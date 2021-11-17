@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA) [2019]</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=918c8c74fd.css" />
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="Quantized Chaos" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA) [2019]" />
+    <meta property="og:description" content="AbstractThis system is to be installed at an intersection that captures image feeds of vehicles, accelerates vehicle detection using a custom coprocessor implemented on the FPGA fabric of a programmable system on chip (PSoC), measures traffic parameters and hence adaptively controls traffic signals at an intersection. The system further includes" />
+    <meta property="og:url" content="http://localhost:2368/vision-based-adaptive/" />
+    <meta property="og:image" content="https://static.ghost.org/v4.0.0/images/publication-cover.jpg" />
+    <meta property="article:published_time" content="2021-11-17T15:55:04.000Z" />
+    <meta property="article:modified_time" content="2021-11-17T15:55:04.000Z" />
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA) [2019]" />
+    <meta name="twitter:description" content="AbstractThis system is to be installed at an intersection that captures image feeds of vehicles, accelerates vehicle detection using a custom coprocessor implemented on the FPGA fabric of a programmable system on chip (PSoC), measures traffic parameters and hence adaptively controls traffic signals at an intersection. The system further includes" />
+    <meta name="twitter:url" content="http://localhost:2368/vision-based-adaptive/" />
+    <meta name="twitter:image" content="https://static.ghost.org/v4.0.0/images/publication-cover.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Abarajithan Gnaneswaran" />
+    <meta name="twitter:site" content="@ghost" />
+    <meta property="og:image:width" content="7183" />
+    <meta property="og:image:height" content="2885" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Quantized Chaos",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Abarajithan Gnaneswaran",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/cb4b7e1f2245f7a5de8a568d1f48a816?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/abarajithan/",
+        "sameAs": []
+    },
+    "headline": "Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA) [2019]",
+    "url": "http://localhost:2368/vision-based-adaptive/",
+    "datePublished": "2021-11-17T15:55:04.000Z",
+    "dateModified": "2021-11-17T15:55:04.000Z",
+    "description": "Abstract\nThis system is to be installed at an intersection that captures image feeds of\nvehicles, accelerates vehicle detection using a custom coprocessor implemented\non the FPGA fabric of a programmable system on chip (PSoC), measures traffic\nparameters and hence adaptively controls traffic signals at an intersection. The\nsystem further includes methods for detecting vehicles from a video feed,\ntracking vehicles, measuring weighted vehicle flow, and hence calculating signal\ntimings. The system ",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.7" />
+    <link rel="alternate" type="application/rss+xml" title="Quantized Chaos" href="../rss/index.html" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.5.1/umd/portal.min.js" data-ghost="http://localhost:2368/"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style><style>:root {--ghost-accent-color: #FF1A75;}</style>
+
+</head>
+<body class="post-template">
+<div class="viewport">
+
+    <header id="gh-head" class="gh-head has-cover">
+        <nav class="gh-head-inner inner gh-container">
+
+            <div class="gh-head-brand">
+                <a class="gh-head-logo" href="../index.html">
+                        Quantized Chaos
+                </a>
+                <a class="gh-burger" role="button">
+                    <div class="gh-burger-box">
+                        <div class="gh-burger-inner"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="gh-head-menu">
+                <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about"><a href="../about/index.html">About</a></li>
+    <li class="nav-collection"><a href="http://localhost:2368/tag/getting-started/">Collection</a></li>
+    <li class="nav-author"><a href="../author/ghost/index.html">Author</a></li>
+    <li class="nav-portal"><a href="http://localhost:2368/portal/">Portal</a></li>
+</ul>
+
+            </div>
+            <div class="gh-head-actions">
+                <div class="gh-social">
+                        <a class="gh-social-facebook" href="https://www.facebook.com/ghost" title="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0c8.837 0 16 7.163 16 16s-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0zm5.204 4.911h-3.546c-2.103 0-4.443.885-4.443 3.934.01 1.062 0 2.08 0 3.225h-2.433v3.872h2.509v11.147h4.61v-11.22h3.042l.275-3.81h-3.397s.007-1.695 0-2.187c0-1.205 1.253-1.136 1.329-1.136h2.054V4.911z" /></svg></a>
+                        <a class="gh-social-twitter" href="https://twitter.com/ghost" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+                </div>
+
+                    <a class="gh-head-button" href="index.html#/portal/signup">Subscribe</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        
+
+
+
+<article class="article post no-image">
+
+    <header class="article-header gh-canvas">
+
+
+        <h1 class="article-title">Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA) [2019]</h1>
+
+
+        <div class="article-byline">
+            <section class="article-byline-content">
+                <ul class="author-list">
+                    <li class="author-list-item">
+                        <a href="../author/abarajithan/index.html" class="author-avatar">
+                            <img class="author-profile-image" src="http://www.gravatar.com/avatar/cb4b7e1f2245f7a5de8a568d1f48a816?s=250&amp;d=mm&amp;r=x" alt="Abarajithan Gnaneswaran" />
+                        </a>
+                    </li>
+                </ul>
+                <div class="article-byline-meta">
+                    <h4 class="author-name"><a href="../author/abarajithan/index.html">Abarajithan Gnaneswaran</a></h4>
+                    <div class="byline-meta-content">
+                        <time class="byline-meta-date" datetime="2021-11-17">Nov 17, 2021</time>
+                        <span class="byline-reading-time"><span class="bull">&bull;</span> 4 min read</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </header>
+
+    <section class="gh-content gh-canvas">
+        <figure class="kg-card kg-image-card"><img src="https://lh4.googleusercontent.com/HJFQ4EJ9lUMKTIT-Y4n62H4m9ycX8UFHR6fZ1zfh3unr5-cxbKu583e375MhoGww3Z-DFubOuXnmxZtUZ2rlFDAS0PKhuIpH8RancFtczEgnTSvNr87KDv2PM-n0aFxx8XpWQyY6" class="kg-image" alt loading="lazy"></figure><figure class="kg-card kg-embed-card"><iframe width="200" height="150" src="https://www.youtube.com/embed/TXb7dYBRh3A?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></figure><h2 id="abstract">Abstract</h2><p>This system is to be installed at an intersection that captures image feeds of vehicles, accelerates vehicle detection using a custom coprocessor implemented on the FPGA fabric of a programmable system on chip (PSoC), measures traffic parameters and hence adaptively controls traffic signals at an intersection. The system further includes methods for detecting vehicles from a video feed, tracking vehicles, measuring weighted vehicle flow, and hence calculating signal timings. The system is able to measure traffic parameters such as flow, velocity, density, and queue length with camera calibration.</p><p>The algorithms for detecting vehicles, tracking vehicles, measuring weighted vehicle flow are demonstrated to generalize well with remarkable count accuracy of 100% in daytime,  97.7% in rainy time and 90.6% in night time when placed in multiple intersections with challenging lighting conditions where the system was not trained. The method for calculating traffic signal timings from weighted vehicle flow measurement is demonstrated to be stable, allowing hundreds of more vehicles per hour through the intersection and reducing average waiting time of vehicles significantly compared to the static timing values used in the real world when evaluated on a real world intersection modelled with real world traffic flow data in VISSIM traffic simulation software.</p><h2 id="gold-awardnational-best-quality-software">Gold Award - National Best Quality Software</h2><p>Our project won Gold at NBQSA 2020 (National ICT Awards) organized by British Computer Society in Tertiary Student Category and has been nominated for APICTA (Asia Pacific) Awards to be held in Malaysia.​ ​ A patent for our system is currently under review at NIPO and the system is being further developed with funding from World Bank via AHEAD into a product by a multidisciplinary team of engineers through the Enterprise (Business Linkage Cell) of the University of Moratuwa, together with RDA and SD&amp;CC.​</p><h2 id="startup-web-based-traffic-analytics">Startup: Web-based traffic analytics</h2><figure class="kg-card kg-embed-card"><iframe width="200" height="113" src="https://www.youtube.com/embed/UdplbYJY7hE?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></figure><h2 id="project-scope">Project Scope</h2><h3 id="1-machine-learning">1. Machine Learning</h3><h4 id="11-inference-framework-for-precision-experiments-aba">1.1 Inference Framework for Precision Experiments (Aba)</h4><p>I built a Keras-like object-oriented inference framework using the multidimensional operations of numpy. Layer types (Conv, Relu...etc) are implemented as subclasses of common Layer class. They can be chained to build a model, which can forward propagate an image through multiple datapaths.</p><p>Github gist: <a href="https://gist.github.com/abarajithan11/66711711f13a499583b5afa43bcb1cfa">gist.github.com/abarajithan11/66711711f13a499583b5afa43bcb1cfa</a></p><p></p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2021/11/image-1.png" class="kg-image" alt loading="lazy" width="1740" height="819" srcset="../content/images/size/w600/2021/11/image-1.png 600w, ../content/images/size/w1000/2021/11/image-1.png 1000w, ../content/images/size/w1600/2021/11/image-1.png 1600w, ../content/images/2021/11/image-1.png 1740w" sizes="(min-width: 720px) 720px"><figcaption>Part of my code showing convolution via Einstein summation and custom requantization scheme</figcaption></figure><h3 id="12-data-collection-devices-rukshan-chinthana-annotation-tehara">1.2 Data Collection Devices (Rukshan, Chinthana) &amp; Annotation (Tehara)</h3><p>Built four remotely powered, wirelessly data-collection devices. Collected, annotate and augment traffic images to create a Sri Lankan traffic dataset (1500 images).</p><figure class="kg-card kg-image-card"><img src="../content/images/2021/11/data-coll.jpg" class="kg-image" alt loading="lazy" width="960" height="720" srcset="../content/images/size/w600/2021/11/data-coll.jpg 600w, ../content/images/2021/11/data-coll.jpg 960w" sizes="(min-width: 720px) 720px"></figure><h3 id="13-cnn-architecture-training-tehara">1.3 CNN Architecture &amp; Training (Tehara)</h3><p>Optimized the architecture of YOLOv2 object detection neural network for hardware implementation. Trained YOLOv2 and TinyYOLO.</p><ul><li>Fused batch normalization into convolution by modifying the weights and biases accordingly.</li><li>Interchanged conv =&gt; leaky-relu =&gt; max-pool to conv =&gt; max-pool =&gt; leaky-relu to reduce power.</li><li>Changed the output layer from 80 classes to 5 classes, by reusing weights of appropriate classes.</li><li>Changed grid size from (13 x 13) to (12 x 8) and designed the sensing algorithm accordingly</li><li>Trained with custom Sri Lankan Traffic Dataset (threewheelers)</li></ul><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/Slide7.JPG" width="960" height="720" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Slide7.JPG 600w, ../content/images/2021/11/Slide7.JPG 960w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/Slide8.JPG" width="960" height="720" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Slide8.JPG 600w, ../content/images/2021/11/Slide8.JPG 960w" sizes="(min-width: 720px) 720px"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/Slide9.JPG" width="960" height="720" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Slide9.JPG 600w, ../content/images/2021/11/Slide9.JPG 960w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/Slide10.JPG" width="960" height="720" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Slide10.JPG 600w, ../content/images/2021/11/Slide10.JPG 960w" sizes="(min-width: 720px) 720px"></div></div></div></figure><h3 id="2-cnn-accelerator-design-aba">2. CNN Accelerator Design (Aba)</h3><p>Accelerator core v1.0 was designed to perform 12 of 3x3 convolutions in 9 clock cycles, using 9-muxes = 24, 3-muxes = 48, 16-bit registers = 144,  Multipliers = 3, Accumulators = 3. This was redesigned into core 2.0, which was 4 times faster, using five times fewer 3-muxes, zero 9-muxes, about 20 times fewer registers (for the same speed), with 100% utilization of all multipliers and adders.</p><p>For 3x3, 1x1 layers of YOLOv2. Implemented at 50 MHz on Xilinx Z706.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/Figure-7---system_diagram.png" width="751" height="633" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Figure-7---system_diagram.png 600w, ../content/images/2021/11/Figure-7---system_diagram.png 751w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/Figure-8---conv_unit.png" width="692" height="472" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Figure-8---conv_unit.png 600w, ../content/images/2021/11/Figure-8---conv_unit.png 692w"></div></div></div><figcaption>System Design on ZYNQ Programmable SoC (left); One of the 192 cores, able to do 3x3 and 1x1 convolutions (right)</figcaption></figure><h3 id="3-tracking-algorithm-aba">3. Tracking Algorithm (Aba)</h3><p>Lightweight, IOU-based, standalone (no libraries) object tracking algorithm, robust to broken tracks, double counting...etc. Implemented in C (bare-metal on ARM side of ZYNQ FPGA.</p><ul><li>Built a custom lightweight tracking algorithm that can be implemented in C, without any libraries, so it can be run bare-metal (standalone) on the ZYNQ-PS side with minimal memory bandwidth (such that the ZYNQ-PL can use maximum bandwidth)</li><li>Near 97% vehicle counting accuracy in the daytime, 85% accuracy in the night, rainy time, on test data (on a road the CNN has never seen before)</li><li>Object detector (YOLOv2) has less accuracy. But tracking algorithm is designed to obtain  near 100% accuracy in vehicle counting and identification</li></ul><figure class="kg-card kg-image-card"><img src="https://lh3.googleusercontent.com/mq9pvVp_5mRubWaCg8sdn_rPp077OCmNyZpXaNxfjvVKIUcMeK6ikCKxhE0TFhUCZ0foavMUUR2pk3VfkbnAKQvWubmHcg53bMYh031WxUN6qbT8iLgNyY-QOb-RYs2TYcFA_sXC" class="kg-image" alt loading="lazy"></figure><h3 id="4-delta-algorithm-for-traffic-timing-aba-vissim-verification-chinthana">4. Delta Algorithm for Traffic timing (Aba), VISSIM verification (Chinthana)</h3><p>Designed and tested 8 algorithms based on density, bounding box count, flow...etc. Finally built the Delta Algorithm. Works on top of static timing. Sensitivity is adjustable. During poor visibility, naturally falls back to static timing</p><figure class="kg-card kg-image-card"><img src="../content/images/2021/11/fyp_viva_final.jpg" class="kg-image" alt loading="lazy" width="960" height="720" srcset="../content/images/size/w600/2021/11/fyp_viva_final.jpg 600w, ../content/images/2021/11/fyp_viva_final.jpg 960w" sizes="(min-width: 720px) 720px"></figure><figure class="kg-card kg-embed-card"><iframe width="200" height="150" src="https://www.youtube.com/embed/0_rzJ_J0B_4?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></figure><h2 id="acknowledgement">Acknowledgement</h2><p>We are forever indebted to our families of Tehara and Chinthana for hosting our team for weeks/months during strikes and study breaks, allowing us to work together. In addition, we thank our Supervisors: Prof. Rohan and Prof. Saman Bandara for their support and assistance.</p>
+    </section>
+
+
+</article>
+
+<section class="footer-cta">
+    <div class="inner">
+        <h2>Sign up for more like this.</h2>
+        <a class="footer-cta-button" href="index.html#/portal">
+            <div>Enter your email</div>
+            <span>Subscribe</span>
+        </a>
+    </div>
+</section>
+
+
+<aside class="read-more-wrap">
+    <div class="read-more inner">
+
+
+
+    </div>
+</aside>
+
+
+    </main>
+
+    <footer class="site-footer outer">
+        <div class="inner">
+            <section class="copyright"><a href="../index.html">Quantized Chaos</a> &copy; 2021</section>
+            <nav class="site-footer-nav">
+                <ul class="nav">
+    <li class="nav-data-privacy"><a href="../privacy/index.html">Data &amp; privacy</a></li>
+    <li class="nav-contact"><a href="../contact/index.html">Contact</a></li>
+    <li class="nav-contribute"><a href="../contribute/index.html">Contribute →</a></li>
+</ul>
+
+            </nav>
+            <div><a href="https://ghost.org/" target="_blank" rel="noopener">Powered by Ghost</a></div>
+        </div>
+    </footer>
+
+</div>
+
+
+<script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous">
+</script>
+<script src="../assets/built/casper.js%3Fv=918c8c74fd"></script>
+<script>
+$(document).ready(function () {
+    // Mobile Menu Trigger
+    $('.gh-burger').click(function () {
+        $('body').toggleClass('gh-head-open');
+    });
+    // FitVids - Makes video embeds responsive
+    $(".gh-content").fitVids();
+});
+</script>
+
+
+
+</body>
+</html>
