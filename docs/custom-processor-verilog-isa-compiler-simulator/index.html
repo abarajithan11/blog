@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Custom Processor (Verilog), ISA, Compiler &amp; Simulator (Python)</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preload" href="../assets/css/app.css%3Fv=c9e2a93bba.css" as="style" />
+    <link rel="preload" href="../assets/js/manifest.js%3Fv=c9e2a93bba" as="script" />
+    <link rel="preload" href="../assets/js/vendor/content-api.min.js%3Fv=c9e2a93bba" as="script" />
+    <link rel="preload" href="../assets/js/vendor.js%3Fv=c9e2a93bba" as="script" />
+    <link rel="preload" href="../assets/js/app.js%3Fv=c9e2a93bba" as="script" />
+    <link rel="preconnect" href="https://polyfill.io">
+    <link rel="dns-prefetch" href="https://polyfill.io">
+
+      <link rel="preload" href="../assets/css/post.css%3Fv=c9e2a93bba.css" as="style" />
+  <link rel="preload" href="../assets/js/post.js%3Fv=c9e2a93bba" as="script" />
+
+
+    <style>
+      /* These font-faces are here to make fonts work if the Ghost instance is installed in a subdirectory */
+
+      /* source-sans-pro-regular */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('SourceSansPro-Regular'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-regular.woff2%3Fv=c9e2a93bba") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-regular.woff%3Fv=c9e2a93bba") format('woff');
+      }
+
+      /* source-sans-pro-600 */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: local('SourceSansPro-SemiBold'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-600.woff2%3Fv=c9e2a93bba") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-600.woff%3Fv=c9e2a93bba") format('woff');
+      }
+
+      /* source-sans-pro-700 */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: local('SourceSansPro-Bold'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-700.woff2%3Fv=c9e2a93bba") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-700.woff%3Fv=c9e2a93bba") format('woff');
+      }
+
+      /* iconmoon */
+      @font-face {
+        font-family: 'icomoon';
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+        src: url("../assets/fonts/icomoon/icomoon.eot%3F101fc3%3Fv=c9e2a93bba");
+        src: url("../assets/fonts/icomoon/icomoon.eot%3F101fc3") format('embedded-opentype'),
+        url("../assets/fonts/icomoon/icomoon.ttf%3F101fc3%3Fv=c9e2a93bba") format('truetype'),
+        url("../assets/fonts/icomoon/icomoon.woff%3F101fc3%3Fv=c9e2a93bba") format('woff'),
+        url("../assets/fonts/icomoon/icomoon.svg%3F101fc3") format('svg');
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/app.css%3Fv=c9e2a93bba.css" media="screen" />
+
+      <link rel="stylesheet" type="text/css" href="../assets/css/post.css%3Fv=c9e2a93bba.css" media="screen" />
+
+
+    
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="Aba&#x27;s Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Custom Processor (Verilog), ISA, Compiler &amp; Simulator (Python)" />
+    <meta property="og:description" content="The first architecture I designedThe major challenge in designing a processor is the trade-off between the size of ISA, hardware complexity and user-friendliness. ABRUTECH is a unique custom processor highly optimized to manipulate matrices while preserving the functionalities of a generic processor. It has been designed to strike the delicate" />
+    <meta property="og:url" content="http://localhost:2368/custom-processor-verilog-isa-compiler-simulator/" />
+    <meta property="og:image" content="http://localhost:2368/content/images/2021/11/Processor-complete-borderless.png" />
+    <meta property="article:published_time" content="2021-11-17T18:36:20.000Z" />
+    <meta property="article:modified_time" content="2021-11-17T19:49:27.000Z" />
+    <meta property="article:tag" content="Projects" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Custom Processor (Verilog), ISA, Compiler &amp; Simulator (Python)" />
+    <meta name="twitter:description" content="The first architecture I designedThe major challenge in designing a processor is the trade-off between the size of ISA, hardware complexity and user-friendliness. ABRUTECH is a unique custom processor highly optimized to manipulate matrices while preserving the functionalities of a generic processor. It has been designed to strike the delicate" />
+    <meta name="twitter:url" content="http://localhost:2368/custom-processor-verilog-isa-compiler-simulator/" />
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2021/11/Processor-complete-borderless.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Abarajithan Gnaneswaran" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Projects" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="1540" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aba&#x27;s Blog",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Abarajithan Gnaneswaran",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/cb4b7e1f2245f7a5de8a568d1f48a816?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/abarajithan/",
+        "sameAs": []
+    },
+    "headline": "Custom Processor (Verilog), ISA, Compiler &amp; Simulator (Python)",
+    "url": "http://localhost:2368/custom-processor-verilog-isa-compiler-simulator/",
+    "datePublished": "2021-11-17T18:36:20.000Z",
+    "dateModified": "2021-11-17T19:49:27.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:2368/content/images/2021/11/Processor-complete-borderless.png",
+        "width": 2000,
+        "height": 1540
+    },
+    "keywords": "Projects",
+    "description": "The first architecture I designedThe major challenge in designing a processor is\nthe trade-off between the size of ISA, hardware complexity and\nuser-friendliness. ABRUTECH is a unique custom processor highly optimized to\nmanipulate matrices while preserving the functionalities of a generic processor.\nIt has been designed to strike the delicate balance in the above tradeoffs.\nWhile having only 16 instructions, the ISA of ABRUTECH is crafted to be simple,\nyet highly powerful and is implemented usi",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+<style>:root {--ghost-accent-color: #2861bd;}</style>
+    <meta name="generator" content="Ghost 4.22" />
+    <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../rss/index.html" />
+    
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=c9e2a93bba.css">
+
+    <script>
+      // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat
+      const ghostHost = "http://localhost:2368"
+      // @license-end
+    </script>
+  </head>
+  <body class="post-template tag-projects">
+    
+
+
+
+  
+<header class="m-header with-picture js-header">
+  <div class="m-mobile-topbar" data-aos="fade-down">
+    <button class="m-icon-button in-mobile-topbar js-open-menu" aria-label="Open menu">
+      <span class="icon-menu" aria-hidden="true"></span>
+    </button>
+      <a href="../index.html" class="m-site-name in-mobile-topbar">
+        Aba&#x27;s Blog
+      </a>
+    <button class="m-icon-button in-mobile-topbar js-open-search" aria-label="Open search">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="m-menu js-menu">
+    <button class="m-icon-button outlined as-close-menu js-close-menu" aria-label="Close menu">
+      <span class="icon-close"></span>
+    </button>
+    <div class="m-menu__main" data-aos="fade-down">
+      <div class="l-wrapper">
+        <div class="m-nav js-main-nav">
+          <nav class="m-nav__left js-main-nav-left" role="navigation" aria-label="Main menu">
+            <ul>
+                <li class="only-desktop">
+                  <a href="../index.html" class="m-site-name in-desktop-menu">
+                    Aba&#x27;s Blog
+                  </a>
+                </li>
+                
+    <li class="nav-home">
+      <a href="../index.html">Home</a>
+    </li>
+    <li class="nav-about">
+      <a href="http://localhost:2368/about/">About</a>
+    </li>
+    <li class="nav-work">
+      <a href="../tag/projects/index.html">Work</a>
+    </li>
+    <li class="nav-travels">
+      <a href="http://localhost:2368/tag/travel/">Travels</a>
+    </li>
+    <li class="nav-thoughts">
+      <a href="http://localhost:2368/tag/thoughts/">Thoughts</a>
+    </li>
+    <li class="nav-teaching">
+      <a href="../tag/teaching/index.html">Teaching</a>
+    </li>
+    <li class="nav-community">
+      <a href="../tag/volunteering/index.html">Community</a>
+    </li>
+
+              <li class="submenu-option js-submenu-option">
+                <button class="m-icon-button in-menu-main more js-toggle-submenu" aria-label="Open submenu">
+                  <span class="icon-more" aria-hidden="true"></span>
+                </button>
+                <div class="m-submenu js-submenu">
+                  <div class="l-wrapper in-submenu">
+                    <section class="m-recent-articles">
+                      <h3 class="m-submenu-title in-recent-articles">Recent articles</h3>
+                          <div class="glide js-recent-slider">
+                            <div class="glide__track" data-glide-el="track">
+                              <div class="glide__slides">
+                                <div class="glide__slide">
+                                  <a href="../feel-lanka-tourism-development/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2021/11/IMG_0069.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Feel Lanka - Tourism Development">
+                                      Feel Lanka - Tourism Development
+                                    </h3>
+                                    <span class="m-recent-article__date">an hour ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../systemverilog-2020/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2021/11/Slide1-1.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Webinar Series: RTL Design and Simulation with SystemVerilog (slides, recordings and feedback)">
+                                      Webinar Series: RTL Design and Simulation with SystemVerilog (slides, recordings and feedback)
+                                    </h3>
+                                    <span class="m-recent-article__date">2 hours ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../csiro-end-to-end-machine-learning-pipeline-2018/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2021/11/6wheelRobot.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="CSIRO: End-to-End Machine Learning Pipeline (2018)">
+                                      CSIRO: End-to-End Machine Learning Pipeline (2018)
+                                    </h3>
+                                    <span class="m-recent-article__date">2 hours ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2021/11/Processor-complete-borderless.png" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Custom Processor (Verilog), ISA, Compiler &amp; Simulator (Python)">
+                                      Custom Processor (Verilog), ISA, Compiler &amp; Simulator (Python)
+                                    </h3>
+                                    <span class="m-recent-article__date">3 hours ago</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </section>
+                    <section class="m-tags">
+                      <h3 class="m-submenu-title">Tags</h3>
+                        <ul>
+                            <li>
+                              <a href="../tag/projects/index.html">Projects</a>
+                            </li>
+                            <li>
+                              <a href="../tag/teaching/index.html">Teaching</a>
+                            </li>
+                            <li>
+                              <a href="../tag/volunteering/index.html">Volunteering</a>
+                            </li>
+                        </ul>
+                    </section>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <div class="m-nav__right">
+            <button class="m-icon-button in-menu-main js-open-search" aria-label="Open search">
+              <span class="icon-search" aria-hidden="true"></span>
+            </button>
+            <div class="m-toggle-darkmode js-tooltip" data-tippy-content="Toggle dark mode" tabindex="0">
+              <label for="toggle-darkmode" class="sr-only">
+                Toggle dark mode
+              </label>
+              <input id="toggle-darkmode" type="checkbox" class="js-toggle-darkmode">
+              <div>
+                <span class="icon-moon moon" aria-hidden="true"></span>
+                <span class="icon-sunny sun" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<main class="main-wrap">
+    
+  <section class="m-hero with-picture" data-aos="fade">
+    <div class="m-hero__picture in-post">
+      <img
+        srcset="../content/images/size/w300/2021/11/Processor-complete-borderless.pngderless.png 300w../content/images/size/w600/2021/11/Processor-complete-borderless.pngrderless.png 600../content/images/size/w1000/2021/11/Processor-complete-borderless.pngorderless.png 100../content/images/size/w2000/2021/11/Processor-complete-borderless.pngborderless.png 2000w
+        "
+        sizes="(max-width: 600px) 600px, (max-width: 1000px) 1000px, 2000px"
+        src="../content/images/size/w1000/2021/11/Processor-complete-borderless.png"
+        alt=""
+      />
+    </div>
+    </section>
+  
+  <article>
+    <div class="l-content in-post">
+        <div class="l-wrapper in-post  js-aos-wrapper" data-aos="fade-up"
+          data-aos-delay="300">
+          <div
+            class="l-post-content js-progress-content">
+            <header class="m-heading">
+              <h1 class="m-heading__title in-post">Custom Processor (Verilog), ISA, Compiler &amp; Simulator (Python)</h1>
+              <div class="m-heading__meta">
+                  <a href="../tag/projects/index.html" class="m-heading__meta__tag">Projects</a>
+                  <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
+                <span class="m-heading__meta__time">Nov 17, 2021</span>
+              </div>
+            </header>
+            <div class="pos-relative js-post-content">
+              <div class="m-share">
+                <div class="m-share__content js-sticky">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/custom-processor-verilog-isa-compiler-simulator/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Facebook">
+                    <span class="icon-facebook" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://twitter.com/intent/tweet?text=Custom%20Processor%20(Verilog)%2C%20ISA%2C%20Compiler%20%26%20Simulator%20(Python)&url=http://localhost:2368/custom-processor-verilog-isa-compiler-simulator/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">
+                    <span class="icon-twitter" aria-hidden="true"></span>
+                  </a>
+                  <button class="m-icon-button filled in-share progress js-scrolltop" aria-label="Scroll to top">
+                    <span class="icon-arrow-top" aria-hidden="true"></span>
+                    <svg aria-hidden="true">
+                      <circle class="progress-ring__circle js-progress" fill="transparent" r="0" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2021/11/Processor-complete-borderless-1.png" class="kg-image" alt loading="lazy" width="2000" height="1540" srcset="../content/images/size/w600/2021/11/Processor-complete-borderless-1.png 600w, ../content/images/size/w1000/2021/11/Processor-complete-borderless-1.png 1000w, ../content/images/size/w1600/2021/11/Processor-complete-borderless-1.png 1600w, ../content/images/size/w2400/2021/11/Processor-complete-borderless-1.png 2400w" sizes="(min-width: 720px) 720px"><figcaption>The first architecture I designed</figcaption></figure><p>The major challenge in designing a processor is the trade-off between the size of ISA, hardware complexity and user-friendliness. ABRUTECH is a unique custom processor highly optimized to manipulate matrices while preserving the functionalities of a generic processor. It has been designed to strike the delicate balance in the above tradeoffs. While having only 16 instructions, the ISA of ABRUTECH is crafted to be simple, yet highly powerful and is implemented using only 1000 logic elements.</p><p>This is demonstrated in the results section, with sample programs that are only 30-40 bytes long but are able to downsample and upsample any 512x512 image by any integer, detect edges, find prime numbers and Fibonacci numbers. . . etc.</p><h2 id="instruction-set-architecture-isa">Instruction Set Architecture (ISA)</h2><p>With only 16 instructions each of which execute in only 2.2 clocks cycles on average, our ISA and the complier allow the programmer to write programs quickly that take only 1.8 bytes of memory per instruction on average. Our ISA was designed to incorporate advantageous features from both RISC and CISC instruction sets. As in RISC, each operation is designed to perform a specific task, especially the load and store operations are maintained strictly separate. However, unlike RISC, not all instructions are of equal length but are either 1, 2 or 4 bytes long. Certain instructions are encoded, resulting in high code density. This allows building smaller programs that use the limited instruction memory efficiently while also allowing faster execution. However, this is balanced with maintaining moderate hardware-level complexity in our system architecture.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/isa-1.png" width="710" height="1380" loading="lazy" alt srcset="../content/images/size/w600/2021/11/isa-1.png 600w, ../content/images/2021/11/isa-1.png 710w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/Register_Set.png" width="636" height="864" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Register_Set.png 600w, ../content/images/2021/11/Register_Set.png 636w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/u-ins-1.png" width="661" height="1341" loading="lazy" alt srcset="../content/images/size/w600/2021/11/u-ins-1.png 600w, ../content/images/2021/11/u-ins-1.png 661w"></div></div></div><figcaption>ISA --- Register — Micro instructions</figcaption></figure><h2 id="architecture">Architecture</h2><p>ABRUTECH works with an 8-bit wide, 262144-bit (512x512) deep data memory and an 8-bit wide 256-bit deep instruction memory, both of which can be loaded through UART. The system was coded in Verilog HDL using Intel Quartus II Prime and implemented successfully on an Altera de2-115 development board.</p><p>While being an 8-bit processor, (bus sizes and most register sizes being 8-bit), ABRUTECH features a 12-bit ALU and accumulator, which allows it to process calculations with intermediate steps that give results up to 4096, without causing an overflow error. The ALU is also designed to perform round-o divisions (unlike the typical our division), to improve accuracy.</p><p>Our processor also features a special module called Address Maker, which (optionally) allows the programmer to navigate a 512 x 512 matrix either row-wise or column-wise, without the need of a complex algorithm. This helps in implementing image processing algorithms such as downsampling, nearest neighbour upsampling, upsampling by bilinear interpolation.</p><p>Another special feature in ABRUTECH is a bank of shift registers, which help to perform linear convolution operations several times faster. Together with Address Maker, this allows the programmer to perform 2D convolution with a linearly decomposable kernel, such as Gaussian smoothing or edge detection, without losing a row and a column of data in the process, as with the traditional algorithms.</p><h2 id="compiler-simulator-in-python-aba">Compiler &amp; Simulator in Python (Aba)</h2><p>I also built a corresponding python-based compiler program, which scans the excel sheet where ISA is specified and translates the algorithm written in the human language to an array of binary values, which are then sent to the instruction memory through UART. The compiler identifies syntax errors, which allows the programmer to write assembly code with ease, using our ISA.</p><p>In addition to the compiler, I built a simulator software for ABRUTECH. The simulator can run the algorithm like the processor and show the values of registers and memory at each step, helping us debug an algorithm fast and remotely, without repeatedly loading it into the processor.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/4_Program.png" width="633" height="375" loading="lazy" alt srcset="../content/images/size/w600/2021/11/4_Program.png 600w, ../content/images/2021/11/4_Program.png 633w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/5_Simulate.png" width="567" height="738" loading="lazy" alt></div></div></div><figcaption>Compiler &amp; Simulator</figcaption></figure><h2 id="algorithms">Algorithms</h2><p>As detailed in the report, we devised brand new algorithms for downsampling and other tasks, which are mathematically justified (in the report) to have better accuracy and speed than traditional algorithms.</p><figure class="kg-card kg-image-card"><img src="../content/images/2021/11/image-4.png" class="kg-image" alt loading="lazy" width="611" height="403" srcset="../content/images/size/w600/2021/11/image-4.png 600w, ../content/images/2021/11/image-4.png 611w"></figure><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/bilinear_upsample.png" width="700" height="1050" loading="lazy" alt srcset="../content/images/size/w600/2021/11/bilinear_upsample.png 600w, ../content/images/2021/11/bilinear_upsample.png 700w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/custom_filter-1.png" width="600" height="700" loading="lazy" alt srcset="../content/images/2021/11/custom_filter-1.png 600w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/DIVdownsample.png" width="600" height="550" loading="lazy" alt srcset="../content/images/2021/11/DIVdownsample.png 600w"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/downBy3.png" width="600" height="650" loading="lazy" alt srcset="../content/images/2021/11/downBy3.png 600w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/downByANY.png" width="700" height="750" loading="lazy" alt srcset="../content/images/size/w600/2021/11/downByANY.png 600w, ../content/images/2021/11/downByANY.png 700w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/EdgeDetectHorz.png" width="600" height="650" loading="lazy" alt srcset="../content/images/2021/11/EdgeDetectHorz.png 600w"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/EdgeDetectVert.png" width="600" height="650" loading="lazy" alt srcset="../content/images/2021/11/EdgeDetectVert.png 600w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/GaussianSmoothing.png" width="600" height="900" loading="lazy" alt srcset="../content/images/2021/11/GaussianSmoothing.png 600w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/PrimeFinder.png" width="700" height="1100" loading="lazy" alt srcset="../content/images/size/w600/2021/11/PrimeFinder.png 600w, ../content/images/2021/11/PrimeFinder.png 700w"></div></div></div><figcaption>Algorithms I wrote in our assembly, first verified in my python-based simulator, then run on FPGA based implementation of the processor</figcaption></figure><h2 id="hardware-debugging">Hardware Debugging</h2><p>The system itself is implemented with hardware debugging features, such as the ability to run the processor either at 1 Hz clock frequency, 10 MHz clock frequency or through a manual clock provided by a push-button. We are able to see the currently fetched instruction and currently retrieved data on 7 segment displays and LED bulbs.</p><p>Our processor is also free of major hardware vulnerabilities, such as spectre and meltdown since we did not have the time to implement the branch prediction and speculative execution modules. :-)</p><figure class="kg-card kg-image-card"><img src="../content/images/2021/11/image-5.png" class="kg-image" alt loading="lazy" width="1344" height="1008" srcset="../content/images/size/w600/2021/11/image-5.png 600w, ../content/images/size/w1000/2021/11/image-5.png 1000w, ../content/images/2021/11/image-5.png 1344w" sizes="(min-width: 720px) 720px"></figure><h2 id="results">Results</h2><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/Bilinear_upsampple.png" width="1494" height="816" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Bilinear_upsampple.png 600w, ../content/images/size/w1000/2021/11/Bilinear_upsampple.png 1000w, ../content/images/2021/11/Bilinear_upsampple.png 1494w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/Downsampple_By_2_Snake_algorithm.png" width="1314" height="738" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Downsampple_By_2_Snake_algorithm.png 600w, ../content/images/size/w1000/2021/11/Downsampple_By_2_Snake_algorithm.png 1000w, ../content/images/2021/11/Downsampple_By_2_Snake_algorithm.png 1314w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/Custom_filter.png" width="1468" height="774" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Custom_filter.png 600w, ../content/images/size/w1000/2021/11/Custom_filter.png 1000w, ../content/images/2021/11/Custom_filter.png 1468w" sizes="(min-width: 720px) 720px"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/Edge_detection-waterfall.png" width="1407" height="732" loading="lazy" alt srcset="../content/images/size/w600/2021/11/Edge_detection-waterfall.png 600w, ../content/images/size/w1000/2021/11/Edge_detection-waterfall.png 1000w, ../content/images/2021/11/Edge_detection-waterfall.png 1407w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/Fibonacci_Series.png" width="277" height="456" loading="lazy" alt></div><div class="kg-gallery-image"><img src="../content/images/2021/11/Pascal_Triangle.png" width="442" height="420" loading="lazy" alt></div></div></div><figcaption>Upsampling, Downsampling, Custom filtering, Edge Detection, Fibonacci, Pascal Triangle</figcaption></figure><h2 id="report">Report</h2><!--kg-card-begin: html--><div style="text-align: center;">
+<iframe height="600" src="https://drive.google.com/file/d/1ObpKNKtklwhv3zmWbPKoYd_jBMk35f5c/preview" width="1000"></iframe>
+</div><!--kg-card-end: html-->
+                <section class="m-tags in-post">
+                  <h3 class="m-submenu-title">Tags</h3>
+                  <ul>
+                      <li>
+                        <a href="../tag/projects/index.html" title="Projects">Projects</a>
+                      </li>
+                  </ul>
+                </section>
+            </div>
+          </div>
+        </div>
+        <section class="m-subscribe-section js-newsletter">
+          <div class="l-wrapper in-post">
+            <div class="m-subscribe-section__content">
+              <div class="m-subscribe-section__text">
+                <h4 class="m-subscribe-section__title">Subscribe to our newsletter</h4>
+                <p class="m-subscribe-section__description">
+                  Get the latest posts delivered right to your inbox.
+                </p>
+              </div>
+              <div class="m-subscribe-section__form">
+                
+<div class="m-subscribe-section__form">
+  <form data-members-form="subscribe" id="newsletter-form" class="m-subscribe-section__container">
+    <div class="m-subscribe__form">
+      <div class="pos-relative">
+        <label for="newsletter-input" class="sr-only">Your email address</label>
+        <input data-members-email id="newsletter-input" class="m-input in-subscribe-section" type="email"
+          placeholder="Your email address" required />
+      </div>
+      <button id="newsletter-button" class="m-button primary block" type="submit">Subscribe</button>
+    </div>
+    <div class="m-subscribe__success">
+      <header class="m-heading no-margin">
+        <img src="../assets/images/success.png%3Fv=c9e2a93bba" alt="Success!" class="m-subscribe__success_icon">
+        <p class="m-heading__description in-newsletter-form">
+          Now check your inbox and click the link to confirm your subscription.
+        </p>
+      </header>
+    </div>
+    <p class="m-subscribe__invalid m-small-text">
+      Please enter a valid email address
+    </p>
+    <p class="m-subscribe__error m-small-text">
+      Oops! There was an error sending the email, please try later.
+    </p>
+  </form>
+</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="m-author">
+          <div class="m-author__content">
+            <div class="m-author__picture">
+              <a href="../author/abarajithan/index.html" class="m-author-picture" aria-label="Abarajithan Gnaneswaran">
+                  <div style="background-image: url(http://www.gravatar.com/avatar/cb4b7e1f2245f7a5de8a568d1f48a816?s&);"></div>
+              </a>
+            </div>
+            <div class="m-author__info">
+              <h4 class="m-author__name">
+                <a href="../author/abarajithan/index.html">Abarajithan Gnaneswaran</a>
+              </h4>
+              <ul class="m-author-links">
+              </ul>
+            </div>
+          </div>
+        </section>
+          <section class="m-recommended">
+            <div class="l-wrapper in-recommended">
+              <h3 class="m-section-title in-recommended">Recommended for you</h3>
+              <div class="m-recommended-articles">
+                <div class="m-recommended-slider glide js-recommended-slider">
+                  <div class="glide__track" data-glide-el="track">
+                    <div class="glide__slides">
+                      
+    <div class="m-recommended-slider__item glide__slide">
+  <article class="m-article-card  post tag-projects">
+    <div class="m-article-card__picture">
+      <a href="../csiro-end-to-end-machine-learning-pipeline-2018/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2021/11/6wheelRobot.jpg" loading="lazy" alt="">
+      <a href="../author/abarajithan/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan Gnaneswaran" data-tippy-content="Posted by Abarajithan Gnaneswaran ">
+          <div style="background-image: url(http://www.gravatar.com/avatar/cb4b7e1f2245f7a5de8a568d1f48a816?s&);"></div>
+      </a>
+    </div>
+      <div class="m-article-card__info">
+        <a href="../tag/projects/index.html" class="m-article-card__tag">Projects</a>
+      <a href="../csiro-end-to-end-machine-learning-pipeline-2018/index.html" class="m-article-card__info-link" aria-label="CSIRO: End-to-End Machine Learning Pipeline (2018)">
+        <div>
+          <h2 class="m-article-card__title js-article-card-title " title="CSIRO: End-to-End Machine Learning Pipeline (2018)">
+            CSIRO: End-to-End Machine Learning Pipeline (2018)
+          </h2>
+        </div>
+        <div class="m-article-card__timestamp">
+          <span>2 hours ago</span>
+          <span>&bull;</span>
+          <span>1 min read</span>
+        </div>
+      </a>
+    </div>
+  </article>
+    </div>
+    <div class="m-recommended-slider__item glide__slide">
+  <article class="m-article-card  post tag-projects featured">
+    <div class="m-article-card__picture">
+      <a href="../vision-based-adaptive/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2021/11/IMG_20191204_112452.jpg" loading="lazy" alt="">
+      <a href="../author/abarajithan/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan Gnaneswaran" data-tippy-content="Posted by Abarajithan Gnaneswaran ">
+          <div style="background-image: url(http://www.gravatar.com/avatar/cb4b7e1f2245f7a5de8a568d1f48a816?s&);"></div>
+      </a>
+        <a href="../vision-based-adaptive/index.html" class="m-article-card__featured js-tooltip" data-tippy-content="Featured" aria-label="Featured">
+          <span class="icon-star" aria-hidden="true"></span>
+        </a>
+    </div>
+      <div class="m-article-card__info">
+        <a href="../tag/projects/index.html" class="m-article-card__tag">Projects</a>
+      <a href="../vision-based-adaptive/index.html" class="m-article-card__info-link" aria-label="Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA) [2019]">
+        <div>
+          <h2 class="m-article-card__title js-article-card-title " title="Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA) [2019]">
+            Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA) [2019]
+          </h2>
+        </div>
+        <div class="m-article-card__timestamp">
+          <span>6 hours ago</span>
+          <span>&bull;</span>
+          <span>6 min read</span>
+        </div>
+      </a>
+    </div>
+  </article>
+    </div>
+                    </div>
+                  </div>
+                  <div data-glide-el="controls" class="glide__arrows js-controls">
+                    <button data-glide-dir="<" class="m-icon-button filled in-recommended-articles glide-prev" aria-label="Previous">
+                      <span class="icon-arrow-left" aria-hidden="true"></span>
+                    </button>
+                    <button data-glide-dir=">" class="m-icon-button filled in-recommended-articles glide-next" aria-label="Next">
+                      <span class="icon-arrow-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    </div>
+  </article>
+</main>
+
+
+
+    
+<div class="m-search js-search" role="dialog" aria-modal="true" aria-label="Search">
+  <button class="m-icon-button outlined as-close-search js-close-search" aria-label="Close search">
+    <span class="icon-close" aria-hidden="true"></span>
+  </button>
+  <div class="m-search__content">
+    <form class="m-search__form">
+      <div class="pos-relative">
+        <span class="icon-search m-search-icon" aria-hidden="true"></span>
+        <label for="search-input" class="sr-only">
+          Type to search
+        </label>
+        <input id="search-input" type="text" class="m-input in-search js-input-search" placeholder="Type to search">
+      </div>
+    </form>
+    <div class="js-search-results hide"></div>
+    <p class="m-not-found align-center hide js-no-results">
+      No results for your search, please try with something else.
+    </p>
+  </div>
+</div>
+
+    
+<footer class="m-footer">
+  <div class="m-footer__content">
+    <nav class="m-footer-social">
+        <a href="https://www.facebook.com/abarajithan11" target="_blank" rel="noopener" aria-label="Facebook">
+          <span class="icon-facebook" aria-hidden="true"></span>
+        </a>
+      <a href="http://localhost:2368/rss" aria-label="RSS">
+        <span class="icon-rss" aria-hidden="true"></span>
+      </a>
+    </nav>
+    <p class="m-footer-copyright">
+      <span>Aba&#x27;s Blog &copy; 2021</span>
+      <span>&nbsp; &bull; &nbsp;</span>
+      <span>Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a></span>
+    </p>
+    <p class="m-footer-copyright jslicense">
+      <a href="../assets/html/javascript.html%3Fv=c9e2a93bba.html" rel="jslicense">JavaScript license information</a>
+    </p>
+  </div>
+</footer>
+
+    <div class="m-alert success subscribe js-alert" data-notification="subscribe">
+  Great! You&#x27;ve successfully subscribed.
+  <button class="m-alert__close js-notification-close" aria-label="Close">
+    <span class="icon-close"></span>
+  </button>
+</div>
+
+<div class="m-alert success signup js-alert" data-notification="signup">
+  Great! Next, complete checkout for full access.
+  <button class="m-alert__close js-notification-close" aria-label="Close">
+    <span class="icon-close"></span>
+  </button>
+</div>
+
+<div class="m-alert success signin js-alert" data-notification="signin">
+  Welcome back! You&#x27;ve successfully signed in.
+  <button class="m-alert__close js-notification-close" aria-label="Close">
+    <span class="icon-close"></span>
+  </button>
+</div>
+
+<div class="m-alert success checkout js-alert" data-notification="checkout">
+  Success! Your account is fully activated, you now have access to all content.
+  <button class="m-alert__close js-notification-close" aria-label="Close">
+    <span class="icon-close"></span>
+  </button>
+</div>
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CPromise%2CArray.prototype.includes%2CString.prototype.endsWith%2CString.prototype.startsWith%2CObject.assign%2CNodeList.prototype.forEach"></script>
+    <script defer src="../assets/js/manifest.js%3Fv=c9e2a93bba"></script>
+    <script defer src="../assets/js/vendor/content-api.min.js%3Fv=c9e2a93bba"></script>
+    <script defer src="../assets/js/vendor.js%3Fv=c9e2a93bba"></script>
+    <script defer src="../assets/js/app.js%3Fv=c9e2a93bba"></script>
+
+      <script defer src="../assets/js/post.js%3Fv=c9e2a93bba"></script>
+
+
+    
+  </body>
+</html>
