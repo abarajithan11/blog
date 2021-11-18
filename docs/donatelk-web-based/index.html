@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>DonateLK: Web Based Donation Platform</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preload" href="../assets/css/app.css%3Fv=c9e2a93bba.css" as="style" />
+    <link rel="preload" href="../assets/js/manifest.js%3Fv=c9e2a93bba" as="script" />
+    <link rel="preload" href="../assets/js/vendor/content-api.min.js%3Fv=c9e2a93bba" as="script" />
+    <link rel="preload" href="../assets/js/vendor.js%3Fv=c9e2a93bba" as="script" />
+    <link rel="preload" href="../assets/js/app.js%3Fv=c9e2a93bba" as="script" />
+    <link rel="preconnect" href="https://polyfill.io">
+    <link rel="dns-prefetch" href="https://polyfill.io">
+
+      <link rel="preload" href="../assets/css/post.css%3Fv=c9e2a93bba.css" as="style" />
+  <link rel="preload" href="../assets/js/post.js%3Fv=c9e2a93bba" as="script" />
+
+
+    <style>
+      /* These font-faces are here to make fonts work if the Ghost instance is installed in a subdirectory */
+
+      /* source-sans-pro-regular */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('SourceSansPro-Regular'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-regular.woff2%3Fv=c9e2a93bba") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-regular.woff%3Fv=c9e2a93bba") format('woff');
+      }
+
+      /* source-sans-pro-600 */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: local('SourceSansPro-SemiBold'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-600.woff2%3Fv=c9e2a93bba") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-600.woff%3Fv=c9e2a93bba") format('woff');
+      }
+
+      /* source-sans-pro-700 */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: local('SourceSansPro-Bold'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-700.woff2%3Fv=c9e2a93bba") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-700.woff%3Fv=c9e2a93bba") format('woff');
+      }
+
+      /* iconmoon */
+      @font-face {
+        font-family: 'icomoon';
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+        src: url("../assets/fonts/icomoon/icomoon.eot%3F101fc3%3Fv=c9e2a93bba");
+        src: url("../assets/fonts/icomoon/icomoon.eot%3F101fc3") format('embedded-opentype'),
+        url("../assets/fonts/icomoon/icomoon.ttf%3F101fc3%3Fv=c9e2a93bba") format('truetype'),
+        url("../assets/fonts/icomoon/icomoon.woff%3F101fc3%3Fv=c9e2a93bba") format('woff'),
+        url("../assets/fonts/icomoon/icomoon.svg%3F101fc3") format('svg');
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/app.css%3Fv=c9e2a93bba.css" media="screen" />
+
+      <link rel="stylesheet" type="text/css" href="../assets/css/post.css%3Fv=c9e2a93bba.css" media="screen" />
+
+
+    
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="Aba&#x27;s Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="DonateLK: Web Based Donation Platform" />
+    <meta property="og:description" content="DonateLK was developed as a semester project for the module: &#x27;Modular Software Development&#x27;. It is a web-based marketplace that is designed to support consumer to consumer donations. Individuals who would like to donate (Donors), as well as those who are looking for donations (Recipients), can create donor and recipient accounts" />
+    <meta property="og:url" content="http://localhost:2368/donatelk-web-based/" />
+    <meta property="og:image" content="http://localhost:2368/content/images/2021/11/1.-Home.PNG" />
+    <meta property="article:published_time" content="2017-11-18T00:52:00.000Z" />
+    <meta property="article:modified_time" content="2021-11-18T01:10:36.000Z" />
+    <meta property="article:tag" content="Tech" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
+    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DonateLK: Web Based Donation Platform" />
+    <meta name="twitter:description" content="DonateLK was developed as a semester project for the module: &#x27;Modular Software Development&#x27;. It is a web-based marketplace that is designed to support consumer to consumer donations. Individuals who would like to donate (Donors), as well as those who are looking for donations (Recipients), can create donor and recipient accounts" />
+    <meta name="twitter:url" content="http://localhost:2368/donatelk-web-based/" />
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2021/11/1.-Home.PNG" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Abarajithan Gnaneswaran" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Tech" />
+    <meta property="og:image:width" content="1366" />
+    <meta property="og:image:height" content="738" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aba&#x27;s Blog",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Abarajithan Gnaneswaran",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/content/images/2021/11/im_large_vignette.jpg",
+            "width": 1600,
+            "height": 1600
+        },
+        "url": "http://localhost:2368/author/abarajithan/",
+        "sameAs": [
+            "https://www.facebook.com/abarajithan11"
+        ]
+    },
+    "headline": "DonateLK: Web Based Donation Platform",
+    "url": "http://localhost:2368/donatelk-web-based/",
+    "datePublished": "2017-11-18T00:52:00.000Z",
+    "dateModified": "2021-11-18T01:10:36.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:2368/content/images/2021/11/1.-Home.PNG",
+        "width": 1366,
+        "height": 738
+    },
+    "keywords": "Tech",
+    "description": "DonateLK was developed as a semester project for the module: &#x27;Modular Software\nDevelopment&#x27;. It is a web-based marketplace that is designed to support consumer\nto consumer donations. Individuals who would like to donate (Donors), as well as\nthose who are looking for donations (Recipients), can create donor and recipient\naccounts respectively. After verification from the administration, those\nindividuals can then send and receive items through Donate.lk warehouse without\nany compromise of privacy",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.22" />
+    <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../rss/index.html" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.12.0/umd/portal.min.js" data-ghost="http://localhost:2368/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style><style>:root {--ghost-accent-color: #2861bd;}</style>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=c9e2a93bba.css">
+
+    <script>
+      // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat
+      const ghostHost = "http://localhost:2368"
+      // @license-end
+    </script>
+  </head>
+  <body class="post-template tag-tech">
+    
+
+
+
+  
+<header class="m-header with-picture js-header">
+  <div class="m-mobile-topbar" data-aos="fade-down">
+    <button class="m-icon-button in-mobile-topbar js-open-menu" aria-label="Open menu">
+      <span class="icon-menu" aria-hidden="true"></span>
+    </button>
+      <a href="../index.html" class="m-site-name in-mobile-topbar">
+        Aba&#x27;s Blog
+      </a>
+    <button class="m-icon-button in-mobile-topbar js-open-search" aria-label="Open search">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="m-menu js-menu">
+    <button class="m-icon-button outlined as-close-menu js-close-menu" aria-label="Close menu">
+      <span class="icon-close"></span>
+    </button>
+    <div class="m-menu__main" data-aos="fade-down">
+      <div class="l-wrapper">
+        <div class="m-nav js-main-nav">
+          <nav class="m-nav__left js-main-nav-left" role="navigation" aria-label="Main menu">
+            <ul>
+                <li class="only-desktop">
+                  <a href="../index.html" class="m-site-name in-desktop-menu">
+                    Aba&#x27;s Blog
+                  </a>
+                </li>
+                
+    <li class="nav-home">
+      <a href="../index.html">Home</a>
+    </li>
+    <li class="nav-about">
+      <a href="http://localhost:2368/about/">About</a>
+    </li>
+    <li class="nav-tech">
+      <a href="../tag/tech/index.html">Tech</a>
+    </li>
+    <li class="nav-travels">
+      <a href="http://localhost:2368/tag/travels/">Travels</a>
+    </li>
+    <li class="nav-thoughts">
+      <a href="http://localhost:2368/tag/thoughts/">Thoughts</a>
+    </li>
+    <li class="nav-teaching">
+      <a href="../tag/teaching/index.html">Teaching</a>
+    </li>
+    <li class="nav-community">
+      <a href="../tag/community/index.html">Community</a>
+    </li>
+
+              <li class="submenu-option js-submenu-option">
+                <button class="m-icon-button in-menu-main more js-toggle-submenu" aria-label="Open submenu">
+                  <span class="icon-more" aria-hidden="true"></span>
+                </button>
+                <div class="m-submenu js-submenu">
+                  <div class="l-wrapper in-submenu">
+                    <section class="m-recent-articles">
+                      <h3 class="m-submenu-title in-recent-articles">Recent articles</h3>
+                          <div class="glide js-recent-slider">
+                            <div class="glide__track" data-glide-el="track">
+                              <div class="glide__slides">
+                                <div class="glide__slide">
+                                  <a href="../webinar-modern-c-embedded-intro/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2021/11/modern_cpp_2021.png" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Webinar: Modern C++ &amp; Embedded">
+                                      Webinar: Modern C++ &amp; Embedded
+                                    </h3>
+                                    <span class="m-recent-article__date">6 months ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../systemverilog-2020/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2021/11/Slide1-1.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Webinar: Design and Simulation with SystemVerilog">
+                                      Webinar: Design and Simulation with SystemVerilog
+                                    </h3>
+                                    <span class="m-recent-article__date">a year ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../vision-based-adaptive/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2021/11/IMG_20191204_112837--1--1.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA)">
+                                      Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA)
+                                    </h3>
+                                    <span class="m-recent-article__date">2 years ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../serial-system-bus-protocol/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2021/11/serial.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Serial System Bus + Protocol">
+                                      Serial System Bus + Protocol
+                                    </h3>
+                                    <span class="m-recent-article__date">3 years ago</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </section>
+                    <section class="m-tags">
+                      <h3 class="m-submenu-title">Tags</h3>
+                        <ul>
+                            <li>
+                              <a href="../tag/community/index.html">Community Work</a>
+                            </li>
+                            <li>
+                              <a href="../tag/teaching/index.html">Teaching</a>
+                            </li>
+                            <li>
+                              <a href="../tag/tech/index.html">Tech</a>
+                            </li>
+                        </ul>
+                    </section>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <div class="m-nav__right">
+            <button class="m-icon-button in-menu-main js-open-search" aria-label="Open search">
+              <span class="icon-search" aria-hidden="true"></span>
+            </button>
+            <div class="m-toggle-darkmode js-tooltip" data-tippy-content="Toggle dark mode" tabindex="0">
+              <label for="toggle-darkmode" class="sr-only">
+                Toggle dark mode
+              </label>
+              <input id="toggle-darkmode" type="checkbox" class="js-toggle-darkmode">
+              <div>
+                <span class="icon-moon moon" aria-hidden="true"></span>
+                <span class="icon-sunny sun" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<main class="main-wrap">
+    
+  <section class="m-hero with-picture" data-aos="fade">
+    <div class="m-hero__picture in-post">
+      <img
+        srcset="../content/images/size/w300/2021/11/1.-Home.PNG1.-Home.PNG 300w../content/images/size/w600/2021/11/1.-Home.PNG/1.-Home.PNG 600../content/images/size/w1000/2021/11/1.-Home.PNG1/1.-Home.PNG 100../content/images/size/w2000/2021/11/1.-Home.PNG11/1.-Home.PNG 2000w
+        "
+        sizes="(max-width: 600px) 600px, (max-width: 1000px) 1000px, 2000px"
+        src="../content/images/size/w1000/2021/11/1.-Home.PNG"
+        alt=""
+      />
+    </div>
+    </section>
+  
+  <article>
+    <div class="l-content in-post">
+        <div class="l-wrapper in-post  js-aos-wrapper" data-aos="fade-up"
+          data-aos-delay="300">
+          <div
+            class="l-post-content js-progress-content">
+            <header class="m-heading">
+              <h1 class="m-heading__title in-post">DonateLK: Web Based Donation Platform</h1>
+              <div class="m-heading__meta">
+                  <a href="../tag/tech/index.html" class="m-heading__meta__tag">Tech</a>
+                  <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
+                <span class="m-heading__meta__time">Nov 18, 2017</span>
+              </div>
+            </header>
+            <div class="pos-relative js-post-content">
+              <div class="m-share">
+                <div class="m-share__content js-sticky">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/donatelk-web-based/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Facebook">
+                    <span class="icon-facebook" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://twitter.com/intent/tweet?text=DonateLK%3A%20Web%20Based%20Donation%20Platform&url=http://localhost:2368/donatelk-web-based/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">
+                    <span class="icon-twitter" aria-hidden="true"></span>
+                  </a>
+                  <button class="m-icon-button filled in-share progress js-scrolltop" aria-label="Scroll to top">
+                    <span class="icon-arrow-top" aria-hidden="true"></span>
+                    <svg aria-hidden="true">
+                      <circle class="progress-ring__circle js-progress" fill="transparent" r="0" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <p>DonateLK was developed as a semester project for the module: 'Modular Software Development'. It is a web-based marketplace that is designed to support consumer to consumer donations. Individuals who would like to donate (Donors), as well as those who are looking for donations (Recipients), can create donor and recipient accounts respectively. After verification from the administration, those individuals can then send and receive items through Donate.lk warehouse without any compromise of privacy as explained below.</p><h2 id="objectives"><strong>Objectives</strong></h2><ul><li>To test our ability to produce software as a team, within the given deadline.</li><li>To provide hands-on experience in the application of software engineering models (Iterative Model, Extreme Programming)</li><li>To provide experience in the division of work, teamwork and project management in large programming projects.</li></ul><h2 id="my-responsibilities"><strong>My Responsibilities</strong></h2><p>I was the team leader for a team of five. I was also the lead developer during the development of the module. I was responsible for:</p><ul><li>Writing 7 out of 8 classes in PHP</li><li>Designing the Database</li><li>Integration of PHP and the UI designed in CSS and HTML</li></ul><h2 id="functionality"><strong>Functionality</strong></h2><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/3.-Register-Recipient-1.PNG" width="616" height="736" loading="lazy" alt srcset="../content/images/size/w600/2021/11/3.-Register-Recipient-1.PNG 600w, ../content/images/2021/11/3.-Register-Recipient-1.PNG 616w"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/4.-Requester-Home.PNG" width="1366" height="738" loading="lazy" alt srcset="../content/images/size/w600/2021/11/4.-Requester-Home.PNG 600w, ../content/images/size/w1000/2021/11/4.-Requester-Home.PNG 1000w, ../content/images/2021/11/4.-Requester-Home.PNG 1366w" sizes="(min-width: 720px) 720px"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/10.-Donator--Add-item.PNG" width="524" height="738" loading="lazy" alt></div><div class="kg-gallery-image"><img src="../content/images/2021/11/11.-Donor---Items-Donated-List.PNG" width="1366" height="738" loading="lazy" alt srcset="../content/images/size/w600/2021/11/11.-Donor---Items-Donated-List.PNG 600w, ../content/images/size/w1000/2021/11/11.-Donor---Items-Donated-List.PNG 1000w, ../content/images/2021/11/11.-Donor---Items-Donated-List.PNG 1366w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2021/11/14.-Donor---Viewing-a-request.PNG" width="524" height="549" loading="lazy" alt></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2021/11/19.-Admin---Sent-Items.PNG" width="1366" height="738" loading="lazy" alt srcset="../content/images/size/w600/2021/11/19.-Admin---Sent-Items.PNG 600w, ../content/images/size/w1000/2021/11/19.-Admin---Sent-Items.PNG 1000w, ../content/images/2021/11/19.-Admin---Sent-Items.PNG 1366w" sizes="(min-width: 720px) 720px"></div></div></div></figure><p>Donate.lk is a web-based marketplace that is designed to support consumer to consumer donations. Individuals who would like to donate (Donors), as well as those who are looking for donations (Recipients), can create donor and recipient accounts respectively. After verification from the administration, those individuals can then send and receive items through Donate.lk warehouse without any compromise of privacy as explained below.<br>Donors and recipients can register as users of the system. A recipient must provide a short summary about himself/herself in addition to details about his/her job, salary and financial information. A recipient account is first initiated into a waiting state. An admin must review the recipient’s account and verify that the short summary is true, before making the recipient account active. The details and summary of a recipient are only visible to an admin, while only the short summary is shown to a donor.<br>A donor can place information about his/her item in the system. A recipient can find items through a search feature and request up to five items. Multiple recipients can request one item. A donor can view all the items he/she has donated and the requests that have arrived at his/her items. By considering the summary of each recipient, the donor confirms one request out of many, per item. This marks the item as ‘confirmed by donor’<br>Then the donor is given a unique request ID, which can be used as a transaction ID. The donor can attach this ID and send the item to the administrator by mail. Then the admin marks his item’s status as ‘sent by donor’.<br>Items sent by donors are shown to the admin in the admin’s database. The admin then receives the item and marks it as ‘received by admin’. Then he/she sends it to the recipient, marking the item as ‘sent by admin’. The recipient can track the status of the item through the recipient home page. When the recipient receives the item, he/she marks it as ‘received by recipient’ and that ends a transaction.<br>This system ensures the privacy of the information of both donors and recipients. The only communication is through their transaction ID, issued by the system anonymously.<br><br><br>Furthermore, the system can be used by the administration to view the status of all items in transit as well as review, terminate or suspend all user accounts.<br></p><h2 id="skills-acquired"><strong>Skills Acquired</strong></h2><ul><li>PHP, CSS, HTML</li><li>Division of work in a programming project</li><li>Team management &amp; leadership</li><li>Familiarity with preparing SRS document</li></ul>
+                <section class="m-tags in-post">
+                  <h3 class="m-submenu-title">Tags</h3>
+                  <ul>
+                      <li>
+                        <a href="../tag/tech/index.html" title="Tech">Tech</a>
+                      </li>
+                  </ul>
+                </section>
+            </div>
+          </div>
+        </div>
+        <section class="m-subscribe-section js-newsletter">
+          <div class="l-wrapper in-post">
+            <div class="m-subscribe-section__content">
+              <div class="m-subscribe-section__text">
+                <h4 class="m-subscribe-section__title">Subscribe to our newsletter</h4>
+                <p class="m-subscribe-section__description">
+                  Get the latest posts delivered right to your inbox.
+                </p>
+              </div>
+              <div class="m-subscribe-section__form">
+                
+<div class="m-subscribe-section__form">
+  <form data-members-form="subscribe" id="newsletter-form" class="m-subscribe-section__container">
+    <div class="m-subscribe__form">
+      <div class="pos-relative">
+        <label for="newsletter-input" class="sr-only">Your email address</label>
+        <input data-members-email id="newsletter-input" class="m-input in-subscribe-section" type="email"
+          placeholder="Your email address" required />
+      </div>
+      <button id="newsletter-button" class="m-button primary block" type="submit">Subscribe</button>
+    </div>
+    <div class="m-subscribe__success">
+      <header class="m-heading no-margin">
+        <img src="../assets/images/success.png%3Fv=c9e2a93bba" alt="Success!" class="m-subscribe__success_icon">
+        <p class="m-heading__description in-newsletter-form">
+          Now check your inbox and click the link to confirm your subscription.
+        </p>
+      </header>
+    </div>
+    <p class="m-subscribe__invalid m-small-text">
+      Please enter a valid email address
+    </p>
+    <p class="m-subscribe__error m-small-text">
+      Oops! There was an error sending the email, please try later.
+    </p>
+  </form>
+</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="m-author">
+          <div class="m-author__content">
+            <div class="m-author__picture">
+              <a href="../author/abarajithan/index.html" class="m-author-picture" aria-label="Abarajithan Gnaneswaran">
+                  <div style="background-image: url(../content/images/2021/11/im_large_vignette.jpg);"></div>
+              </a>
+            </div>
+            <div class="m-author__info">
+              <h4 class="m-author__name">
+                <a href="../author/abarajithan/index.html">Abarajithan Gnaneswaran</a>
+              </h4>
+              <ul class="m-author-links">
+                  <li>
+                    <a href="https://facebook.com/abarajithan11" target="_blank" rel="noopener" aria-label="Facebook">
+                      <span class="icon-facebook" aria-hidden="true"></span>
+                    </a>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+          <section class="m-recommended">
+            <div class="l-wrapper in-recommended">
+              <h3 class="m-section-title in-recommended">Recommended for you</h3>
+              <div class="m-recommended-articles">
+                <div class="m-recommended-slider glide js-recommended-slider">
+                  <div class="glide__track" data-glide-el="track">
+                    <div class="glide__slides">
+                      
+    <div class="m-recommended-slider__item glide__slide">
+  <article class="m-article-card  post tag-tech featured">
+    <div class="m-article-card__picture">
+      <a href="../vision-based-adaptive/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2021/11/IMG_20191204_112837--1--1.jpg" loading="lazy" alt="">
+      <a href="../author/abarajithan/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan Gnaneswaran" data-tippy-content="Posted by Abarajithan Gnaneswaran ">
+          <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
+      </a>
+        <a href="../vision-based-adaptive/index.html" class="m-article-card__featured js-tooltip" data-tippy-content="Featured" aria-label="Featured">
+          <span class="icon-star" aria-hidden="true"></span>
+        </a>
+    </div>
+      <div class="m-article-card__info">
+        <a href="../tag/tech/index.html" class="m-article-card__tag">Tech</a>
+      <a href="../vision-based-adaptive/index.html" class="m-article-card__info-link" aria-label="Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA)">
+        <div>
+          <h2 class="m-article-card__title js-article-card-title " title="Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA)">
+            Vision-Based Adaptive Traffic Control on PSoC (ARM+FPGA)
+          </h2>
+        </div>
+        <div class="m-article-card__timestamp">
+          <span>2 years ago</span>
+          <span>&bull;</span>
+          <span>6 min read</span>
+        </div>
+      </a>
+    </div>
+  </article>
+    </div>
+    <div class="m-recommended-slider__item glide__slide">
+  <article class="m-article-card  post tag-tech">
+    <div class="m-article-card__picture">
+      <a href="../serial-system-bus-protocol/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2021/11/serial.jpg" loading="lazy" alt="">
+      <a href="../author/abarajithan/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan Gnaneswaran" data-tippy-content="Posted by Abarajithan Gnaneswaran ">
+          <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
+      </a>
+    </div>
+      <div class="m-article-card__info">
+        <a href="../tag/tech/index.html" class="m-article-card__tag">Tech</a>
+      <a href="../serial-system-bus-protocol/index.html" class="m-article-card__info-link" aria-label="Serial System Bus + Protocol">
+        <div>
+          <h2 class="m-article-card__title js-article-card-title " title="Serial System Bus + Protocol">
+            Serial System Bus + Protocol
+          </h2>
+        </div>
+        <div class="m-article-card__timestamp">
+          <span>3 years ago</span>
+          <span>&bull;</span>
+          <span>1 min read</span>
+        </div>
+      </a>
+    </div>
+  </article>
+    </div>
+    <div class="m-recommended-slider__item glide__slide">
+  <article class="m-article-card  post tag-tech">
+    <div class="m-article-card__picture">
+      <a href="../csiro-end-to-end-machine-learning-pipeline-2018/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2021/11/6wheelRobot.jpg" loading="lazy" alt="">
+      <a href="../author/abarajithan/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan Gnaneswaran" data-tippy-content="Posted by Abarajithan Gnaneswaran ">
+          <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
+      </a>
+    </div>
+      <div class="m-article-card__info">
+        <a href="../tag/tech/index.html" class="m-article-card__tag">Tech</a>
+      <a href="../csiro-end-to-end-machine-learning-pipeline-2018/index.html" class="m-article-card__info-link" aria-label="CSIRO: End-to-End Machine Learning Pipeline">
+        <div>
+          <h2 class="m-article-card__title js-article-card-title " title="CSIRO: End-to-End Machine Learning Pipeline">
+            CSIRO: End-to-End Machine Learning Pipeline
+          </h2>
+        </div>
+        <div class="m-article-card__timestamp">
+          <span>3 years ago</span>
+          <span>&bull;</span>
+          <span>1 min read</span>
+        </div>
+      </a>
+    </div>
+  </article>
+    </div>
+                    </div>
+                  </div>
+                  <div data-glide-el="controls" class="glide__arrows js-controls">
+                    <button data-glide-dir="<" class="m-icon-button filled in-recommended-articles glide-prev" aria-label="Previous">
+                      <span class="icon-arrow-left" aria-hidden="true"></span>
+                    </button>
+                    <button data-glide-dir=">" class="m-icon-button filled in-recommended-articles glide-next" aria-label="Next">
+                      <span class="icon-arrow-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    </div>
+  </article>
+</main>
+
+
+
+    
+<div class="m-search js-search" role="dialog" aria-modal="true" aria-label="Search">
+  <button class="m-icon-button outlined as-close-search js-close-search" aria-label="Close search">
+    <span class="icon-close" aria-hidden="true"></span>
+  </button>
+  <div class="m-search__content">
+    <form class="m-search__form">
+      <div class="pos-relative">
+        <span class="icon-search m-search-icon" aria-hidden="true"></span>
+        <label for="search-input" class="sr-only">
+          Type to search
+        </label>
+        <input id="search-input" type="text" class="m-input in-search js-input-search" placeholder="Type to search">
+      </div>
+    </form>
+    <div class="js-search-results hide"></div>
+    <p class="m-not-found align-center hide js-no-results">
+      No results for your search, please try with something else.
+    </p>
+  </div>
+</div>
+
+    
+<footer class="m-footer">
+  <div class="m-footer__content">
+    <nav class="m-footer-social">
+        <a href="https://www.facebook.com/abarajithan11" target="_blank" rel="noopener" aria-label="Facebook">
+          <span class="icon-facebook" aria-hidden="true"></span>
+        </a>
+      <a href="http://localhost:2368/rss" aria-label="RSS">
+        <span class="icon-rss" aria-hidden="true"></span>
+      </a>
+    </nav>
+    <p class="m-footer-copyright">
+      <span>Aba&#x27;s Blog &copy; 2021</span>
+      <span>&nbsp; &bull; &nbsp;</span>
+      <span>Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a></span>
+    </p>
+    <p class="m-footer-copyright jslicense">
+      <a href="../assets/html/javascript.html%3Fv=c9e2a93bba.html" rel="jslicense">JavaScript license information</a>
+    </p>
+  </div>
+</footer>
+
+    <div class="m-alert success subscribe js-alert" data-notification="subscribe">
+  Great! You&#x27;ve successfully subscribed.
+  <button class="m-alert__close js-notification-close" aria-label="Close">
+    <span class="icon-close"></span>
+  </button>
+</div>
+
+<div class="m-alert success signup js-alert" data-notification="signup">
+  Great! Next, complete checkout for full access.
+  <button class="m-alert__close js-notification-close" aria-label="Close">
+    <span class="icon-close"></span>
+  </button>
+</div>
+
+<div class="m-alert success signin js-alert" data-notification="signin">
+  Welcome back! You&#x27;ve successfully signed in.
+  <button class="m-alert__close js-notification-close" aria-label="Close">
+    <span class="icon-close"></span>
+  </button>
+</div>
+
+<div class="m-alert success checkout js-alert" data-notification="checkout">
+  Success! Your account is fully activated, you now have access to all content.
+  <button class="m-alert__close js-notification-close" aria-label="Close">
+    <span class="icon-close"></span>
+  </button>
+</div>
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CPromise%2CArray.prototype.includes%2CString.prototype.endsWith%2CString.prototype.startsWith%2CObject.assign%2CNodeList.prototype.forEach"></script>
+    <script defer src="../assets/js/manifest.js%3Fv=c9e2a93bba"></script>
+    <script defer src="../assets/js/vendor/content-api.min.js%3Fv=c9e2a93bba"></script>
+    <script defer src="../assets/js/vendor.js%3Fv=c9e2a93bba"></script>
+    <script defer src="../assets/js/app.js%3Fv=c9e2a93bba"></script>
+
+      <script defer src="../assets/js/post.js%3Fv=c9e2a93bba"></script>
+
+
+    
+  </body>
+</html>
