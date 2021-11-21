@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>My Paper-Writing Workflow [Inkscape, Python, Mendeley, VSCode, Git]</title>
+
+    <link rel="icon" href="../../favicon.png" type="image/png" />
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="Aba&#x27;s Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="My Paper-Writing Workflow [Inkscape, Python, Mendeley, VSCode, Git]" />
+    <meta property="og:description" content="I&#x27;m no beginner to LaTeX. In fact, our department has made sure that we master LaTeX by making us submit our assignments and reports on LaTeX from sophomore level. Therefore, I have developed a workflow with LaTeX over time. I built upon it into a complete publication workflow, for my" />
+    <meta property="og:url" content="http://localhost:2368/paper-workflow/" />
+    <meta property="og:image" content="http://localhost:2368/content/images/2021/11/53-3.png" />
+    <meta property="article:published_time" content="2021-11-21T06:32:20.000Z" />
+    <meta property="article:modified_time" content="2021-11-21T06:39:05.000Z" />
+    <meta property="article:tag" content="Technical Projects" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
+    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="My Paper-Writing Workflow [Inkscape, Python, Mendeley, VSCode, Git]" />
+    <meta name="twitter:description" content="I&#x27;m no beginner to LaTeX. In fact, our department has made sure that we master LaTeX by making us submit our assignments and reports on LaTeX from sophomore level. Therefore, I have developed a workflow with LaTeX over time. I built upon it into a complete publication workflow, for my" />
+    <meta name="twitter:url" content="http://localhost:2368/paper-workflow/" />
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2021/11/53-3.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Abarajithan G" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Technical Projects" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1042" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aba&#x27;s Blog",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Abarajithan G",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/content/images/2021/11/im_large_vignette.jpg",
+            "width": 1600,
+            "height": 1600
+        },
+        "url": "http://localhost:2368/author/aba/",
+        "sameAs": [
+            "https://www.linkedin.com/in/abarajithan11",
+            "https://www.facebook.com/abarajithan11"
+        ]
+    },
+    "headline": "My Paper-Writing Workflow [Inkscape, Python, Mendeley, VSCode, Git]",
+    "url": "http://localhost:2368/paper-workflow/",
+    "datePublished": "2021-11-21T06:32:20.000Z",
+    "dateModified": "2021-11-21T06:39:05.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:2368/content/images/2021/11/53-3.png",
+        "width": 1920,
+        "height": 1042
+    },
+    "keywords": "Technical Projects",
+    "description": "I&#x27;m no beginner to LaTeX. In fact, our department has made sure that we master\nLaTeX by making us submit our assignments and reports on LaTeX from sophomore\nlevel. Therefore, I have developed a workflow with LaTeX over time. I built upon\nit into a complete publication workflow, for my first paper: Kraken. Because\nthis is my first paper, I wanted it to be perfect. Even the graphs, diagrams,\ntheir font sizes and everything. \n\nDrawings - Inkscape\nWhich one of these two looks better?\n\nLEFT: one I dr",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.22" />
+    <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../../rss/index.html" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #2861bd;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                <amp-img class="site-icon" src="http://localhost:2368/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">My Paper-Writing Workflow [Inkscape, Python, Mendeley, VSCode, Git]</h1>
+                <section class="post-meta">
+                    Abarajithan G -
+                    <time class="post-date" datetime="2021-11-21">21 Nov 2021</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="http://localhost:2368/content/images/2021/11/53-3.png" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <p>I'm no beginner to LaTeX. In fact, our department has made sure that we master LaTeX by making us submit our assignments and reports on LaTeX from sophomore level. Therefore, I have developed a workflow with LaTeX over time. I built upon it into a complete publication workflow, for my first paper: Kraken. Because this is my first paper, I wanted it to be perfect. Even the graphs, diagrams, their font sizes and everything. </p><h2 id="drawingsinkscape">Drawings - Inkscape</h2><p>Which one of these two looks better?</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>LEFT: one I drew with draw.io for our patent, RIGHT: one I drew with Inkscape for my paper</figcaption></figure><p>Tools like <a href="https://app.diagrams.net/">draw.io</a> lack precision. Also, the size and style of their fonts do not match the rest of the LaTeX text. Inkscape <a href="https://inkscape.org/release/inkscape-1.1.1/">[get]</a> is a professional vector graphics tool, a fully-functional, lightweight, free and open-source alternative to Adobe Illustrator. Therefore, I learnt it to draw the two diagrams in the paper. </p><p>First, find the column/text width of your LaTeX document with <em>\the\columnwidth </em>in points (1 pt = 1/72.27 inch)<em>.</em> Then set the Inkscape canvas size in <em>File &gt; Document Properties &gt; Page &gt; Custom Size.</em> You can create a grid, either rectangular or isometric in <em>File &gt; Document Properties &gt; Grid</em>. You can start drawing with Bezier Curve tool [B], organize the drawing by layers...etc</p><h3 id="adding-text">Adding Text</h3><p>Text can be added in multiple ways using the Text tool [T]. You can simply add text, but that will get rendered with the image, resulting in any font/size you want. But I wanted the text to be rendered in LaTeX, such that it has uniform size and style, to match the rest of the document. For this, I type the text, with any required latex symbols as follows, and save a copy of the image as EPS+LaTeX. This creates an .eps file without text and a .tex file with text only. Make sure to keep the master copy of your drawing updated in the default SVG format (only save a copy in the EPS+TEX format) to avoid data loss.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>(1) select the text, adjust the alignment. Inkscape has a bug here. You need to check few times that it is aligned correctly. (2) <em>File &gt; Save a Copy &gt; EPS &gt; Omit Text in PDF</em>. This will create a pair of files.</figcaption></figure><p>Then add the tex file into your LaTeX document using either include or import:</p><figure class="kg-card kg-image-card"></figure><p>Since this renders text seperately, the text might have moved slightly. Make nessasary adjustments, and recheck the text alignment to make it work.</p><p>The first figure (this one) took me over 10 days to make. To learn inkscape from scratch, try like five different text insertion methods and finally get it right. The next figure (following one) took me just a few hours.</p><figure class="kg-card kg-image-card"></figure><h2 id="line-bar-pie-chartspython-ecosystem">Line, bar, pie charts - Python Ecosystem</h2><p>If you prefer Matlab, skip this. I, on the other hand love the python stack. Numpy is the best in manipulating like 6,7 dimensional arrays, and the object oriented and intutive nature of python libaries make them a treat to use. I also found this awesome package: SciencePlots <a href="https://github.com/garrettj403/SciencePlots">[get]</a>, which works on top of other packages and makes IEEE &amp; Science style plots with ease.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>Science + Nature vs Science + IEEE styles</figcaption></figure><p>To build the spreadsheet, I populate a pandas dataframe with some regular python code. Yes, I had to spend few days learning pandas for this, but its a great investment. Then I use matplotlib to make plots and seaborn to make them prettier. </p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>My code</figcaption></figure><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div></div></div><figcaption>Drawings in my paper</figcaption></figure><h2 id="reference-managementmendeley">Reference Management - Mendeley</h2><p>I had to read and summarize like hundred papers for a literature review. Keeping them organized is a nightmare with regular file manager. Which one do you prefer among the following?</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>(1) Regular file manager (2,3) Mendeley</figcaption></figure><p>Mendeley is available on Web, Windows, Mac and iOS. It has tons of features, including the following.</p><ul><li>Add refereces as you browse the internet. Install the Mendeley extension and click it from arXiv, IEEE, ResearchGate, Springer, raw PDF...etc. It will fetch the data (author, journal, year, abstract, possibly pdf) and save it to its Web version. You can sync that to all your devices. </li><li>Group by labels, sort by author/year...etc. </li><li>Search within your references fast</li><li>Highlight and add comments using the built-in PDF tool. You may take notes as well. Everything will be synced between all your devices.</li><li>Easily export bibilography as LaTeX. Select a set of references, right click, copy as BibiTeX, then paste into your .bib file.</li></ul><p>I summarize the papers into a Google / Online Excel Sheet, so my supervisor also can have a look.</p><figure class="kg-card kg-image-card"></figure><h2 id="sync-handwriting-between-tablet-and-pc">Sync Handwriting between Tablet and PC</h2><p>I prefer drawing on the papers and writing stuff on them with my Android tablet and pen. Mendeley does not work with Android and I'm not sure if its iOS version supports handwriting. Therefore, to sync documents, I use Resilio Sync. It can be insalled in both PC <a href="https://www.resilio.com/platforms/desktop/">[get]</a> and tablet <a href="https://www.resilio.com/platforms/mobile/">[get]</a>. Folders from PC can be connected to those in the tablet, such that any changes made on either are reflected in other one within minutes.</p><p>I use Xodo <a href="https://play.google.com/store/apps/details?id=com.xodo.pdf.reader&amp;hl=en&amp;gl=US">[get]</a>, an excellent PDF manager on my tablet to draw on the papers. These then reflect in the PC (and within Mendeley).</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div></div></div></figure><h2 id="pure-latex-but-fastervscode">Pure LaTeX, but faster! - VSCode</h2><blockquote>"What's wrong with Overleaf?" <br />"Oh you're a simpleton happy with LyX!"  </blockquote><p>Nope, I write pure LaTeX. But Overleaf sucks. Here's why</p><ul><li>Limited version control - I can't diff and see the exact changes between two versions...etc. I'd rather use a proper version control tool: git</li><li> It is web-based, and hence not responsive enough</li><li>It lacks many more features, read on...</li></ul><p>Since I wrote the entire journal paper alone, all 15 pages of it, and revised it like ten times, I had the freedom to develop my own workflow. When I finally passed it on to my supervisor for final revision, I synced it with Overleaf so he can work with it comfortably and his changes will be reflected in my local machine.</p><h3 id="latex-compiler">Latex Compiler</h3><p>You first need a LaTeX compiler like mikTex: <a href="https://miktex.org/">miktex.org</a>.</p><h3 id="vscode-latex-workshop">VSCode + Latex Workshop</h3><p>VSCode <a href="https://code.visualstudio.com/download">[get]</a> is the free, open-source editor from Microsoft. By installing the right extensions, you can make it into a super-powerful, master-of-all-langs IDE. Latex Workshop <a href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop">[get]</a> is the extension we need. Coupled with VScode's native features, it makes a killer LaTeX experience. Check out some of its coolest features below. More features listed <a href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop">[here]</a>. The theme I use is One Dark Pro Monokai Darker <a href="https://marketplace.visualstudio.com/items?itemName=eserozvataf.one-dark-pro-monokai-darker">[get]</a></p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Multiple tabs, symbols pane, preview equations on hover, ultra-fast intelligent autocomplete, easy-on-eyes dark theme, pretty colors (theme can be chosen independently), seamless git</figcaption></figure><h3 id="version-controlgit">Version Control - git</h3><p>Git is a pain to lot of people. It was the same to me, until mid-2020. When I was stranded in New Delhi due to COVID lockdowns amidst my solo-backpacking, I started reading some books on git. Then I figured that its what I have been missing all my life.</p><figure class="kg-card kg-image-card"></figure><p>Git is a version control tool. Bascially a time machine that helps you to move to any point in the development, compare two points (diff), manage them collaboratively...etc. It gurantees that "commits" (aka snapshots) of your folder are immutable and non-deletable, giving you the confidence to clean up your code and try new things after each commit.  </p><p>It has a horrible interface. The commands barely makes sense. But underneath, it has a beautiful data model. Once I understood that deeply, I was able to recall or google commands at will and use git like a pro. Now I'm addicted to the safety it provides. Even for a personal project, I start tracking it with git. Note, git is a local tool. You dont need internet connection to use it.</p><figure class="kg-card kg-embed-card kg-card-hascaption"><amp-youtube width="200" height="113" data-videoid="2sjqTHE0zok" layout="fixed"></amp-youtube><figcaption>An awesome MIT video that explains git beautifully. This video changed my life.</figcaption></figure><figure class="kg-card kg-bookmark-card kg-card-hascaption"><a class="kg-bookmark-container" href="https://missing.csail.mit.edu/2020/version-control/"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Version Control (Git)</div><div class="kg-bookmark-description"></div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://missing.csail.mit.edu/apple-touch-icon.png" alt width="180" height="180" layout="fixed"></amp-img><span class="kg-bookmark-author">the missing semester of your cs education</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://imgs.xkcd.com/comics/git.png" alt width="330" height="478" layout="responsive"></amp-img></div></a><figcaption>Corresponding article to the video</figcaption></figure><p>Okay, how do I use git for paper-writing? Well, simple. Once you understand git, start tracking all your TEX, EPS, SVG, BIB, python, ipynb files using git. You will feel the confidence and power. When you add something and save (recompile) successfully, make a commit with an appropriate commit message (eg: "Modify table horz_conv, to add circles around y").</p><h3 id="overleaf-sync">Overleaf Sync</h3><p>Right, all good. But my supervisor is not familar with git and Mendeley. What do I do? He is very familiar with overleaf though. So, I setup sync to overleaf via github. I had to purchase a student account for $8/month. </p><p>First create a github repo (remote), connect overleaf to that empty repo, push your local repo to remote, then import changes into overleaf. When supervisor changes something, I can push that from overleaf to github and pull it into local repo. Following is a tutorial</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://www.overleaf.com/learn/how-to/How_do_I_connect_an_Overleaf_project_with_a_repo_on_GitHub%2C_GitLab_or_BitBucket%3F#:~:text=You%20can%20configure%20your%20Overleaf,Then%20follow%20the%20prompts."><div class="kg-bookmark-content"><div class="kg-bookmark-title">How do I connect an Overleaf project with a repo on GitHub, GitLab or BitBucket?</div><div class="kg-bookmark-description">An online LaTeX editor that’s easy to use. No installation, real-time collaboration, version control, hundreds of LaTeX templates, and more.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://www.overleaf.com/touch-icon-192x192.png" alt width="192" height="192" layout="fixed"></amp-img><span class="kg-bookmark-author">Overleaf, Online LaTeX Editor</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://cdn.overleaf.com/img/ol-brand/overleaf_og_logo.png" alt width="256" height="256" layout="fixed"></amp-img></div></a></figure><h2 id="conclusion">Conclusion</h2><p>Yeah, I had to learn 80% of this over several weeks to setup my workflow. But I beleive this is a worthy investment, as I can continue to write future papers with this easily.</p><p>If you think I am taking this too far, here's what I aspire to be. This mathematics freshman takes lecture notes with LaTeX using vim (yep), while drawing all mathematical drawings in real time (as the prof draws on blackboard) on Inkscape.</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://castel.dev/post/lecture-notes-1/"><div class="kg-bookmark-content"><div class="kg-bookmark-title">How I’m able to take notes in mathematics lectures using LaTeX and Vim</div><div class="kg-bookmark-description">A while back I an­swered a ques­tion on Quora: Can peo­ple ac­tu­al­ly keep up with note-​taking in Math­e­mat­ics lec­tures with LaTeX.There, I ex­plained my work­flow of tak­ing lec­ture notes in LaTeX using Vim and how I draw fig­ures in Inkscape.How­ev…</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://castel.dev/icons/icon-512x512.png?v=27cd7f782269f5d5087006b570d8d8c1" alt width="512" height="512" layout="responsive"></amp-img><span class="kg-bookmark-author">Gilles Castel</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://castel.dev/static/ba66c52b01c8fe6b31c97af52b5eb7f7/f9fff/ca1.png" alt width="680" height="480" layout="responsive"></amp-img></div></a></figure>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+            <amp-img class="site-icon" src="http://localhost:2368/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+        <h3>Aba&#x27;s Blog</h3>
+            <p>Tech - Travels - Thoughts</p>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>
