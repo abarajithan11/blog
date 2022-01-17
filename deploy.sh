@@ -1,4 +1,4 @@
-wget -r -nH -P /mnt/d/blog/gatsby/docs -E -T 2 -np -k http://localhost:2368/
+wget -r -nH -P ./docs -E -T 2 -np -k http://localhost:2368/
 echo "----- wget done. Replacing localhost -------"
 find ./docs -type f -exec sed -i 's/http:\/\/localhost:2368/https:\/\/aba-blog.xyz/g' {} \;
 echo "----- Replaced localhost. Replacing og:image -------"
