@@ -85,18 +85,18 @@
     <meta property="og:site_name" content="Aba&#x27;s Blog" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="DNN → Chip Design [2/4: Golden Models]" />
-    <meta property="og:description" content="This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken.  Kraken Paper PyTorch/TensorFlow: Explore DNN models, quantize &amp;amp; extract weights Golden Model in Python (NumPy stack): Custom OOP framework, process the weights, convert to custom" />
+    <meta property="og:description" content="This is a series of articles [intro] outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken [arXiv paper].Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level" />
     <meta property="og:url" content="https://aba-blog.xyz/dnn-to-chip-2/" />
     <meta property="og:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" />
     <meta property="article:published_time" content="2022-01-29T10:30:50.000Z" />
-    <meta property="article:modified_time" content="2022-01-29T11:41:59.000Z" />
+    <meta property="article:modified_time" content="2022-01-29T18:43:05.000Z" />
     <meta property="article:tag" content="Technical Projects" />
     
     <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
     <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="DNN → Chip Design [2/4: Golden Models]" />
-    <meta name="twitter:description" content="This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken.  Kraken Paper PyTorch/TensorFlow: Explore DNN models, quantize &amp;amp; extract weights Golden Model in Python (NumPy stack): Custom OOP framework, process the weights, convert to custom" />
+    <meta name="twitter:description" content="This is a series of articles [intro] outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken [arXiv paper].Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level" />
     <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-2/" />
     <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -139,7 +139,7 @@
     "headline": "DNN → Chip Design [2/4: Golden Models]",
     "url": "https://aba-blog.xyz/dnn-to-chip-2/",
     "datePublished": "2022-01-29T10:30:50.000Z",
-    "dateModified": "2022-01-29T11:41:59.000Z",
+    "dateModified": "2022-01-29T18:43:05.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://aba-blog.xyz/content/images/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg",
@@ -147,7 +147,7 @@
         "height": 1366
     },
     "keywords": "Technical Projects",
-    "description": "\n\nThis is a series of articles outlining my workflow, which I developed over the\npast few years through building my own DNN accelerator: Kraken. \n\nKraken Paper [https://arxiv.org/abs/2112.02793] 1. PyTorch/TensorFlow: Explore DNN models, quantize &amp; extract weights\n 2. Golden Model in Python (NumPy\n    stack): Custom OOP framework, process the weights, convert to custom\n    datatypes\n 3. Whiteboard: Design hardware (next post)\n\n1. Tensorflow / PyTorch\nTensorflow (Google) and PyTorch (Facebook) ar",
+    "description": "\n\n&gt; This is a series of articles [intro]\n[https://aba-blog.xyz/dnn-to-chip-1/index.html] outlining my workflow of 15\nsteps, which I developed over the past few years through building my own DNN\naccelerator: Kraken [arXiv paper] [https://arxiv.org/abs/2112.02793].\nGolden Models are essential to hardware (FPGA/ASIC) development. They model the\nexpected behavior of a chip using a high-level language, such that they can be\nbuilt relatively fast, with almost zero chance of error. The input and expect",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://aba-blog.xyz/"
@@ -237,13 +237,15 @@
   const ghostSearchApiKey = 'f615b479aa70555d4c87186458'
 </script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism-tomorrow.min.css" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coldark-dark.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.css" />
 <style>
     pre[class*=language-] {
         margin: 0.5em 0;
-        font-size: 1rem;
+        font-size: 0.8rem;
         background: #111;
     }
 </style><style>:root {--ghost-accent-color: #2861bd;}</style>
@@ -331,23 +333,23 @@
                                 <div class="glide__slide">
                                   <a href="../dnn-to-chip-4/index.html" class="m-recent-article">
                                     <div class="m-recent-article__picture ">
-                                        <img src="../content/images/size/w300/2022/01/image_o-12-1.png" loading="lazy" alt="">
+                                        <img src="../content/images/size/w300/2022/01/sys-4.jpg" loading="lazy" alt="">
                                     </div>
                                     <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [4/4: System-on-Chip]">
                                       DNN → Chip Design [4/4: System-on-Chip]
                                     </h3>
-                                    <span class="m-recent-article__date">an hour ago</span>
+                                    <span class="m-recent-article__date">8 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
                                   <a href="../dnn-to-chip-3/index.html" class="m-recent-article">
                                     <div class="m-recent-article__picture ">
-                                        <img src="../content/images/size/w300/2022/01/Data-Flow-of-Inference-Engine-2-1.png" loading="lazy" alt="">
+                                        <img src="../content/images/size/w300/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" loading="lazy" alt="">
                                     </div>
                                     <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [3/4: Digital Design]">
                                       DNN → Chip Design [3/4: Digital Design]
                                     </h3>
-                                    <span class="m-recent-article__date">an hour ago</span>
+                                    <span class="m-recent-article__date">8 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
@@ -358,18 +360,18 @@
                                     <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [2/4: Golden Models]">
                                       DNN → Chip Design [2/4: Golden Models]
                                     </h3>
-                                    <span class="m-recent-article__date">an hour ago</span>
+                                    <span class="m-recent-article__date">8 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
                                   <a href="../dnn-to-chip-1/index.html" class="m-recent-article">
                                     <div class="m-recent-article__picture ">
-                                        <img src="../content/images/size/w300/2022/01/langs-2.png" loading="lazy" alt="">
+                                        <img src="../content/images/size/w300/2022/01/cov-14.jpg" loading="lazy" alt="">
                                     </div>
                                     <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
                                       DNN → Chip Design [1/4: Intro &amp; Directory Structure]
                                     </h3>
-                                    <span class="m-recent-article__date">19 hours ago</span>
+                                    <span class="m-recent-article__date">a day ago</span>
                                   </a>
                                 </div>
                               </div>
@@ -487,12 +489,11 @@
                   </button>
                 </div>
               </div>
-              <p></p><p>This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken. </p><div class="kg-card kg-button-card kg-align-center"><a href="https://arxiv.org/abs/2112.02793" class="kg-btn kg-btn-accent">Kraken Paper</a></div><!--kg-card-begin: markdown--><ol>
+              <p></p><blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[intro]</a> outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level language, such that they can be built relatively fast, with almost zero chance of error. The input and expected output test vectors for every RTL module are generated using them, and the simulation output from the testbench is compared against their 'gold standard.'</p><p>I first obtain pretrained DNNs from PyTorch / Tensorflow model zoo, analyze them, then load them into the custom DNN inference framework I have built with NumPy stack to ensure I fully understand each operation. I then generate test vectors from those golden models.</p><h2 id="steps">Steps:</h2><!--kg-card-begin: markdown--><ol>
 <li><strong>PyTorch/TensorFlow</strong>: Explore DNN models, quantize &amp; extract weights</li>
 <li><strong>Golden Model in Python (NumPy stack)</strong>: Custom OOP framework, process the weights, convert to custom datatypes</li>
-<li><strong>Whiteboard</strong>: Design hardware (next post)</li>
 </ol>
-<!--kg-card-end: markdown--><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">1. Tensorflow / PyTorch</h2></div><p>Tensorflow (Google) and PyTorch (Facebook) are the two competing open source libraries used to build, train, quantize and deploy modern deep neural networks. </p><p>Users of both are able to build &amp; train networks using high-level, user-friendly classes and functions such as Conv2D, model.fit(). Each such high-level API is implemented using their own low-level tensor operations (matmul, einsum), which also can be used by the users. Those operations are implemented using their C++ backend, accelerated by high performant libraries like eigen and CUDA. Once we define the models using Python, the C++ code underneath pulls the load, making them fast as well as user-friendly.</p><h3 id="11-download-explore-pretrained-dnn-models">1.1. Download &amp; Explore Pretrained DNN Models</h3><p>As the first step, I obtained the pretrained models from either <a href="https://keras.io/api/applications/">Keras.Applications</a> or <a href="https://pytorch.org/serve/model_zoo.html">PyTorch Model Zoo</a>.</p><figure class="kg-card kg-code-card"><pre><code class="language-python">import tensorflow as tf
+<!--kg-card-end: markdown--><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">1. Tensorflow / PyTorch</h2></div><p>Tensorflow (Google) and PyTorch (Facebook) are the two competing open source libraries used to build, train, quantize and deploy modern deep neural networks. </p><p>Both frameworks provide high-level, user-friendly classes and functions such as Conv2D, model.fit() to build &amp; train networks. Each such high-level API is implemented using their own low-level tensor operations (matmul, einsum), which also can be used by the users. Those operations are implemented using their C++ backend, accelerated by high performant libraries like eigen and CUDA. Once we define the models using Python, the C++ code underneath pulls the load, making them fast as well as user-friendly.</p><h3 id="11-download-explore-pretrained-dnn-models">1.1. Download &amp; Explore Pretrained DNN Models</h3><p>As the first step, I obtained the pretrained models from either <a href="https://keras.io/api/applications/">Keras.Applications</a> or <a href="https://pytorch.org/serve/model_zoo.html">PyTorch Model Zoo</a>.</p><figure class="kg-card kg-code-card"><pre><code class="language-python">import tensorflow as tf
 from tensorflow.keras.applications import VGG16
 
 vgg16 = VGG16(
@@ -666,7 +667,7 @@ for i, image in enumerate(images):
     output = interpreter.get_tensor(output_details["index"])[0]
     predictions[i] = output.argmax()
 
-print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explore Model Architecture</h3><p><a href="https://netron.app/">Netron </a>is a great tool for opening tensorflow's 32-bit models (savedmodel), tflite's int8 models (tflite), pytorch models (pt), ONNX models, and more, to observe the architecture and tensor names.</p><figure class="kg-card kg-image-card"><img src="../content/images/2022/01/image-2.png" class="kg-image" alt loading="lazy" width="1062" height="1042" srcset="../content/images/size/w600/2022/01/image-2.png 600w, ../content/images/size/w1000/2022/01/image-2.png 1000w, ../content/images/2022/01/image-2.png 1062w" sizes="(min-width: 720px) 720px"></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">2. Golden Model</h2><h3 class="kg-header-card-subheader">Python (NumPy stack)</h3></div><p>After obtaining the pretrained model, I need to 100% understand what operations are involved and how they are applied as data flows through the network. The best way to do this is to re-do it myself from scratch and obtain exactly the same results. </p><h3 id="21-custom-inference-framework-oop-python">2.1. Custom Inference Framework (OOP, Python)</h3><p>For this, I built a custom framework in Python. It is structured like Keras with the following classes, inheriting as follows:</p><!--kg-card-begin: markdown--><ul>
+print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explore Model Architecture</h3><p><a href="https://netron.app/">Netron </a>is a great tool for opening tensorflow's 32-bit models (savedmodel), tflite's int8 models (tflite), pytorch models (pt), ONNX models, and more, to observe the architecture and tensor names.</p><figure class="kg-card kg-image-card"><img src="../content/images/2022/01/image-2.png" class="kg-image" alt loading="lazy" width="1062" height="1042" srcset="../content/images/size/w600/2022/01/image-2.png 600w, ../content/images/size/w1000/2022/01/image-2.png 1000w, ../content/images/2022/01/image-2.png 1062w" sizes="(min-width: 720px) 720px"></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">2. Golden Model</h2><h3 class="kg-header-card-subheader">Python (NumPy stack)</h3></div><p>After obtaining the pretrained model, I need to 100% understand what operations are involved and how they are applied as data flows through the network. The best way to do this is to re-do it myself from scratch and obtain exactly the same results. </p><h3 id="21-custom-quantization-scheme">2.1. Custom Quantization Scheme</h3><figure class="kg-card kg-image-card"><img src="../content/images/2022/01/quant2.jpg" class="kg-image" alt loading="lazy" width="1280" height="606" srcset="../content/images/size/w600/2022/01/quant2.jpg 600w, ../content/images/size/w1000/2022/01/quant2.jpg 1000w, ../content/images/2022/01/quant2.jpg 1280w" sizes="(min-width: 720px) 720px"></figure><h3 id="22-custom-inference-framework-oop-python">2.2. Custom Inference Framework (OOP, Python)</h3><p>For this, I built a custom framework in Python. It is structured like Keras with the following classes, inheriting as follows:</p><!--kg-card-begin: markdown--><ul>
 <li>MyModel</li>
 <li>MyLayer
 <ul>
@@ -762,7 +763,7 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
             submatrices = strd(img_pad,shape,img_pad.strides*2,writeable=False)
 
             out_batch += [np.einsum('ijkl,ijkmno-&gt;mnl', kernel, submatrices)]
-        return np.array(out_batch)</code></pre><figcaption>stripped-down version of the MyConv implementation</figcaption></figure><h3 id="22-rebuilding-the-model-debugging">2.2. Rebuilding the model &amp; Debugging</h3><p>I then rebuild the model using the above framework, pass data and tweak things until I get the exact same output. That tells me I have understood all the operations going on inside the model.</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2022/01/image-3.png" width="723" height="862" loading="lazy" alt srcset="../content/images/size/w600/2022/01/image-3.png 600w, ../content/images/2022/01/image-3.png 723w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2022/01/image-4.png" width="1331" height="655" loading="lazy" alt srcset="../content/images/size/w600/2022/01/image-4.png 600w, ../content/images/size/w1000/2022/01/image-4.png 1000w, ../content/images/2022/01/image-4.png 1331w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2022/01/image-5.png" width="1269" height="869" loading="lazy" alt srcset="../content/images/size/w600/2022/01/image-5.png 600w, ../content/images/size/w1000/2022/01/image-5.png 1000w, ../content/images/2022/01/image-5.png 1269w" sizes="(min-width: 720px) 720px"></div></div></div></figure><p>Once I've understood the model inside-out, I start designing the hardware on the whiteboard.</p>
+        return np.array(out_batch)</code></pre><figcaption>stripped-down version of the MyConv implementation</figcaption></figure><h3 id="23-rebuilding-the-model-debugging">2.3. Rebuilding the model &amp; Debugging</h3><p>I then rebuild the model using the above framework, pass data and tweak things until I get the exact same output. That tells me I have understood all the operations going on inside the model.</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2022/01/image-3.png" width="723" height="862" loading="lazy" alt srcset="../content/images/size/w600/2022/01/image-3.png 600w, ../content/images/2022/01/image-3.png 723w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2022/01/image-4.png" width="1331" height="655" loading="lazy" alt srcset="../content/images/size/w600/2022/01/image-4.png 600w, ../content/images/size/w1000/2022/01/image-4.png 1000w, ../content/images/2022/01/image-4.png 1331w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2022/01/image-5.png" width="1269" height="869" loading="lazy" alt srcset="../content/images/size/w600/2022/01/image-5.png 600w, ../content/images/size/w1000/2022/01/image-5.png 1000w, ../content/images/2022/01/image-5.png 1269w" sizes="(min-width: 720px) 720px"></div></div></div></figure><p>Once I've understood the model inside-out, I start designing the hardware on the whiteboard.</p><h2 id="next">Next:</h2><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-3/index.html"><div class="kg-bookmark-content"><div class="kg-bookmark-title">DNN → Chip Design [3/4: Digital Design]</div><div class="kg-bookmark-description">This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken. Kraken Paper Whiteboard: Design hardware RTL Design: SystemVerilog/Verilog for the whiteboard designs Generate Test Vectors: using Python Notebooks Testbenc…</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt=""><span class="kg-bookmark-author">Aba&#x27;s Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/Data-Flow-of-Inference-Engine-2-1.png" alt=""></div></a></figure>
                 <section class="m-tags in-post">
                   <h3 class="m-submenu-title">Tags</h3>
                   <ul>
@@ -794,7 +795,7 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
   <article class="m-article-card  post tag-tech-projects">
     <div class="m-article-card__picture">
       <a href="../dnn-to-chip-4/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
-        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/image_o-12-1.png" loading="lazy" alt="">
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/sys-4.jpg" loading="lazy" alt="">
       <a href="../author/aba/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan G" data-tippy-content="Posted by Abarajithan G ">
           <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
       </a>
@@ -808,9 +809,9 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>an hour ago</span>
+          <span>8 hours ago</span>
           <span>&bull;</span>
-          <span>9 min read</span>
+          <span>10 min read</span>
         </div>
       </a>
     </div>
@@ -820,7 +821,7 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
   <article class="m-article-card  post tag-tech-projects">
     <div class="m-article-card__picture">
       <a href="../dnn-to-chip-3/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
-        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/Data-Flow-of-Inference-Engine-2-1.png" loading="lazy" alt="">
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" loading="lazy" alt="">
       <a href="../author/aba/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan G" data-tippy-content="Posted by Abarajithan G ">
           <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
       </a>
@@ -834,22 +835,25 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>an hour ago</span>
+          <span>8 hours ago</span>
           <span>&bull;</span>
-          <span>11 min read</span>
+          <span>12 min read</span>
         </div>
       </a>
     </div>
   </article>
     </div>
     <div class="m-recommended-slider__item glide__slide">
-  <article class="m-article-card  post tag-tech-projects">
+  <article class="m-article-card  post tag-tech-projects featured">
     <div class="m-article-card__picture">
       <a href="../dnn-to-chip-1/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
-        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/langs-2.png" loading="lazy" alt="">
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/cov-14.jpg" loading="lazy" alt="">
       <a href="../author/aba/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan G" data-tippy-content="Posted by Abarajithan G ">
           <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
       </a>
+        <a href="../dnn-to-chip-1/index.html" class="m-article-card__featured js-tooltip" data-tippy-content="Featured" aria-label="Featured">
+          <span class="icon-star" aria-hidden="true"></span>
+        </a>
     </div>
       <div class="m-article-card__info">
         <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
@@ -860,9 +864,9 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>19 hours ago</span>
+          <span>a day ago</span>
           <span>&bull;</span>
-          <span>2 min read</span>
+          <span>5 min read</span>
         </div>
       </a>
     </div>
@@ -970,5 +974,6 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-verilog.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-latex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-verilog.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js"></script>
   </body>
 </html>
