@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>DNN → Chip Design [3/4: Digital Design]</title>
+
+    <link rel="icon" href="../../favicon.png" type="image/png" />
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="Aba&#x27;s Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="DNN → Chip Design [3/4: Digital Design]" />
+    <meta property="og:description" content="This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken.  Kraken Paper Whiteboard: Design hardware RTL Design: SystemVerilog/Verilog for the whiteboard designs Generate Test Vectors: using Python Notebooks Testbenches: SystemVerilog OOP testbenches to read the" />
+    <meta property="og:url" content="https://aba-blog.xyz/dnn-to-chip-3/" />
+    <meta property="og:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/Data-Flow-of-Inference-Engine-2-1.png" />
+    <meta property="article:published_time" content="2022-01-29T10:36:04.000Z" />
+    <meta property="article:modified_time" content="2022-01-29T11:41:43.000Z" />
+    <meta property="article:tag" content="Technical Projects" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
+    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DNN → Chip Design [3/4: Digital Design]" />
+    <meta name="twitter:description" content="This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken.  Kraken Paper Whiteboard: Design hardware RTL Design: SystemVerilog/Verilog for the whiteboard designs Generate Test Vectors: using Python Notebooks Testbenches: SystemVerilog OOP testbenches to read the" />
+    <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-3/" />
+    <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/Data-Flow-of-Inference-Engine-2-1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Abarajithan G" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Technical Projects" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="1042" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aba&#x27;s Blog",
+        "url": "https://aba-blog.xyz/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://aba-blog.xyz/favicon.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Abarajithan G",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://aba-blog.xyz/content/images/2021/11/im_large_vignette.jpg",
+            "width": 1600,
+            "height": 1600
+        },
+        "url": "https://aba-blog.xyz/author/aba/",
+        "sameAs": [
+            "https://www.linkedin.com/in/abarajithan11",
+            "https://www.facebook.com/abarajithan11"
+        ]
+    },
+    "headline": "DNN → Chip Design [3/4: Digital Design]",
+    "url": "https://aba-blog.xyz/dnn-to-chip-3/",
+    "datePublished": "2022-01-29T10:36:04.000Z",
+    "dateModified": "2022-01-29T11:41:43.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://aba-blog.xyz/content/images/2022/01/Data-Flow-of-Inference-Engine-2-1.png",
+        "width": 2000,
+        "height": 1042
+    },
+    "keywords": "Technical Projects",
+    "description": "This is a series of articles outlining my workflow, which I developed over the\npast few years through building my own DNN accelerator: Kraken. \n\nKraken Paper [https://arxiv.org/abs/2112.02793] 3.  Whiteboard: Design hardware\n 4.  RTL Design: SystemVerilog/Verilog for the whiteboard designs\n 5.  Generate Test Vectors: using Python Notebooks\n 6.  Testbenches: SystemVerilog OOP testbenches to read the input vector (txt\n     file), randomly control the valid &amp; ready signals and get output vectors\n  ",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aba-blog.xyz/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.32" />
+    <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../../rss/index.html" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content blockquote.kg-blockquote-alt {
+        font-size: 1.2em;
+        font-style: italic;
+        line-height: 1.6em;
+        text-align: center;
+        color: #738a94;
+        padding: 0.75em 3em 1.25em;
+    }
+
+    .post-content blockquote.kg-blockquote-alt::before {
+        display: none;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 3px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-toggle-card-icon {
+        display: none;
+    }
+
+    .kg-toggle-content {
+        margin-top: 0.8rem;
+    }
+
+    .kg-product-card-container {
+        background: transparent;
+        padding: 20px;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: inset 0 0 0 1px rgb(124 139 154 / 25%);
+    }
+
+    .kg-product-card-description p {
+        margin-top: 1.5em;
+    }
+
+    .kg-product-card-description ul {
+        margin-left: 24px;
+    }
+
+    .kg-product-card-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+    }
+
+    .kg-product-card-rating-star {
+        height: 28px;
+        width: 20px;
+        margin-right: 2px;
+    }
+
+    .kg-product-card-rating-star svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    opacity: 0.15;
+    }
+
+    .kg-product-card-rating-active.kg-product-card-rating-star svg {
+    opacity: 1;
+    }
+
+    .kg-nft-card-container {
+        position: relative;
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        text-decoration: none;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        box-shadow: 0 2px 6px -2px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 40%);
+        width: 100%;
+        max-width: 512px;
+        color: #15212A;
+        background: #fff;
+        border-radius: 5px;
+        transition: none;
+        margin: 0 auto;
+    }
+
+    .kg-nft-metadata {
+        padding: 2.0rem;
+    }
+
+    .kg-nft-image-container {
+        position: relative;
+    }
+
+    .kg-nft-image {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .kg-nft-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .kg-nft-header h4.kg-nft-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin: 0;
+        color: #15212A;
+    }
+
+    .kg-nft-header amp-img {
+        max-width: 114px;
+        max-height: 26px;
+    }
+
+    .kg-nft-opensea-logo {
+        margin-top: 2px;
+        width: 100px;
+    }
+
+    .kg-nft-creator {
+        font-family: inherit;
+        color: #95A1AD;
+    }
+
+    .kg-nft-creator span {
+        font-weight: 500;
+        color: #15212A;
+    }
+
+    .kg-nft-card p.kg-nft-description {
+        font-size: 1.4rem;
+        line-height: 1.4em;
+        margin: 2.0rem 0 0;
+        color: #222;
+    }
+
+    .kg-button-card {
+        display: flex;
+        position: static;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .kg-btn {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 2.0rem;
+        height: 4.0rem;
+        line-height: 4.0rem;
+        font-size: 1.65rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .kg-btn:hover {
+        opacity: 0.85;
+    }
+
+    .kg-btn-accent {
+        background-color: var(--ghost-accent-color, #1292EE);
+        color: #fff;
+    }
+
+    .kg-callout-card {
+        display: flex;
+        padding: 20px 28px;
+        border-radius: 3px;
+    }
+
+    .kg-callout-card-grey {
+        background: rgba(124, 139, 154, 0.13);
+    }
+
+    .kg-callout-card-white {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-callout-card-blue {
+        background: rgba(33, 172, 232, 0.12);
+    }
+
+    .kg-callout-card-green {
+        background: rgba(52, 183, 67, 0.12);
+    }
+
+    .kg-callout-card-yellow {
+        background: rgba(240, 165, 15, 0.13);
+    }
+
+    .kg-callout-card-red {
+        background: rgba(209, 46, 46, 0.11);
+    }
+
+    .kg-callout-card-pink {
+        background: rgba(225, 71, 174, 0.11);
+    }
+
+    .kg-callout-card-purple {
+        background: rgba(135, 85, 236, 0.12);
+    }
+
+    .kg-callout-card-accent {
+        background: var(--ghost-accent-color);
+        color: #fff;
+    }
+
+    .kg-callout-card-accent a {
+        color: #fff;
+    }
+
+    .kg-callout-emoji {
+        padding-right: 16px;
+        line-height: 1.3;
+        font-size: 1.25em;
+    }
+
+    .kg-header-card {
+        padding: 6em 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .kg-header-card.kg-size-small {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+
+    .kg-header-card.kg-size-large {
+        padding-top: 12em;
+        padding-bottom: 12em;
+    }
+
+    .kg-header-card.kg-width-full {
+        padding-left: 4em;
+        padding-right: 4em;
+    }
+
+    .kg-header-card.kg-align-left {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .kg-header-card.kg-style-dark {
+        background: #15171a;
+        color: #ffffff;
+    }
+
+    .kg-header-card.kg-style-light {
+        color: #15171a;
+        border: 1px solid rgba(124, 139, 154, 0.25);
+        border-width: 1px 0;
+    }
+
+    .kg-header-card.kg-style-accent {
+        background-color: var(--ghost-accent-color);
+    }
+
+    .kg-header-card.kg-style-image {
+        background-color: #e7e7eb;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .kg-header-card h2 {
+        font-size: 4em;
+        font-weight: 700;
+        line-height: 1.1em;
+        margin: 0;
+    }
+
+    .kg-header-card h2 strong {
+        font-weight: 800;
+    }
+
+    .kg-header-card.kg-size-small h2 {
+        font-size: 3em;
+    }
+
+    .kg-header-card.kg-size-large h2 {
+        font-size: 5em;
+    }
+
+    .kg-header-card h3 {
+        font-size: 1.25em;
+        font-weight: 500;
+        line-height: 1.3em;
+        margin: 0;
+    }
+
+    .kg-header-card h3 strong {
+        font-weight: 600;
+    }
+
+    .kg-header-card.kg-size-small h3 {
+        font-size: 1em;
+    }
+
+    .kg-header-card.kg-size-large h3 {
+        font-size: 1.5em;
+    }
+
+    .kg-header-card:not(.kg-style-light) h2,
+    .kg-header-card:not(.kg-style-light) h3 {
+        color: #ffffff;
+    }
+
+    .kg-header-card a.kg-header-card-button {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 1.2em;
+        height: 2.4em;
+        line-height: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-size: 0.95em;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+        background-color: var(--ghost-accent-color);
+        color: #ffffff;
+        margin: 1.75em 0 0;
+    }
+
+    .kg-header-card a.kg-header-card-button:hover {
+        opacity: 0.85;
+    }
+
+    .kg-header-card.kg-size-large a.kg-header-card-button {
+        margin-top: 2em;
+    }
+
+    .kg-header-card.kg-size-small a.kg-header-card-button {
+        margin-top: 1.5em;
+    }
+
+    .kg-header-card.kg-style-image a.kg-header-card-button,
+    .kg-header-card.kg-style-dark a.kg-header-card-button {
+        background: #ffffff;
+        color: #15171a;
+    }
+
+    .kg-header-card.kg-style-accent a.kg-header-card-button {
+        background: #ffffff;
+        color: var(--ghost-accent-color);
+    }
+
+    .kg-audio-card {
+        display: flex;
+        width: 100%;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-audio-thumbnail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        background: transparent;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .kg-audio-thumbnail.placeholder {
+        background: var(--ghost-accent-color);
+    }
+
+    .kg-audio-thumbnail.placeholder svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }
+
+    .kg-audio-player-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        --seek-before-width: 0%;
+        --volume-before-width: 100%;
+        --buffered-width: 0%;
+    }
+
+    .kg-audio-title {
+        width: 100%;
+        padding: 8px 12px 0;
+        border: none;
+        font-family: inherit;
+        font-size: 1.1em;
+        font-weight: 700;
+        background: transparent;
+    }
+
+    .kg-audio-player {
+        display: none;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #2861bd;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">DNN → Chip Design [3/4: Digital Design]</h1>
+                <section class="post-meta">
+                    Abarajithan G -
+                    <time class="post-date" datetime="2022-01-29">29 Jan 2022</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://aba-blog.xyz/content/images/2022/01/Data-Flow-of-Inference-Engine-2-1.png" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <p>This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken. </p><div class="kg-card kg-button-card kg-align-center"><a href="https://arxiv.org/abs/2112.02793" class="kg-btn kg-btn-accent">Kraken Paper</a></div><ol start="3">
+<li><strong>Whiteboard</strong>: Design hardware</li>
+<li><strong>RTL Design</strong>: SystemVerilog/Verilog for the whiteboard designs</li>
+<li><strong>Generate Test Vectors</strong>: using Python Notebooks</li>
+<li><strong>Testbenches</strong>: SystemVerilog OOP testbenches to read the input vector (txt file), randomly control the valid &amp; ready signals and get output vectors (txt files)</li>
+<li><strong>Debug</strong>: Python notebooks to compare the expected output with simulation output and to find which dimensions have errors.</li>
+<li><strong>Microsoft Excel</strong>: I manually simulate the values in wires with excel to debug</li>
+<li>Repeat 3-8: For every module &amp; every level of integration</li>
+<li><strong>ASIC Synthesis</strong></li>
+<li><strong>SoC Block Design</strong>: (next post)</li>
+</ol>
+<div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">3. Whiteboard</h2></div><p>I almost always design my modules fully on a whiteboard before sitting down to write RTL. This helps to map out almost every register and multiplexer, get an idea of the critical paths, and also to reduce bugs.</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">4. RTL Design</h2><h3 class="kg-header-card-subheader">SystemVerilog / Verilog</h3></div><p>I then start writing modules, state-machines...etc. using synthesizable SystemVerilog, converting my whiteboard drawings into code. This is fairly straightforward. I've given a stripped-down example code of my conv engine. The key things are:</p><ul><li><strong>SystemVerilog </strong>- Verilog lacks a lot of features and has the potential to cause serious bugs. SystemVerilog is beautiful and a breeze to write and read.</li><li><strong>Multidimensional wires and ports</strong> - I use them a lot, to group ports meaningfully and connect with each other. I use the packed dimension, so it can be seamlessly connected to Verilog wrappers which do not accept multiple dimensions.</li><li> <strong>Readability </strong>- I take this seriously. Order does not matter in HDL, but I write in a way that the code top to bottom corresponds to left to right in my whiteboard diagram (the way signal flows).</li><li><strong>Macro Parameters</strong> - I put all the parameters, derived parameters in a common file and include it in all modules. That file itself is written through a tcl file. This way, the parameters of all files are guaranteed to be the same, avoiding bugs and also making the code readable.</li><li><strong>FPGA &amp; ASIC</strong> - Using preprocessor directives (`ifdef), I write code to suit both FPGA and ASIC. Registers have async reset in ASIC mode and sync reset in FPGA mode.</li></ul><pre><code class="language-verilog">`timescale 1ns/1ps
+`include "../include/params.v"
+
+module conv_engine #(ZERO=0) (
+    clk            ,
+    clken          ,
+    resetn         ,
+    s_valid        ,
+    s_ready        ,
+    s_last         ,
+    s_user         ,
+    s_data_pixels  ,
+    s_data_weights ,
+    m_valid        ,
+    m_data         ,
+    m_last         ,
+    m_user         
+  );
+  input  logic clk, clken, resetn;
+  input  logic s_valid, s_last;
+  output logic s_ready;
+  output logic m_valid, m_last;
+  input  logic [`TUSER_WIDTH_CONV_IN-1:0] s_user;
+  input  logic [`COPIES-1:0][`UNITS -1:0]                          [`WORD_WIDTH_IN    -1:0] s_data_pixels;
+  input  logic [`COPIES-1:0][`GROUPS-1:0][`MEMBERS-1:0]            [`WORD_WIDTH_IN    -1:0] s_data_weights;                                                                        
+  output logic [`COPIES-1:0][`GROUPS-1:0][`MEMBERS-1:0][`UNITS-1:0][`WORD_WIDTH_OUT   -1:0] m_data;
+  output logic [`TUSER_WIDTH_CONV_OUT-1:0] m_user;
+  
+  // Code ommited
+  logic [`KW_MAX/2:0][`SW_MAX -1:0][`MEMBERS -1:0] lut_sum_start;
+  logic [`COPIES-1:0][`GROUPS-1:0][`MEMBERS-1:0][`UNITS-1:0][`WORD_WIDTH_IN*2-1:0] mul_m_data ;
+  logic [`COPIES-1:0][`GROUPS-1:0][`MEMBERS-1:0][`UNITS-1:0][`WORD_WIDTH_OUT -1:0] acc_s_data ;
+  logic [`COPIES-1:0][`GROUPS-1:0][`MEMBERS-1:0][`UNITS-1:0][`WORD_WIDTH_OUT -1:0] mux_s2_data;
+
+  generate
+    genvar c,g,u,m,b,kw2,sw_1;
+    // Code ommitted
+    for (c=0; c &lt; `COPIES; c++)
+      for (g=0; g &lt; `GROUPS; g++)
+        for (u=0; u &lt; `UNITS; u++)
+          for (m=0; m &lt; `MEMBERS; m++)
+            if (m==0) assign mux_s2_data [c][g][m][u] = 0;
+            else      assign mux_s2_data [c][g][m][u] = m_data     [c][g][m-1][u];
+    assign mux_sel_next = mul_m_valid &amp;&amp; mul_m_user[`I_IS_CIN_LAST] &amp;&amp; (mul_m_kw2 != 0);
+
+    register #(
+      .WORD_WIDTH     (1),
+      .RESET_VALUE    (0)
+    ) MUX_SEL (
+      .clock          (clk   ),
+      .resetn         (resetn),
+      .clock_enable   (clken ),
+      .data_in        (mux_sel_next),
+      .data_out       (mux_sel )
+    );
+    assign clken_mul = clken &amp;&amp; !mux_sel;
+            
+    for (m=0; m &lt; `MEMBERS; m++) begin: Mb
+      for (kw2=0; kw2 &lt;= `KW_MAX/2; kw2++)
+        for (sw_1=0; sw_1 &lt; `SW_MAX; sw_1++) begin
+          localparam k = kw2*2 + 1;
+          localparam s = sw_1 + 1;
+          localparam j = k + s -1;
+
+          assign lut_sum_start[kw2][sw_1][m] = m % j &lt; s; // m % 3 &lt; 1 : 0,1
+        end
+      assign acc_m_sum_start [m] = lut_sum_start[acc_m_kw2][acc_m_sw_1][m] &amp; acc_m_user[`I_IS_SUM_START];
+      // Code ommited
+    end
+
+    for (c=0; c &lt; `COPIES; c++) begin: Ca
+      for (g=0; g &lt; `GROUPS; g++) begin: Ga
+        for (u=0; u &lt; `UNITS; u++) begin: Ua
+          for (m=0; m &lt; `MEMBERS; m++) begin: Ma
+            processing_element PROCESSING_ELEMENT (
+              .clk           (clk           ),
+              .clken         (clken         ),
+              .resetn        (resetn        ),
+              .clken_mul     (clken_mul     ),
+              .s_data_pixels (s_data_pixels [c]      [u]), 
+              .s_data_weights(s_data_weights[c][g][m]   ),
+              .mul_m_data    (mul_m_data    [c][g][m][u]),
+              .mux_sel       (mux_sel       ),
+              .mux_s2_data   (mux_s2_data   [c][g][m][u]),
+              .bypass        (bypass        [m]),
+              .clken_acc     (clken_acc     [m]),
+              .acc_s_data    (acc_s_data    [c][g][m][u]),
+              .m_data        (m_data        [c][g][m][u])
+            );
+    end end end end
+
+    // Code ommitted
+    assign m_user_base[`I_IS_BOTTOM_BLOCK:`I_IS_NOT_MAX] = acc_m_user[`I_IS_BOTTOM_BLOCK:`I_IS_NOT_MAX];
+    assign m_user  = {m_clr, m_shift_b, m_shift_a, m_user_base};
+  endgenerate
+endmodule
+
+module processing_element (
+    clk    ,
+    clken  ,
+    resetn ,
+
+    clken_mul,
+    s_data_pixels, 
+    s_data_weights,
+    mul_m_data,
+
+    mux_sel,
+    mux_s2_data,
+    bypass,
+    clken_acc,
+    acc_s_data,
+    m_data
+  );
+  input  logic clk, clken, resetn;
+  input  logic clken_mul, mux_sel, bypass, clken_acc;
+  input  logic [`WORD_WIDTH_IN  -1:0] s_data_pixels, s_data_weights;
+  input  logic [`WORD_WIDTH_OUT -1:0] mux_s2_data;
+  output logic [`WORD_WIDTH_IN*2-1:0] mul_m_data;
+  output logic [`WORD_WIDTH_OUT -1:0] acc_s_data;
+  output logic [`WORD_WIDTH_OUT -1:0] m_data;
+
+`ifdef MAC_XILINX
+  multiplier MUL (
+`else
+  multiplier_raw MUL (
+`endif
+    .CLK    (clk),
+    .CE     (clken_mul),
+    .A      (s_data_pixels ),
+    .B      (s_data_weights),
+    .P      (mul_m_data    )
+  );
+  assign acc_s_data = mux_sel ? mux_s2_data  : `WORD_WIDTH_OUT'(signed'(mul_m_data));
+  
+`ifdef MAC_XILINX
+  accumulator ACC (
+`else
+  accumulator_raw ACC (
+`endif
+    .CLK    (clk),  
+    .bypass (bypass     ),  
+    .CE     (clken_acc  ),  
+    .B      (acc_s_data ),  
+    .Q      (m_data     )  
+  );
+endmodule</code></pre><p></p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">5. Test Vector Generation</h2><h3 class="kg-header-card-subheader">Python</h3></div><p>Next, I write python functions to extracts weights and inputs of each layer from my custom framework model (2.2), and convert them into input test vectors. Their dimensions need to be split, reshaped, transposed and flattened to get the final input \(\hat{X}), and weights \(\hat{K}) packets which can be understood by the hardware I designed. Output \(\hat{Y}) is also transformed to match the hardware's outputs. Also, configuration bits need to be calculated and appended to the packet to make it complete.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>The python functions perform these reshapes to generate input and output vectors (multidimensional tensors)</figcaption></figure><pre><code class="language-python">def get_weights(i_layers, i_itr, c):
+    weights = c.LAYERS[f'{c.PREFIX_CONV}{i_layers}'].weights
+    KH, KW, CIN, COUT = weights.shape
+    max_factor = 2 if f'{c.PREFIX_MAX}{i_layers}' in c.LAYERS.keys() else 1
+    print(f"get_weights - shape_in:(KH, KW, CIN, COUT) = {weights.shape}")
+    
+    '''
+    Reshape
+    '''
+    weights = weights.transpose(3,0,1,2) #(COUT,KH,KW,CIN)
+    weights = fill_invalid_scg(weights,KW=KW,max_factor=max_factor,c=c) #(ITR,EFF_CORES,KH,KW,CIN)
+    ITR,EFF_CORES = weights.shape[0:2]
+    weights = weights.transpose(0,4,2,1,3) #(ITR,CIN,KH,EFF_CORES,KW)
+
+    '''
+    * Data comes out of maxpool in the order: S,CGU
+    * Data comes out of conv in the order   : CGMU and is transposed into S,CGUby hardware
+    * Conv in takes weights in order        : CGM
+
+    * Since system_out is SCG, first invalid should be filled that way, so that output data is continous and cin matches cout
+    * After filling, we transpose it to CGM
+    '''
+    SUB_CORES = c.MEMBERS//KW
+    weights = weights.reshape((ITR,CIN,KH, SUB_CORES,c.COPIES//max_factor,c.GROUPS ,KW)) # EFF_CORES = (SCG)
+    weights = weights.transpose(0,1,2, 4,5, 3,6) # CGS
+    weights = weights.reshape((ITR,CIN,KH,1,c.COPIES//max_factor,c.GROUPS,SUB_CORES,KW)) # (CGS)
+    weights = np.repeat(weights,repeats=max_factor,axis=3)
+    weights = weights.reshape((ITR,CIN,KH,c.COPIES,c.GROUPS,SUB_CORES,KW))
+    weights = weights.reshape((ITR,CIN,KH,c.COPIES,c.GROUPS,SUB_CORES*KW))
+    zeros = np.zeros((ITR,CIN,KH,c.COPIES,c.GROUPS,c.MEMBERS), dtype=weights.dtype)
+    zeros[:,:,:,:,:,0:SUB_CORES*KW] = weights
+    weights = zeros
+
+    KERNEL_BEATS = CIN*KH
+    weights = weights.reshape(ITR,KERNEL_BEATS,c.COPIES,c.GROUPS,c.MEMBERS)
+
+    '''
+    Add LRELU Beats
+    '''
+    lrelu = get_lrelu_config(i_layers=i_layers,c=c) 
+        
+    LRELU_BEATS = lrelu.shape[1]
+    weights_beats = np.concatenate([lrelu,weights], axis=1) # (ITR, LRELU_BEATS + KERNEL_BEATS, COPIES, GROUPS, MEMBERS)
+
+    _,H,W,CIN = c.LAYERS[f'{c.PREFIX_CONV}{i_layers}'].in_data.shape
+    BLOCKS    = H // (SH*max_factor*c.CONV_UNITS)
+
+    bram_weights_addr_max = LRELU_BEATS + SW*KH*CIN-1
+    print("bram_weights_addr_max: ", bram_weights_addr_max)
+
+    weights_config = 0
+    weights_config |= (KW//2)
+    weights_config |= (KH//2)               &lt;&lt; (BITS_KW2)
+    weights_config |= SW-1                  &lt;&lt; (BITS_KW2 + BITS_KH2)
+    weights_config |= (CIN   -1)            &lt;&lt; (BITS_KW2 + BITS_KH2 + BITS_SW)
+    weights_config |= (W     -1)            &lt;&lt; (BITS_KW2 + BITS_KH2 + BITS_SW + BITS_CIN_MAX)
+    weights_config |= (BLOCKS-1)            &lt;&lt; (BITS_KW2 + BITS_KH2 + BITS_SW + BITS_CIN_MAX + BITS_COLS_MAX)
+    weights_config |= bram_weights_addr_max &lt;&lt; (BITS_KW2 + BITS_KH2 + BITS_SW + BITS_CIN_MAX + BITS_COLS_MAX + BITS_BLOCKS_MAX)
+
+    weights_config = np.frombuffer(np.uint64(weights_config).tobytes(),np.int8)
+    weights_config = np.repeat(weights_config[np.newaxis,...],repeats=ITR,axis=0)
+
+    '''
+    ADD c BEATS
+    '''
+    weights_dma_beats = np.concatenate([weights_config,weights_beats.reshape(ITR,-1)], axis=1)
+
+    assert weights_dma_beats.shape == (ITR, 8 + (LRELU_BEATS + CIN*KH*SW)*c.COPIES*c.GROUPS*c.MEMBERS)
+    print(f"get_weights - weights_dma_beats.shape: (ITR, 4 + (LRELU_BEATS + CIN*KH)*COPIES*GROUPS*MEMBERS) = {weights_dma_beats.shape}")
+
+    np.savetxt(f"{c.DATA_DIR}{i_layers}_weights.txt", weights_dma_beats[i_itr].flatten(), fmt='%d')
+    return weights_dma_beats</code></pre><p></p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">6. Testbench &amp; Simulation</h2><h3 class="kg-header-card-subheader">SystemVerilog</h3></div><p>Next, I write testbenches for the modules. They are built around two custom SystemVerilog classes: AXIS_Slave, which reads a text file and loads data into an AXI stream port while conforming to the protocol, and AXIS_Master which reads data from a port and writes into a text file. </p><p>The control signals: valid and ready are randomized. They can be switched on and off according to a given probability, to simulate the effects of memory bus freezing up and clearing.</p><figure class="kg-card kg-code-card"><pre><code class="language-verilog">`timescale 1ns/1ps
+class AXIS_Slave #(WORD_WIDTH=8, WORDS_PER_BEAT=1, VALID_PROB=100);
+
+  string file_path;
+  int words_per_packet, status, iterations, i_words;
+  int file = 0;
+  int i_itr = 0;
+  bit enable = 0;
+  bit first_beat = 1;
+
+  rand bit s_valid;
+  constraint c { s_valid dist { 0 := (100-VALID_PROB), 1 := (VALID_PROB)}; };
+
+  function new(string file_path, int words_per_packet, int iterations);
+    this.file_path = file_path;
+    this.words_per_packet = words_per_packet;
+    this.iterations = iterations;
+    this.file = $fopen(this.file_path, "r");
+  endfunction
+
+  function void fill_beat(
+    ref logic [WORDS_PER_BEAT-1:0][WORD_WIDTH-1:0] s_data, 
+    ref logic [WORDS_PER_BEAT-1:0] s_keep,
+    ref logic s_last);
+
+    if($feof(file)) $fatal(1, "EOF found\n");
+    if (first_beat) first_beat = 0;
+
+    for (int i=0; i &lt; WORDS_PER_BEAT; i++) begin
+      status = $fscanf(file,"%d\n", s_data[i]);
+      s_keep[i] = i_words &lt; words_per_packet;
+      i_words  += 1;
+    end
+    if(i_words &gt;= words_per_packet)
+      s_last = 1;
+  endfunction
+
+  function void reset(
+    ref logic s_valid,
+    ref logic [WORDS_PER_BEAT-1:0][WORD_WIDTH-1:0] s_data, 
+    ref logic [WORDS_PER_BEAT-1:0] s_keep,
+    ref logic s_last
+  );
+    enable = 0;
+    s_data = '{default:0};
+    s_valid = 0;
+    s_keep = 0;
+    s_last = 0;
+    first_beat = 1;
+    i_words = 0;
+
+    if (file != 0) $fclose(file);
+    file = $fopen(file_path, "r");
+  endfunction
+
+  task axis_feed(
+    ref logic aclk,
+    ref logic s_ready,
+    ref logic s_valid,
+    ref logic [WORDS_PER_BEAT-1:0][WORD_WIDTH-1:0] s_data, 
+    ref logic [WORDS_PER_BEAT-1:0] s_keep,
+    ref logic s_last
+  );
+    // Before beginning: set all signals zero
+    if (~enable) begin
+      this.reset(s_valid, s_data, s_keep, s_last);
+      @(posedge aclk);
+      return;
+    end
+
+    @(posedge aclk);
+    this.randomize(); // random this.s_valid at every cycle
+    if (s_ready &amp;&amp; (first_beat ? this.s_valid : s_valid)) begin
+      // If s_last has passed with handshake, packet done. start next itr
+      if(s_last) begin #1;
+        i_itr += 1;
+        this.reset(s_valid, s_data, s_keep, s_last);
+
+        if (i_itr &lt; iterations) 
+          enable = 1;
+        else begin
+          $fclose(file);
+          return;
+        end
+      end
+      else #1;
+
+      // If file is not open, keep valid down.
+      if(file == 0) begin
+        s_valid = 0;
+        return;
+      end
+      else this.fill_beat(s_data, s_keep, s_last);
+    end
+    else #1;
+
+    if (~first_beat) s_valid = this.s_valid;
+  endtask
+endclass</code></pre><figcaption>Stripped down version of AXIS_Slave class</figcaption></figure><p>Following is an example on how AXIS slave and master classes are utilized. Each module gets a testbench like this. Some modules get multiple slave and multiple masters.</p><pre><code class="language-verilog">module axis_tb_demo();
+  timeunit 1ns;
+  timeprecision 1ps;
+  localparam CLK_PERIOD = 10;
+  logic aclk;
+  initial begin
+    aclk = 0;
+    forever #(CLK_PERIOD/2) aclk &lt;= ~aclk;
+  end
+
+  localparam WORD_WIDTH        = 8;
+  localparam WORDS_PER_PACKET  = 40;
+  localparam WORDS_PER_BEAT    = 4;
+  localparam ITERATIONS        = 6;
+  localparam BEATS = int'($ceil(real'(WORDS_PER_PACKET)/real'(WORDS_PER_BEAT)));
+
+  logic [WORDS_PER_BEAT  -1:0][WORD_WIDTH-1:0] data;
+  logic [WORDS_PER_BEAT  -1:0] keep;
+  logic valid, ready, last;
+
+  string path = "D:/cnn-fpga/data/axis_test.txt";
+  string out_base = "D:/cnn-fpga/data/axis_test_out_";
+
+  AXIS_Slave #(
+    .WORD_WIDTH    (WORD_WIDTH    ), 
+    .WORDS_PER_BEAT(WORDS_PER_BEAT), 
+    .VALID_PROB    (70            )
+    ) slave_obj  = new(
+      .file_path       (path), 
+      .words_per_packet(WORDS_PER_PACKET), 
+      .iterations      (ITERATIONS)
+      );
+  AXIS_Master #(
+    .WORD_WIDTH    (WORD_WIDTH    ), 
+    .WORDS_PER_BEAT(WORDS_PER_BEAT), 
+    .READY_PROB    (70            ), 
+    .CLK_PERIOD    (CLK_PERIOD    ),
+    .IS_ACTIVE     (1             )
+    ) master_obj = new(
+      .file_base(out_base),
+      .words_per_packet(-1),
+      .packets_per_file(2)
+      );
+  initial forever  slave_obj.axis_feed(aclk, ready, valid, data, keep, last);
+  initial forever master_obj.axis_read(aclk, ready, valid, data, keep, last);
+
+  initial begin
+    @(posedge aclk);
+    slave_obj.enable &lt;= 1;
+    master_obj.enable &lt;= 1;
+  end
+
+  int s_words, s_itr, m_words, m_itr, m_packets, m_packets_per_file;
+  initial
+    forever begin
+      @(posedge aclk);
+      s_words = slave_obj.i_words;
+      s_itr = slave_obj.i_itr;
+      m_words = master_obj.i_words;
+      m_itr = master_obj.i_itr;
+      m_packets = master_obj.i_packets;
+      m_packets_per_file = master_obj.packets_per_file;
+    end
+endmodule</code></pre><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">7. Debugging</h2><h3 class="kg-header-card-subheader">Python Notebooks &amp; SystemVerilog Simulations</h3></div><p>I then run simulations, collect output vectors and compare them with expected vectors using python notebooks. Notebooks allow one to play around with data, quickly print and observe different dimensions...etc. </p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Integration testing the whole system</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Observing outputs</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>The dimension indices of the locations where output doesn't match expected output. Very helpful in debugging.</figcaption></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">8. Debugging with Microsoft Excel</h2><h3 class="kg-header-card-subheader">Yep :-)</h3></div><p>In some cases, the output from a module is garbage and does not match the expected output at all. Since it is a convolution over several values, it is near impossible to guess the bug by looking at such garbage numbers. In that case, I resort to Excel, where I manually transform a set of small input vectors through the logic, step by step to see what I should expect in every clock cycle. I then compare it to the waveforms I see in the simulator to figure out where the bug is.</p><figure class="kg-card kg-image-card"></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">9. Repeat</h2></div><p>I move back and forth between the whiteboard, RTL code, python code, and simulation to fix bugs one by one. Some take weeks and make me want to pull my hair out. I also do this for each module, then put them together hierarchically, write integration testbenches, and test that too. </p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">10. ASIC Synthesis</h2></div><p>Once the design is verified in randomized simulations, I write the scripts for ASIC synthesis. Our university uses Cadence tools, so the following script is for Cadence Genus, using 65nm CMOS PDK from TSMC.</p><pre><code class="language-tcl">set TOP axis_accelerator_asic
+# set TOP axis_conv_engine
+
+#--------- CONFIG
+set RTL_DIR ../../rtl
+set XILINX 0
+source ../../tcl/config.tcl
+set_db hdl_max_loop_limit 10000000
+
+set TECH 65nm
+set NUM_MACS [expr $MEMBERS*$UNITS*$GROUPS*$COPIES]
+set REPORT_DIR ../report/${TECH}/${TOP}/${NUM_MACS}
+exec mkdir -p $REPORT_DIR
+
+#--------- LIBRARIES
+set LIB_DIR ../../../tsmc/${TECH}/GP
+set_db library [glob $LIB_DIR/cc_lib/noise_scadv10_cln65gp_hvt_tt_1p0v_25c.lib $LIB_DIR/cc_lib/scadv10_cln65gp_hvt_tt_1p0v_25c.lib]
+set_db lef_library [glob $LIB_DIR/lef/tsmc_cln65_a10_6X1Z_tech.lef $LIB_DIR/lef/tsmc_cln65_a10_6X2Z_tech.lef $LIB_DIR/lef/tsmc65_hvt_sc_adv10_macro.lef]
+set_db qrc_tech_file $LIB_DIR/other/icecaps.tch
+# set LIB_DIR ../../../tsmc/${TECH}/LP
+# set_db library [glob $LIB_DIR/lib/sc12_cln65lp_base_hvt_tt_typical_max_1p00v_25c.lib $LIB_DIR/lib/sc12_cln65lp_base_hvt_tt_typical_max_1p20v_25c.lib]
+# set_db lef_library [glob $LIB_DIR/lef/sc12_cln65lp_base_hvt.lef]
+
+#--------- READ
+read_hdl -mixvlog [glob $RTL_DIR/include/*]
+read_hdl -mixvlog [glob $RTL_DIR/external/*]
+read_hdl -mixvlog [glob $RTL_DIR/src/*]
+
+#--------- ELABORATE &amp; CHECK
+set_db lp_insert_clock_gating true
+elaborate $TOP
+check_design &gt; ${REPORT_DIR}/check_design.log
+uniquify $TOP
+
+#--------- CONSTRAINTS
+set PERIOD [expr 1000.0/$FREQ_HIGH]
+create_clock -name aclk -period $PERIOD [get_ports aclk]
+set_dont_touch_network [all_clocks]
+set_dont_touch_network [get_ports {aresetn}]
+
+set design_inputs [get_ports {m_axis_tready s_axis_pixels_tvalid s_axis_pixels_tlast s_axis_pixels_tdata s_axis_pixels_tkeep s_axis_weights_tvalid s_axis_weights_tlast s_axis_weights_tdata s_axis_weights_tkeep}]
+set design_outputs [get_ports {s_axis_pixels_tready  s_axis_weights_tready m_axis_tvalid m_axis_tlast m_axis_tdata m_axis_tkeep}]
+
+set_input_delay  [expr $PERIOD * 0.6] -clock aclk $design_inputs
+set_output_delay [expr $PERIOD * 0.6] -clock aclk $design_outputs
+
+#--------- RETIME OPTIONS
+set_db retime_async_reset true
+set_db design:${TOP} .retime true
+
+#--------- SYNTHESIZE
+set_db syn_global_effort high
+syn_generic
+syn_map
+syn_opt
+
+#--------- NETLIST
+write -mapped &gt; ../output/${TOP}.v
+write_sdc &gt; ../output/${TOP}.sdc
+
+#--------- REPORTS
+report_area &gt; ${REPORT_DIR}/area.log
+report_gates &gt; ${REPORT_DIR}/gates.log
+report_timing  -nworst 10 &gt; ${REPORT_DIR}/timing.log
+report_congestion &gt; ${REPORT_DIR}/congestion.log
+report_messages &gt; ${REPORT_DIR}/messages.log
+report_hierarchy &gt; ${REPORT_DIR}/hierarchy.log
+report_clock_gating &gt; ${REPORT_DIR}/clock_gating.log
+
+build_rtl_power_models -clean_up_netlist
+report_power &gt; ${REPORT_DIR}/power.log</code></pre>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+            <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+        <h3>Aba&#x27;s Blog</h3>
+            <p>Tech - Travels - Thoughts</p>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>

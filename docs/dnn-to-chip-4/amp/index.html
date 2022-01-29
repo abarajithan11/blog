@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>DNN → Chip Design [4/4: System-on-Chip]</title>
+
+    <link rel="icon" href="../../favicon.png" type="image/png" />
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="Aba&#x27;s Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="DNN → Chip Design [4/4: System-on-Chip]" />
+    <meta property="og:description" content="This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken.  Kraken Paper SoC Block Design: Build FPGA projects with Vivado manually and synthesize Automation: TCL scripts to automate the project building and configuration C++ Firmware: To" />
+    <meta property="og:url" content="https://aba-blog.xyz/dnn-to-chip-4/" />
+    <meta property="og:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/image_o-12-1.png" />
+    <meta property="article:published_time" content="2022-01-29T10:37:39.000Z" />
+    <meta property="article:modified_time" content="2022-01-29T11:41:14.000Z" />
+    <meta property="article:tag" content="Technical Projects" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
+    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DNN → Chip Design [4/4: System-on-Chip]" />
+    <meta name="twitter:description" content="This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken.  Kraken Paper SoC Block Design: Build FPGA projects with Vivado manually and synthesize Automation: TCL scripts to automate the project building and configuration C++ Firmware: To" />
+    <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-4/" />
+    <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/image_o-12-1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Abarajithan G" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Technical Projects" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1042" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aba&#x27;s Blog",
+        "url": "https://aba-blog.xyz/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://aba-blog.xyz/favicon.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Abarajithan G",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://aba-blog.xyz/content/images/2021/11/im_large_vignette.jpg",
+            "width": 1600,
+            "height": 1600
+        },
+        "url": "https://aba-blog.xyz/author/aba/",
+        "sameAs": [
+            "https://www.linkedin.com/in/abarajithan11",
+            "https://www.facebook.com/abarajithan11"
+        ]
+    },
+    "headline": "DNN → Chip Design [4/4: System-on-Chip]",
+    "url": "https://aba-blog.xyz/dnn-to-chip-4/",
+    "datePublished": "2022-01-29T10:37:39.000Z",
+    "dateModified": "2022-01-29T11:41:14.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://aba-blog.xyz/content/images/2022/01/image_o-12-1.png",
+        "width": 1920,
+        "height": 1042
+    },
+    "keywords": "Technical Projects",
+    "description": "This is a series of articles outlining my workflow, which I developed over the\npast few years through building my own DNN accelerator: Kraken. \n\nKraken Paper [https://arxiv.org/abs/2112.02793] 11. SoC Block Design: Build FPGA projects with Vivado manually and synthesize\n 12. Automation: TCL scripts to automate the project building and configuration\n 13. C++ Firmware: To control the custom modules\n 14. Hardware Verification: Test on FPGA, compare output to golden model\n 15. Repeat 11-14\n\n11. SoC ",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aba-blog.xyz/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.32" />
+    <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../../rss/index.html" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content blockquote.kg-blockquote-alt {
+        font-size: 1.2em;
+        font-style: italic;
+        line-height: 1.6em;
+        text-align: center;
+        color: #738a94;
+        padding: 0.75em 3em 1.25em;
+    }
+
+    .post-content blockquote.kg-blockquote-alt::before {
+        display: none;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 3px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-toggle-card-icon {
+        display: none;
+    }
+
+    .kg-toggle-content {
+        margin-top: 0.8rem;
+    }
+
+    .kg-product-card-container {
+        background: transparent;
+        padding: 20px;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: inset 0 0 0 1px rgb(124 139 154 / 25%);
+    }
+
+    .kg-product-card-description p {
+        margin-top: 1.5em;
+    }
+
+    .kg-product-card-description ul {
+        margin-left: 24px;
+    }
+
+    .kg-product-card-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+    }
+
+    .kg-product-card-rating-star {
+        height: 28px;
+        width: 20px;
+        margin-right: 2px;
+    }
+
+    .kg-product-card-rating-star svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    opacity: 0.15;
+    }
+
+    .kg-product-card-rating-active.kg-product-card-rating-star svg {
+    opacity: 1;
+    }
+
+    .kg-nft-card-container {
+        position: relative;
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        text-decoration: none;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        box-shadow: 0 2px 6px -2px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 40%);
+        width: 100%;
+        max-width: 512px;
+        color: #15212A;
+        background: #fff;
+        border-radius: 5px;
+        transition: none;
+        margin: 0 auto;
+    }
+
+    .kg-nft-metadata {
+        padding: 2.0rem;
+    }
+
+    .kg-nft-image-container {
+        position: relative;
+    }
+
+    .kg-nft-image {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .kg-nft-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .kg-nft-header h4.kg-nft-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin: 0;
+        color: #15212A;
+    }
+
+    .kg-nft-header amp-img {
+        max-width: 114px;
+        max-height: 26px;
+    }
+
+    .kg-nft-opensea-logo {
+        margin-top: 2px;
+        width: 100px;
+    }
+
+    .kg-nft-creator {
+        font-family: inherit;
+        color: #95A1AD;
+    }
+
+    .kg-nft-creator span {
+        font-weight: 500;
+        color: #15212A;
+    }
+
+    .kg-nft-card p.kg-nft-description {
+        font-size: 1.4rem;
+        line-height: 1.4em;
+        margin: 2.0rem 0 0;
+        color: #222;
+    }
+
+    .kg-button-card {
+        display: flex;
+        position: static;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .kg-btn {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 2.0rem;
+        height: 4.0rem;
+        line-height: 4.0rem;
+        font-size: 1.65rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .kg-btn:hover {
+        opacity: 0.85;
+    }
+
+    .kg-btn-accent {
+        background-color: var(--ghost-accent-color, #1292EE);
+        color: #fff;
+    }
+
+    .kg-callout-card {
+        display: flex;
+        padding: 20px 28px;
+        border-radius: 3px;
+    }
+
+    .kg-callout-card-grey {
+        background: rgba(124, 139, 154, 0.13);
+    }
+
+    .kg-callout-card-white {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-callout-card-blue {
+        background: rgba(33, 172, 232, 0.12);
+    }
+
+    .kg-callout-card-green {
+        background: rgba(52, 183, 67, 0.12);
+    }
+
+    .kg-callout-card-yellow {
+        background: rgba(240, 165, 15, 0.13);
+    }
+
+    .kg-callout-card-red {
+        background: rgba(209, 46, 46, 0.11);
+    }
+
+    .kg-callout-card-pink {
+        background: rgba(225, 71, 174, 0.11);
+    }
+
+    .kg-callout-card-purple {
+        background: rgba(135, 85, 236, 0.12);
+    }
+
+    .kg-callout-card-accent {
+        background: var(--ghost-accent-color);
+        color: #fff;
+    }
+
+    .kg-callout-card-accent a {
+        color: #fff;
+    }
+
+    .kg-callout-emoji {
+        padding-right: 16px;
+        line-height: 1.3;
+        font-size: 1.25em;
+    }
+
+    .kg-header-card {
+        padding: 6em 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .kg-header-card.kg-size-small {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+
+    .kg-header-card.kg-size-large {
+        padding-top: 12em;
+        padding-bottom: 12em;
+    }
+
+    .kg-header-card.kg-width-full {
+        padding-left: 4em;
+        padding-right: 4em;
+    }
+
+    .kg-header-card.kg-align-left {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .kg-header-card.kg-style-dark {
+        background: #15171a;
+        color: #ffffff;
+    }
+
+    .kg-header-card.kg-style-light {
+        color: #15171a;
+        border: 1px solid rgba(124, 139, 154, 0.25);
+        border-width: 1px 0;
+    }
+
+    .kg-header-card.kg-style-accent {
+        background-color: var(--ghost-accent-color);
+    }
+
+    .kg-header-card.kg-style-image {
+        background-color: #e7e7eb;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .kg-header-card h2 {
+        font-size: 4em;
+        font-weight: 700;
+        line-height: 1.1em;
+        margin: 0;
+    }
+
+    .kg-header-card h2 strong {
+        font-weight: 800;
+    }
+
+    .kg-header-card.kg-size-small h2 {
+        font-size: 3em;
+    }
+
+    .kg-header-card.kg-size-large h2 {
+        font-size: 5em;
+    }
+
+    .kg-header-card h3 {
+        font-size: 1.25em;
+        font-weight: 500;
+        line-height: 1.3em;
+        margin: 0;
+    }
+
+    .kg-header-card h3 strong {
+        font-weight: 600;
+    }
+
+    .kg-header-card.kg-size-small h3 {
+        font-size: 1em;
+    }
+
+    .kg-header-card.kg-size-large h3 {
+        font-size: 1.5em;
+    }
+
+    .kg-header-card:not(.kg-style-light) h2,
+    .kg-header-card:not(.kg-style-light) h3 {
+        color: #ffffff;
+    }
+
+    .kg-header-card a.kg-header-card-button {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 1.2em;
+        height: 2.4em;
+        line-height: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-size: 0.95em;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+        background-color: var(--ghost-accent-color);
+        color: #ffffff;
+        margin: 1.75em 0 0;
+    }
+
+    .kg-header-card a.kg-header-card-button:hover {
+        opacity: 0.85;
+    }
+
+    .kg-header-card.kg-size-large a.kg-header-card-button {
+        margin-top: 2em;
+    }
+
+    .kg-header-card.kg-size-small a.kg-header-card-button {
+        margin-top: 1.5em;
+    }
+
+    .kg-header-card.kg-style-image a.kg-header-card-button,
+    .kg-header-card.kg-style-dark a.kg-header-card-button {
+        background: #ffffff;
+        color: #15171a;
+    }
+
+    .kg-header-card.kg-style-accent a.kg-header-card-button {
+        background: #ffffff;
+        color: var(--ghost-accent-color);
+    }
+
+    .kg-audio-card {
+        display: flex;
+        width: 100%;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-audio-thumbnail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        background: transparent;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .kg-audio-thumbnail.placeholder {
+        background: var(--ghost-accent-color);
+    }
+
+    .kg-audio-thumbnail.placeholder svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }
+
+    .kg-audio-player-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        --seek-before-width: 0%;
+        --volume-before-width: 100%;
+        --buffered-width: 0%;
+    }
+
+    .kg-audio-title {
+        width: 100%;
+        padding: 8px 12px 0;
+        border: none;
+        font-family: inherit;
+        font-size: 1.1em;
+        font-weight: 700;
+        background: transparent;
+    }
+
+    .kg-audio-player {
+        display: none;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #2861bd;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">DNN → Chip Design [4/4: System-on-Chip]</h1>
+                <section class="post-meta">
+                    Abarajithan G -
+                    <time class="post-date" datetime="2022-01-29">29 Jan 2022</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://aba-blog.xyz/content/images/2022/01/image_o-12-1.png" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <p>This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken. </p><div class="kg-card kg-button-card kg-align-center"><a href="https://arxiv.org/abs/2112.02793" class="kg-btn kg-btn-accent">Kraken Paper</a></div><ol start="11">
+<li><strong>SoC Block Design</strong>: Build FPGA projects with Vivado manually and synthesize</li>
+<li><strong>Automation</strong>: TCL scripts to automate the project building and configuration</li>
+<li><strong>C++ Firmware</strong>: To control the custom modules</li>
+<li><strong>Hardware Verification</strong>: Test on FPGA, compare output to golden model</li>
+<li>Repeat 11-14</li>
+</ol>
+<div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">11. SoC Block Design</h2><h3 class="kg-header-card-subheader">Manually build Vivado projects, block designs</h3></div><figure class="kg-card kg-image-card kg-width-full kg-card-hascaption"><figcaption>I add DMAs, configure them, connect them to the main module, run block &amp; connection automation, copying down TCL commands at every step.</figcaption></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">12. TCL Automation</h2></div><p>Xilinx Vivado projects are notoriously buggy. They crash once in a while and get corrupted. Vivado also auto-generates hundreds of small files, which contain absolute paths, and don't play well with a different Vivado version. Therefore, it is a bad idea to version control them. </p><p>The best practice is to script the project flow. Once I manually copy down the TCL commands, I change them into parameterized code. </p><figure class="kg-card kg-code-card"><pre><code class="language-tcl">set TUSER_WIDTH_MAXPOOL_IN     [expr $BITS_KW2      + $I_KW2]
+set TUSER_WIDTH_LRELU_IN       [expr $BITS_KW       + $I_CLR]
+set TUSER_CONV_DW_BASE         [expr 1 + $I_IS_BOTTOM_BLOCK ]
+set TUSER_CONV_DW_IN           [expr $MEMBERS*$BITS_KW + $BITS_OUT_SHIFT + $BITS_MEMBERS + $TUSER_CONV_DW_BASE]
+set TUSER_WIDTH_LRELU_FMA_1_IN [expr 1         + $I_IS_LRELU]
+set TUSER_WIDTH_CONV_IN        [expr $I_IS_SUM_START     + 1]
+
+set DEBUG_CONFIG_WIDTH_W_ROT   [expr 1 + 2*$BITS_KW2 + 3*($BITS_KH2      + $BITS_IM_CIN + $BITS_IM_COLS + $BITS_IM_BLOCKS)]
+set DEBUG_CONFIG_WIDTH_IM_PIPE [expr 3 + 2 + $BITS_KH2      + 0]
+set DEBUG_CONFIG_WIDTH_LRELU   [expr 3 + 4 + $BITS_FMA_2]
+set DEBUG_CONFIG_WIDTH_MAXPOOL 1
+set DEBUG_CONFIG_WIDTH         [expr $DEBUG_CONFIG_WIDTH_MAXPOOL + $DEBUG_CONFIG_WIDTH_LRELU + 2*$BITS_KH2      + $DEBUG_CONFIG_WIDTH_IM_PIPE + $DEBUG_CONFIG_WIDTH_W_ROT]
+
+# **********    STORE PARAMS    *************
+
+set file_param [open $RTL_DIR/include/params.v w]
+
+if {$MAC_TYPE == "XILINX"} {
+  puts $file_param "`define MAC_XILINX 1"
+}
+if {$REG_TYPE == "ASIC"} {
+  puts $file_param "`define ASIC_REG 1"
+}
+
+puts $file_param "
+`define SRAM_TYPE   \"$SRAM_TYPE\"  
+`define MAC_TYPE    \"$MAC_TYPE\"  
+
+`define UNITS    $UNITS  
+`define GROUPS   $GROUPS 
+`define COPIES   $COPIES 
+`define MEMBERS  $MEMBERS
+`define DW_FACTOR_1 $DW_FACTOR_1
+`define OUTPUT_MODE \"$OUTPUT_MODE\"
+`define KSM_COMBS_EXPR $KSM_COMBS_EXPR
+`define KS_COMBS_EXPR $KS_COMBS_EXPR</code></pre><figcaption>Part of the tcl script that calculates parameters and writes the params.v file</figcaption></figure><p>I then spend a couple of days debugging the TCL script to ensure it can reliably rebuild a project from scratch. These TCL scripts and the source verilog files are tracked by git.</p><figure class="kg-card kg-code-card"><pre><code class="language-tcl">create_bd_design "sys"
+
+# ZYNQ IP
+create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0
+apply_bd_automation -rule xilinx.com:bd_rule:processing_system7 -config {make_external "FIXED_IO, DDR" apply_board_preset "1" Master "Disable" Slave "Disable" }  [get_bd_cells processing_system7_0]
+set_property -dict [list CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ $FREQ_LITE CONFIG.PCW_FPGA1_PERIPHERAL_FREQMHZ $FREQ_LOW CONFIG.PCW_FPGA2_PERIPHERAL_FREQMHZ $FREQ_HIGH CONFIG.PCW_EN_CLK2_PORT $FREQ_LITE CONFIG.PCW_USE_S_AXI_ACP {1} CONFIG.PCW_USE_DEFAULT_ACP_USER_VAL {1} CONFIG.PCW_USE_FABRIC_INTERRUPT {1} CONFIG.PCW_EN_CLK1_PORT {1} CONFIG.PCW_EN_CLK2_PORT {1} CONFIG.PCW_IRQ_F2P_INTR {1} CONFIG.PCW_QSPI_PERIPHERAL_ENABLE {0} CONFIG.PCW_SD0_PERIPHERAL_ENABLE {0} CONFIG.PCW_I2C0_PERIPHERAL_ENABLE {0} CONFIG.PCW_GPIO_MIO_GPIO_ENABLE {0}] [get_bd_cells processing_system7_0]
+
+# Accelerator
+create_bd_cell -type module -reference axis_accelerator axis_accelerator_0
+
+# Weights &amp; out DMA
+set IP_NAME "dma_weights_im_out"
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 $IP_NAME
+set_property -dict [list CONFIG.c_include_sg {0} CONFIG.c_sg_length_width {26} CONFIG.c_m_axi_mm2s_data_width {32} CONFIG.c_m_axis_mm2s_tdata_width {32} CONFIG.c_mm2s_burst_size {8} CONFIG.c_sg_include_stscntrl_strm {0} CONFIG.c_include_mm2s_dre {1} CONFIG.c_m_axi_mm2s_data_width $S_WEIGHTS_WIDTH_LF CONFIG.c_m_axis_mm2s_tdata_width $S_WEIGHTS_WIDTH_LF CONFIG.c_m_axi_s2mm_data_width $M_DATA_WIDTH_LF CONFIG.c_s_axis_s2mm_tdata_width $M_DATA_WIDTH_LF CONFIG.c_include_s2mm_dre {1} CONFIG.c_s2mm_burst_size {16}] [get_bd_cells $IP_NAME]
+
+# Im_in_1
+set IP_NAME "dma_im_in"
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 $IP_NAME
+set_property -dict [list CONFIG.c_include_sg {0} CONFIG.c_sg_length_width {26} CONFIG.c_m_axi_mm2s_data_width [expr $S_PIXELS_WIDTH_LF] CONFIG.c_m_axis_mm2s_tdata_width [expr $S_PIXELS_WIDTH_LF] CONFIG.c_include_mm2s_dre {1} CONFIG.c_mm2s_burst_size {64} CONFIG.c_include_s2mm {0}] [get_bd_cells $IP_NAME]
+
+# # Interrupts
+create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0
+set_property -dict [list CONFIG.NUM_PORTS {4}] [get_bd_cells xlconcat_0]
+connect_bd_net [get_bd_pins dma_im_in/mm2s_introut] [get_bd_pins xlconcat_0/In0]
+connect_bd_net [get_bd_pins dma_weights_im_out/mm2s_introut] [get_bd_pins xlconcat_0/In2]
+connect_bd_net [get_bd_pins dma_weights_im_out/s2mm_introut] [get_bd_pins xlconcat_0/In3]
+connect_bd_net [get_bd_pins xlconcat_0/dout] [get_bd_pins processing_system7_0/IRQ_F2P]
+
+# Engine connections
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK1] [get_bd_pins axis_accelerator_0/aclk]
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK2] [get_bd_pins axis_accelerator_0/hf_aclk]
+connect_bd_intf_net [get_bd_intf_pins dma_im_in/M_AXIS_MM2S] [get_bd_intf_pins axis_accelerator_0/s_axis_pixels]
+connect_bd_intf_net [get_bd_intf_pins dma_weights_im_out/M_AXIS_MM2S] [get_bd_intf_pins axis_accelerator_0/s_axis_weights]
+switch $OUTPUT_MODE {
+  "CONV"    {connect_bd_intf_net [get_bd_intf_pins dma_weights_im_out/S_AXIS_S2MM] [get_bd_intf_pins axis_accelerator_0/conv_dw2_lf_m_axis]}
+  "LRELU"   {connect_bd_intf_net [get_bd_intf_pins dma_weights_im_out/S_AXIS_S2MM] [get_bd_intf_pins axis_accelerator_0/lrelu_dw_lf_m_axis]}
+  "MAXPOOL" {connect_bd_intf_net [get_bd_intf_pins dma_weights_im_out/S_AXIS_S2MM] [get_bd_intf_pins axis_accelerator_0/max_dw2_lf_m_axis ]}
+}
+
+# AXI Lite
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Clk_slave {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Master {/processing_system7_0/M_AXI_GP0} Slave {/dma_im_in/S_AXI_LITE} ddr_seg {Auto} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins dma_im_in/S_AXI_LITE]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Clk_slave {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Master {/processing_system7_0/M_AXI_GP0} Slave {/dma_weights_im_out/S_AXI_LITE} ddr_seg {Auto} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins dma_weights_im_out/S_AXI_LITE]
+endgroup
+
+# AXI4
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_slave {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Master {/dma_weights_im_out/M_AXI_MM2S} Slave {/processing_system7_0/S_AXI_ACP} ddr_seg {Auto} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins processing_system7_0/S_AXI_ACP]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_slave {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Master {/dma_im_in/M_AXI_MM2S} Slave {/processing_system7_0/S_AXI_ACP} ddr_seg {Auto} intc_ip {/axi_mem_intercon} master_apm {0}}  [get_bd_intf_pins dma_im_in/M_AXI_MM2S]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_slave {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Master {/dma_weights_im_out/M_AXI_S2MM} Slave {/processing_system7_0/S_AXI_ACP} ddr_seg {Auto} intc_ip {/axi_mem_intercon} master_apm {0}}  [get_bd_intf_pins dma_weights_im_out/M_AXI_S2MM]
+endgroup
+
+# HF Reset
+set IP_NAME "reset_hf"
+create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 $IP_NAME
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK2] [get_bd_pins $IP_NAME/slowest_sync_clk]
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins $IP_NAME/ext_reset_in]
+connect_bd_net [get_bd_pins $IP_NAME/peripheral_aresetn] [get_bd_pins axis_accelerator_0/hf_aresetn]
+
+# LF Reset
+# NOTE: axi_mem_intercon gets created after axi lite
+connect_bd_net [get_bd_pins axis_accelerator_0/aresetn] [get_bd_pins axi_mem_intercon/ARESETN]
+
+save_bd_design
+validate_bd_design
+
+generate_target all [get_files  $PROJ_FOLDER/$PROJ_NAME.srcs/sources_1/bd/sys/sys.bd]
+make_wrapper -files [get_files $PROJ_FOLDER/$PROJ_NAME.srcs/sources_1/bd/sys/sys.bd] -top
+add_files -norecurse $PROJ_FOLDER/$PROJ_NAME.gen/sources_1/bd/sys/hdl/sys_wrapper.v
+set_property top sys_wrapper [current_fileset]</code></pre><figcaption>TCL file that builds the project.</figcaption></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">13. C++ Firmware</h2></div><p>I then write the C++ code to be run on the ARM processor, which instructs the DMA to pull data from memory and push it back. When multiple DMAs are involved, this is fairly tricky. Right after starting a DMA operation, the parameters for the next DMA iteration must be calculated in advance, to prevent stalling the DMA.</p><h3 id="131-oop-wrappers-for-dma-drivers">13.1. OOP Wrappers for DMA Drivers</h3><p>I find the C code provided by Xilinx a bit counterintuitive. Therefore, I have written an OOP wrapper for the Xilinx DMA, which is open-sourced here:</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://github.com/abarajithan11/zynq-oop-drivers"><div class="kg-bookmark-content"><div class="kg-bookmark-title">GitHub - abarajithan11/zynq-oop-drivers: Object oriented drivers for Xilinx IPs (DMA...) for ZYNQ PSoC</div><div class="kg-bookmark-description">Object oriented drivers for Xilinx IPs (DMA...) for ZYNQ PSoC - GitHub - abarajithan11/zynq-oop-drivers: Object oriented drivers for Xilinx IPs (DMA...) for ZYNQ PSoC</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://github.com/fluidicon.png" alt width="512" height="512" layout="responsive"></amp-img><span class="kg-bookmark-author">GitHub</span><span class="kg-bookmark-publisher">abarajithan11</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://opengraph.githubassets.com/68b1de5a4adce9b41978d0009c3d32b23fa6e0edbafc33a9c62cd23da784f29a/abarajithan11/zynq-oop-drivers" alt width="1200" height="600" layout="responsive"></amp-img></div></a></figure><h3 id="132-oop-architecture-for-dnn-models-config-bits-in-c">13.2. OOP Architecture for DNN models &amp; config bits in C++</h3><p>The firmware needs to be flexible, such that I can create any DNN by chaining layer objects. For this, I write the layer class, with necessary features like extracting configuration bits and appending to data. This is basically like another golden model, but for the purposes of running in the ARM processor.</p><pre><code class="language-cpp">class Layer
+{
+public:
+	 int idx, H_IN, W_IN, C_IN, C_OUT, KH_IN, KW_IN;
+	 bool IS_NOT_MAX, IS_MAX, IS_LRELU;
+
+	 Layer * PREV_P = nullptr;
+	 Layer * NEXT_P = nullptr;
+
+	 int BLOCKS, BLOCKS_PER_ARR;
+	 u8 MAX_FACTOR, SUB_CORES, EFF_CORES, ITR, COUT_FPGA, COUT_VALID, COUT_INVALID;
+	 u8 KW_PAD;
+
+	 int OUT_W_IN, OUT_BLOCKS, OUT_MAX_FACTOR, OUT_BLOCKS_PER_ARR, OUT_KH;
+
+	 int DATA_BEATS_PIXELS;
+	 int BEATS_LRELU = 0;
+	 int WORDS_PIXELS_PER_ARR;
+	 int WORDS_WEIGHTS_PER_ITR, WORDS_WEIGHTS;
+
+	 int WORDS_OUT_PER_TRANSFER, TRANSFERS_OUT_PER_ITR;
+	 int WORDS_OUT_PER_TRANSFER_ARR [3];
+
+	 chunk_s * input_chunk_p  = nullptr;
+	 chunk_s * output_chunk_p = nullptr;
+	 bool done_write = false;
+
+	 Layer ( int idx,
+			 int H_IN, int W_IN, int C_IN, int C_OUT,
+			 int KH_IN, int KW_IN,
+			 bool IS_NOT_MAX, bool IS_MAX, bool IS_LRELU):
+					 idx    (idx),
+					 H_IN   (H_IN),
+					 W_IN   (W_IN),
+					 C_IN   (C_IN),
+					 C_OUT  (C_OUT),
+					 KH_IN   (KH_IN),
+					 KW_IN   (KW_IN),
+					 IS_NOT_MAX(IS_NOT_MAX),
+					 IS_MAX    (IS_MAX),
+					 IS_LRELU  (IS_LRELU)
+	 {
+		 BLOCKS     = H_IN / UNITS;
+		 MAX_FACTOR = IS_MAX ? 2 : 1;
+		 BLOCKS_PER_ARR = BLOCKS / MAX_FACTOR;
+
+		 KW_PAD = KW_IN - 2*IS_MAX;
+
+		 SUB_CORES = MEMBERS / KW_IN;
+		 EFF_CORES = COPIES * GROUPS * SUB_CORES / MAX_FACTOR;
+		 ITR       = (int)(std::ceil((float)C_OUT / (float)EFF_CORES));
+		 COUT_FPGA = EFF_CORES * ITR;
+
+		 COUT_VALID = C_OUT % EFF_CORES;
+		 COUT_VALID = (COUT_VALID == 0) ? EFF_CORES : COUT_VALID;
+
+		 COUT_INVALID = EFF_CORES - COUT_VALID;
+
+		 /* LRELU BEATS */
+
+		 BEATS_LRELU += 1; //D
+		 BEATS_LRELU += ceil(2.0/KW_IN); // A
+
+		 for (int clr_i=0;  clr_i &lt; KW_IN/2+1; clr_i ++){
+			 int clr = clr_i*2 +1;
+			 for (int mtb=0;  mtb &lt; clr; mtb ++){
+				 int bram_width = MEMBERS/clr;
+				 int bram_size  = 2*SUB_CORES;
+				 int BEATS_ij = ceil((float)bram_size/bram_width);
+
+				 BEATS_LRELU += BEATS_ij;
+			 }
+		 }
+
+		 DATA_BEATS_PIXELS = BLOCKS_PER_ARR * W_IN * C_IN;
+
+		 WORDS_PIXELS_PER_ARR  =      DATA_BEATS_PIXELS  * UNITS_EDGES;
+		 WORDS_WEIGHTS_PER_ITR = (S_WEIGHTS_WIDTH/8) + (BEATS_LRELU + C_IN*KH_IN) * COPIES * GROUPS * MEMBERS;
+		 WORDS_WEIGHTS         = ITR * WORDS_WEIGHTS_PER_ITR;
+
+		 if (IS_NOT_MAX &amp;&amp; IS_MAX)
+		 {
+			 WORDS_OUT_PER_TRANSFER_ARR[0] = SUB_CORES * COPIES * GROUPS * UNITS_EDGES;
+			 WORDS_OUT_PER_TRANSFER_ARR[1] =             COPIES * GROUPS * UNITS_EDGES;
+			 WORDS_OUT_PER_TRANSFER_ARR[2] =             COPIES * GROUPS * UNITS_EDGES / MAX_FACTOR;
+
+			 TRANSFERS_OUT_PER_ITR = BLOCKS/MAX_FACTOR * W_IN/MAX_FACTOR * (1 + 2 * SUB_CORES);
+		 }
+		 else
+		 {
+			 WORDS_OUT_PER_TRANSFER = SUB_CORES * COPIES * GROUPS * UNITS_EDGES / MAX_FACTOR;
+			 TRANSFERS_OUT_PER_ITR  = BLOCKS/MAX_FACTOR * W_IN/MAX_FACTOR;
+		 }
+	 };
+
+	 void set_config()
+	 {
+		 input_chunk_p-&gt;data_p[0] = (s8)(IS_NOT_MAX);
+		 input_chunk_p-&gt;data_p[1] = (s8)(IS_MAX);
+		 input_chunk_p-&gt;data_p[2] = (s8)(IS_LRELU);
+		 input_chunk_p-&gt;data_p[3] = (s8)(KH_IN/2);
+
+#ifdef DEBUG
+		 for (int i=4; i&lt;UNITS_EDGES; i++) input_chunk_p-&gt;data_p[i] = 0;
+#endif
+		 Xil_DCacheFlushRange((UINTPTR)input_chunk_p-&gt;data_p, UNITS_EDGES);
+	 };
+
+	 void set_out_params()
+	 {
+		 /* Next layer can be null (if this is last) or can have multiple next layers.
+		  * We are interested in how to arrange the output values of this, to match the next
+		  */
+
+		 OUT_W_IN   = W_IN / MAX_FACTOR;
+		 OUT_BLOCKS = (H_IN / MAX_FACTOR) / UNITS;
+
+		 OUT_MAX_FACTOR     = (NEXT_P == nullptr) ? 1 : NEXT_P-&gt;MAX_FACTOR;
+		 OUT_BLOCKS_PER_ARR = OUT_BLOCKS/OUT_MAX_FACTOR;
+
+		 OUT_KH = (NEXT_P == nullptr) ? KH_IN : NEXT_P-&gt;KH_IN;
+	 }
+
+	 inline s8* get_input_pixels_base_p()
+	 {
+		 return (s8*)(input_chunk_p-&gt;data_p) + UNITS_EDGES;
+	 }
+	 inline s8* get_output_pixels_base_p()
+	 {
+		 return (s8*)(output_chunk_p-&gt;data_p) + UNITS_EDGES;
+	 }
+};</code></pre><pre><code class="language-cpp">auto build_yolo_mod()
+{
+	std::array&lt;Layer,21&gt; layers = {
+		Layer(1,	H_RGB   ,W_RGB  ,    3,  32,   3,   3,false, true, true),
+		Layer(2,	H_RGB/2 ,W_RGB/2,   32,  64,   3,   3,false, true, true),
+		Layer(3,	H_RGB/4 ,W_RGB/4,   64, 128,   3,   3,true, false, true),
+		Layer(4,	H_RGB/4 ,W_RGB/4,  128,  64,   1,   1,true, false, true),
+		Layer(5,	H_RGB/4 ,W_RGB/4,   64, 128,   3,   3,false, true, true),
+		Layer(6,	H_RGB/8 ,W_RGB/8,  128, 256,   3,   3,true, false, true),
+		Layer(7,	H_RGB/8 ,W_RGB/8,  256, 128,   1,   1,true, false, true),
+		Layer(8,	H_RGB/8 ,W_RGB/8,  128, 256,   3,   3,false, true, true),
+		Layer(9,	H_RGB/16,W_RGB/16, 256, 512,   3,   3,true, false, true),
+		Layer(10,	H_RGB/16,W_RGB/16, 512, 256,   1,   1,true, false, true),
+		Layer(11,	H_RGB/16,W_RGB/16, 256, 512,   3,   3,true, false, true),
+		Layer(12,	H_RGB/16,W_RGB/16, 512, 256,   1,   1,true, false, true),
+		Layer(13,	H_RGB/16,W_RGB/16, 256, 512,   3,   3,false, true, true),
+		Layer(14,	H_RGB/32,W_RGB/32, 512,1024,   3,   3,true, false, true),
+		Layer(15,	H_RGB/32,W_RGB/32,1024, 512,   1,   1,true, false, true),
+		Layer(16,	H_RGB/32,W_RGB/32, 512,1024,   3,   3,true, false, true),
+		Layer(17,	H_RGB/32,W_RGB/32,  64, 128,1024, 512,true, false, true),
+		Layer(18,	H_RGB/32,W_RGB/32,  64, 128, 512,1024,true, false, true),
+		Layer(19,	H_RGB/32,W_RGB/32,1024,1024,   3,   3,true, false, true),
+		Layer(20,	H_RGB/32,W_RGB/32,1024,1024,   3,   3,true, false, true),
+		Layer(21,	H_RGB/32,W_RGB/32,1024,  45,   1,   1,true, false, false)
+	};
+
+	for (int i=0; i &lt; N_LAYERS; i++)
+	{
+		if (i!=0         ) layers[i].PREV_P = &amp;layers[i-1];
+		if (i!=N_LAYERS-1) layers[i].NEXT_P = &amp;layers[i+1];
+		layers[i].set_out_params();
+	}
+	return layers;
+}</code></pre><h3 id="133-c-code-to-control-multiple-dmas-effectively">13.3. C++ Code to control multiple DMAs effectively</h3><pre><code class="language-cpp">void restart_output()
+{
+	static int i_w=0, i_w_flipped=0, i_blocks=0, i_bpa=0, i_arr=0, i_cout=0, i_itr=0, i_layers=i_layers_start;
+	static volatile s8 * write_p = layers[i_layers].get_output_pixels_base_p();
+	static bool is_new_layer=true;
+
+    static volatile s8 * write_p_old = 0;
+	Xil_DCacheFlushRange((UINTPTR)write_p_old, UNITS_EDGES);
+
+	if ((i_itr == 0 &amp;&amp; i_blocks == 31) || (i_itr == 1 &amp;&amp; i_blocks == 0)){
+		for (int i=0; i&lt;UNITS_EDGES; i++){
+			PRINT(" %d,", write_p_old[i]);
+		}
+		PRINT("] \r\n");
+		PRINT("(%d,%d,%d,%d-%d,:) -- %p [", i_arr, i_bpa, i_w_flipped,i_itr,i_cout, write_p);
+	}
+	write_p_old = write_p;
+
+	// start transfer
+	dma_weights_im_out.s2mm_start(	(UINTPTR)write_p,
+									layers[i_layers].WORDS_OUT_PER_TRANSFER);
+
+	pad_prev(i_w_flipped,i_blocks,i_bpa,i_arr,i_cout,i_layers);
+
+	// set config
+	if (is_new_layer &amp;&amp; i_layers != N_LAYERS-1)
+	{
+		layers[i_layers].NEXT_P-&gt;set_config();
+		layers[i_layers].NEXT_P-&gt;done_write = false;
+		is_new_layer = false;
+	}
+
+	// PREPARE NEXT INDICES
+	// blocks = 31 (a=1,bpa=15), w_f = 191 (w = 190), itr = 0
+	if (i_w &lt; layers[i_layers].OUT_W_IN-1)
+	{
+		i_w += 1;
+		// Flip last KW-1 columns : flipped = 2w-(kw+iw)
+		// For max: kw &lt;- kw-2
+		if (i_w &gt; layers[i_layers].OUT_W_IN - layers[i_layers].KW_PAD)
+			i_w_flipped = 2 * layers[i_layers].OUT_W_IN - (i_w + layers[i_layers].KW_PAD);
+		else
+			i_w_flipped = i_w;
+	}
+	else
+	{
+		i_w = 0;
+		i_w_flipped = 0;
+
+		 PRINT(" i_blocks: %d, write_p: %p \r\n", i_blocks, write_p);
+
+		if (i_blocks &lt; layers[i_layers].OUT_BLOCKS-1)
+		{
+			i_blocks  += 1;
+			i_arr      = i_blocks % layers[i_layers].OUT_MAX_FACTOR;
+			i_bpa      = i_blocks / layers[i_layers].OUT_MAX_FACTOR;
+		}
+		else
+		{
+			i_blocks   = 0;
+			i_arr      = 0;
+			i_bpa      = 0;
+
+			 PRINT(" i_itr: %d \r\n", i_itr);
+
+			if (i_itr &gt;= layers[i_layers].ITR-1)
+			{
+				is_new_layer = true;
+				i_itr = 0;
+				i_cout= 0;
+
+				if (i_layers &lt; N_LAYERS-1)
+					i_layers += 1;
+				else
+				{
+					i_layers = 0;
+					done = true;
+					PRINT("All Layers done \r\n");
+				}
+
+				/* Chaining*/
+				if (i_layers == N_LAYERS-1)
+				{
+					layers[0].input_chunk_p = &amp;temp_in_chunk;
+					layers[i_layers].output_chunk_p = &amp;temp_out_chunk;
+				}
+				else
+				{
+					layers[i_layers].output_chunk_p = get_chunk();
+					layers[i_layers].NEXT_P-&gt;input_chunk_p = layers[i_layers].output_chunk_p;
+				}
+				PRINT("Writing to new layer: chained_chunks (idx:%d -&gt; idx:%d), data_p= %p \r\n",
+						    layers[i_layers].idx, layers[i_layers].NEXT_P-&gt;idx,
+							layers[i_layers].output_chunk_p-&gt;data_p);
+
+				layers[i_layers].print_output_params();
+			}
+			else if (i_itr == 0)
+			{
+				i_itr += 1;
+				i_cout = layers[i_layers].COUT_VALID;
+			}
+			else
+			{
+				i_itr  += 1;
+				i_cout += layers[i_layers].EFF_CORES;
+			}
+		}
+	}
+	// blocks = 31 (a=1,bpa=15), w_f = 191, itr = 0
+	write_p = unravel_image_abwcu(layers[i_layers].get_output_pixels_base_p(),
+								  i_arr,i_bpa,i_w_flipped,i_cout,0, i_layers);
+}</code></pre><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">14. Hardware (FPGA) Verification</h2></div><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Hardware testing. </figcaption></figure><p></p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">15. Repeat 11-14</h2></div><p>I spent weeks or months repeating 11-14, to finally get the hardware outputs to match the golden model, and hence the original DNNs.  Once I spent a month figuring out a bug where the system worked perfectly in randomized simulations but had wrong values for just 6 bytes out of 4 million bytes. Finally I found its a bug in Vivado's compiler.</p>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+            <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+        <h3>Aba&#x27;s Blog</h3>
+            <p>Tech - Travels - Thoughts</p>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>

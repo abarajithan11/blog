@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>DNN → Chip Design [4/4: System-on-Chip]</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preload" href="../assets/css/app.css%3Fv=6e0704866d.css" as="style" />
+    <link rel="preload" href="../assets/js/manifest.js%3Fv=6e0704866d" as="script" />
+    <link rel="preload" href="../assets/js/vendor/content-api.min.js%3Fv=6e0704866d" as="script" />
+    <link rel="preload" href="../assets/js/vendor.js%3Fv=6e0704866d" as="script" />
+    <link rel="preload" href="../assets/js/app.js%3Fv=6e0704866d" as="script" />
+    <link rel="preconnect" href="https://polyfill.io">
+    <link rel="dns-prefetch" href="https://polyfill.io">
+
+      <link rel="preload" href="../assets/css/post.css%3Fv=6e0704866d.css" as="style" />
+  <link rel="preload" href="../assets/js/post.js%3Fv=6e0704866d" as="script" />
+
+
+    <style>
+      /* These font-faces are here to make fonts work if the Ghost instance is installed in a subdirectory */
+
+      /* source-sans-pro-regular */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('SourceSansPro-Regular'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-regular.woff2%3Fv=6e0704866d") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-regular.woff%3Fv=6e0704866d") format('woff');
+      }
+
+      /* source-sans-pro-600 */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: local('SourceSansPro-SemiBold'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-600.woff2%3Fv=6e0704866d") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-600.woff%3Fv=6e0704866d") format('woff');
+      }
+
+      /* source-sans-pro-700 */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: local('SourceSansPro-Bold'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-700.woff2%3Fv=6e0704866d") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-700.woff%3Fv=6e0704866d") format('woff');
+      }
+
+      /* iconmoon */
+      @font-face {
+        font-family: 'icomoon';
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+        src: url("../assets/fonts/icomoon/icomoon.eot%3F101fc3%3Fv=6e0704866d");
+        src: url("../assets/fonts/icomoon/icomoon.eot%3F101fc3") format('embedded-opentype'),
+        url("../assets/fonts/icomoon/icomoon.ttf%3F101fc3%3Fv=6e0704866d") format('truetype'),
+        url("../assets/fonts/icomoon/icomoon.woff%3F101fc3%3Fv=6e0704866d") format('woff'),
+        url("../assets/fonts/icomoon/icomoon.svg%3F101fc3") format('svg');
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/app.css%3Fv=6e0704866d.css" media="screen" />
+
+      <link rel="stylesheet" type="text/css" href="../assets/css/post.css%3Fv=6e0704866d.css" media="screen" />
+
+
+    
+
+    <link rel="icon" href="../favicon.png" type="image/png" />
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="Aba&#x27;s Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="DNN → Chip Design [4/4: System-on-Chip]" />
+    <meta property="og:description" content="This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken.  Kraken Paper SoC Block Design: Build FPGA projects with Vivado manually and synthesize Automation: TCL scripts to automate the project building and configuration C++ Firmware: To" />
+    <meta property="og:url" content="https://aba-blog.xyz/dnn-to-chip-4/" />
+    <meta property="og:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/image_o-12-1.png" />
+    <meta property="article:published_time" content="2022-01-29T10:37:39.000Z" />
+    <meta property="article:modified_time" content="2022-01-29T11:41:14.000Z" />
+    <meta property="article:tag" content="Technical Projects" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
+    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DNN → Chip Design [4/4: System-on-Chip]" />
+    <meta name="twitter:description" content="This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken.  Kraken Paper SoC Block Design: Build FPGA projects with Vivado manually and synthesize Automation: TCL scripts to automate the project building and configuration C++ Firmware: To" />
+    <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-4/" />
+    <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/image_o-12-1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Abarajithan G" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Technical Projects" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1042" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aba&#x27;s Blog",
+        "url": "https://aba-blog.xyz/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://aba-blog.xyz/favicon.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Abarajithan G",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://aba-blog.xyz/content/images/2021/11/im_large_vignette.jpg",
+            "width": 1600,
+            "height": 1600
+        },
+        "url": "https://aba-blog.xyz/author/aba/",
+        "sameAs": [
+            "https://www.linkedin.com/in/abarajithan11",
+            "https://www.facebook.com/abarajithan11"
+        ]
+    },
+    "headline": "DNN → Chip Design [4/4: System-on-Chip]",
+    "url": "https://aba-blog.xyz/dnn-to-chip-4/",
+    "datePublished": "2022-01-29T10:37:39.000Z",
+    "dateModified": "2022-01-29T11:41:14.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://aba-blog.xyz/content/images/2022/01/image_o-12-1.png",
+        "width": 1920,
+        "height": 1042
+    },
+    "keywords": "Technical Projects",
+    "description": "This is a series of articles outlining my workflow, which I developed over the\npast few years through building my own DNN accelerator: Kraken. \n\nKraken Paper [https://arxiv.org/abs/2112.02793] 11. SoC Block Design: Build FPGA projects with Vivado manually and synthesize\n 12. Automation: TCL scripts to automate the project building and configuration\n 13. C++ Firmware: To control the custom modules\n 14. Hardware Verification: Test on FPGA, compare output to golden model\n 15. Repeat 11-14\n\n11. SoC ",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aba-blog.xyz/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.32" />
+    <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../rss/index.html" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.13.0/umd/portal.min.js" data-ghost="https://aba-blog.xyz/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style>
+    <script defer src="../public/cards.min.js%3Fv=6e0704866d"></script>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=6e0704866d.css">
+    <meta property="fb:admins" content="abarajithan11"/>
+<style>
+.post-template {
+    text-align: justify;
+}
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script>
+  const ghostSearchApiKey = 'f615b479aa70555d4c87186458'
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism-tomorrow.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.css" />
+<style>
+    pre[class*=language-] {
+        margin: 0.5em 0;
+        font-size: 1rem;
+        background: #111;
+    }
+</style><style>:root {--ghost-accent-color: #2861bd;}</style>
+
+    <style>
+      :root {
+        --primary-subtle-color: var(--ghost-accent-color) !important;
+      }
+    </style>
+
+    <script>
+      // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat
+      const ghostHost = "https://aba-blog.xyz"
+      // @license-end
+    </script>
+
+  </head>
+  <body class="post-template tag-tech-projects">
+    
+
+
+
+  
+<header class="m-header with-picture js-header">
+  <div class="m-mobile-topbar" data-aos="fade-down">
+    <button class="m-icon-button in-mobile-topbar js-open-menu" aria-label="Open menu">
+      <span class="icon-menu" aria-hidden="true"></span>
+    </button>
+      <a href="../index.html" class="m-site-name in-mobile-topbar">
+        Aba&#x27;s Blog
+      </a>
+    <button class="m-icon-button in-mobile-topbar js-open-search" aria-label="Open search">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="m-menu js-menu">
+    <button class="m-icon-button outlined as-close-menu js-close-menu" aria-label="Close menu">
+      <span class="icon-close"></span>
+    </button>
+    <div class="m-menu__main" data-aos="fade-down">
+      <div class="l-wrapper">
+        <div class="m-nav js-main-nav">
+          <nav class="m-nav__left js-main-nav-left" role="navigation" aria-label="Main menu">
+            <ul>
+                <li class="only-desktop">
+                  <a href="../index.html" class="m-site-name in-desktop-menu">
+                    Aba&#x27;s Blog
+                  </a>
+                </li>
+                
+    <li class="nav-tech-projects">
+      <a href="../tag/tech-projects/index.html">Tech Projects</a>
+    </li>
+    <li class="nav-travels">
+      <a href="../tag/travels/index.html">Travels</a>
+    </li>
+    <li class="nav-thoughts">
+      <a href="../tag/thoughts/index.html">Thoughts</a>
+    </li>
+    <li class="nav-stories">
+      <a href="../tag/stories/index.html">Stories</a>
+    </li>
+    <li class="nav-reviews">
+      <a href="../tag/reviews/index.html">Reviews</a>
+    </li>
+    <li class="nav-teaching">
+      <a href="../tag/teaching/index.html">Teaching</a>
+    </li>
+    <li class="nav-community-work">
+      <a href="../tag/community-work/index.html">Community Work</a>
+    </li>
+
+              <li class="submenu-option js-submenu-option">
+                <button class="m-icon-button in-menu-main more js-toggle-submenu" aria-label="Open submenu">
+                  <span class="icon-more" aria-hidden="true"></span>
+                </button>
+                <div class="m-submenu js-submenu">
+                  <div class="l-wrapper in-submenu">
+                    <section class="m-recent-articles">
+                      <h3 class="m-submenu-title in-recent-articles">Recent articles</h3>
+                          <div class="glide js-recent-slider">
+                            <div class="glide__track" data-glide-el="track">
+                              <div class="glide__slides">
+                                <div class="glide__slide">
+                                  <a href="index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2022/01/image_o-12-1.png" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [4/4: System-on-Chip]">
+                                      DNN → Chip Design [4/4: System-on-Chip]
+                                    </h3>
+                                    <span class="m-recent-article__date">an hour ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../dnn-to-chip-3/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2022/01/Data-Flow-of-Inference-Engine-2-1.png" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [3/4: Digital Design]">
+                                      DNN → Chip Design [3/4: Digital Design]
+                                    </h3>
+                                    <span class="m-recent-article__date">an hour ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../dnn-to-chip-2/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [2/4: Golden Models]">
+                                      DNN → Chip Design [2/4: Golden Models]
+                                    </h3>
+                                    <span class="m-recent-article__date">an hour ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../dnn-to-chip-1/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2022/01/langs-2.png" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
+                                      DNN → Chip Design [1/4: Intro &amp; Directory Structure]
+                                    </h3>
+                                    <span class="m-recent-article__date">19 hours ago</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </section>
+                    <section class="m-tags">
+                      <h3 class="m-submenu-title">Tags</h3>
+                        <ul>
+                            <li>
+                              <a href="../tag/australia/index.html">Australia</a>
+                            </li>
+                            <li>
+                              <a href="../tag/camping/index.html">Camping</a>
+                            </li>
+                            <li>
+                              <a href="../tag/community-work/index.html">Community Work</a>
+                            </li>
+                            <li>
+                              <a href="../tag/india/index.html">India</a>
+                            </li>
+                            <li>
+                              <a href="../tag/reviews/index.html">Reviews</a>
+                            </li>
+                            <li>
+                              <a href="../tag/stories/index.html">Stories</a>
+                            </li>
+                            <li>
+                              <a href="../tag/teaching/index.html">Teaching</a>
+                            </li>
+                            <li>
+                              <a href="../tag/tech-projects/index.html">Technical Projects</a>
+                            </li>
+                            <li>
+                              <a href="../tag/thoughts/index.html">Thoughts</a>
+                            </li>
+                            <li>
+                              <a href="../tag/travels/index.html">Travels</a>
+                            </li>
+                        </ul>
+                    </section>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <div class="m-nav__right">
+            <button class="m-icon-button in-menu-main js-open-search" aria-label="Open search">
+              <span class="icon-search" aria-hidden="true"></span>
+            </button>
+            <div class="m-toggle-darkmode js-tooltip" data-tippy-content="Toggle light/dark mode" tabindex="0">
+              <label for="toggle-darkmode" class="sr-only">
+                Toggle light/dark mode
+              </label>
+              <input id="toggle-darkmode" type="checkbox" class="js-toggle-darkmode">
+              <div>
+                <span class="icon-moon moon" aria-hidden="true"></span>
+                <span class="icon-sunny sun" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<main class="main-wrap">
+    
+  <section class="m-hero with-picture" data-aos="fade">
+    <div class="m-hero__picture in-post">
+      <img srcset="../content/images/size/w300/2022/01/image_o-12-1.png 300w, ../content/images/size/w600/2022/01/image_o-12-1.png 600w, ../content/images/size/w1000/2022/01/image_o-12-1.png 1000w, ../content/images/size/w2000/2022/01/image_o-12-1.png 2000w" sizes="(max-width: 600px) 600px, (max-width: 1000px) 1000px, 2000px" src="../content/images/size/w2000/2022/01/image_o-12-1.png" alt="" />
+    </div>
+    </section>
+  
+  <article>
+    <div class="l-content in-post">
+        <div class="l-wrapper in-post  js-aos-wrapper" data-aos="fade-up"
+          data-aos-delay="300">
+          <div
+            class="l-post-content js-progress-content">
+            <header class="m-heading">
+              <h1 class="m-heading__title in-post">DNN → Chip Design [4/4: System-on-Chip]</h1>
+              <div class="m-heading__meta">
+                  <a href="../tag/tech-projects/index.html" class="m-heading__meta__tag">Technical Projects</a>
+                  <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
+                <span class="m-heading__meta__time">Jan 29, 2022</span>
+              </div>
+            </header>
+            <div class="pos-relative js-post-content">
+              <div class="m-share">
+                <div class="m-share__content js-sticky">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://aba-blog.xyz/dnn-to-chip-4/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Facebook">
+                    <span class="icon-facebook" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://twitter.com/intent/tweet?text=DNN%20%E2%86%92%20Chip%20Design%20%5B4%2F4%3A%20System-on-Chip%5D&url=https://aba-blog.xyz/dnn-to-chip-4/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">
+                    <span class="icon-twitter" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aba-blog.xyz/dnn-to-chip-4/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <span class="icon-linkedin" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://reddit.com/submit?url=https://aba-blog.xyz/dnn-to-chip-4/&title=DNN%20%E2%86%92%20Chip%20Design%20%5B4%2F4%3A%20System-on-Chip%5D"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Reddit">
+                    <span class="icon-reddit" aria-hidden="true"></span>
+                  </a>
+                  <button class="m-icon-button filled in-share progress js-scrolltop" aria-label="Scroll to top">
+                    <span class="icon-arrow-top" aria-hidden="true"></span>
+                    <svg aria-hidden="true">
+                      <circle class="progress-ring__circle js-progress" fill="transparent" r="0" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <p>This is a series of articles outlining my workflow, which I developed over the past few years through building my own DNN accelerator: Kraken. </p><div class="kg-card kg-button-card kg-align-center"><a href="https://arxiv.org/abs/2112.02793" class="kg-btn kg-btn-accent">Kraken Paper</a></div><!--kg-card-begin: markdown--><ol start="11">
+<li><strong>SoC Block Design</strong>: Build FPGA projects with Vivado manually and synthesize</li>
+<li><strong>Automation</strong>: TCL scripts to automate the project building and configuration</li>
+<li><strong>C++ Firmware</strong>: To control the custom modules</li>
+<li><strong>Hardware Verification</strong>: Test on FPGA, compare output to golden model</li>
+<li>Repeat 11-14</li>
+</ol>
+<!--kg-card-end: markdown--><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">11. SoC Block Design</h2><h3 class="kg-header-card-subheader">Manually build Vivado projects, block designs</h3></div><figure class="kg-card kg-image-card kg-width-full kg-card-hascaption"><img src="../content/images/2022/01/image-15.png" class="kg-image" alt loading="lazy" width="1920" height="1042" srcset="../content/images/size/w600/2022/01/image-15.png 600w, ../content/images/size/w1000/2022/01/image-15.png 1000w, ../content/images/size/w1600/2022/01/image-15.png 1600w, ../content/images/2022/01/image-15.png 1920w"><figcaption>I add DMAs, configure them, connect them to the main module, run block &amp; connection automation, copying down TCL commands at every step.</figcaption></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">12. TCL Automation</h2></div><p>Xilinx Vivado projects are notoriously buggy. They crash once in a while and get corrupted. Vivado also auto-generates hundreds of small files, which contain absolute paths, and don't play well with a different Vivado version. Therefore, it is a bad idea to version control them. </p><p>The best practice is to script the project flow. Once I manually copy down the TCL commands, I change them into parameterized code. </p><figure class="kg-card kg-code-card"><pre><code class="language-tcl">set TUSER_WIDTH_MAXPOOL_IN     [expr $BITS_KW2      + $I_KW2]
+set TUSER_WIDTH_LRELU_IN       [expr $BITS_KW       + $I_CLR]
+set TUSER_CONV_DW_BASE         [expr 1 + $I_IS_BOTTOM_BLOCK ]
+set TUSER_CONV_DW_IN           [expr $MEMBERS*$BITS_KW + $BITS_OUT_SHIFT + $BITS_MEMBERS + $TUSER_CONV_DW_BASE]
+set TUSER_WIDTH_LRELU_FMA_1_IN [expr 1         + $I_IS_LRELU]
+set TUSER_WIDTH_CONV_IN        [expr $I_IS_SUM_START     + 1]
+
+set DEBUG_CONFIG_WIDTH_W_ROT   [expr 1 + 2*$BITS_KW2 + 3*($BITS_KH2      + $BITS_IM_CIN + $BITS_IM_COLS + $BITS_IM_BLOCKS)]
+set DEBUG_CONFIG_WIDTH_IM_PIPE [expr 3 + 2 + $BITS_KH2      + 0]
+set DEBUG_CONFIG_WIDTH_LRELU   [expr 3 + 4 + $BITS_FMA_2]
+set DEBUG_CONFIG_WIDTH_MAXPOOL 1
+set DEBUG_CONFIG_WIDTH         [expr $DEBUG_CONFIG_WIDTH_MAXPOOL + $DEBUG_CONFIG_WIDTH_LRELU + 2*$BITS_KH2      + $DEBUG_CONFIG_WIDTH_IM_PIPE + $DEBUG_CONFIG_WIDTH_W_ROT]
+
+# **********    STORE PARAMS    *************
+
+set file_param [open $RTL_DIR/include/params.v w]
+
+if {$MAC_TYPE == "XILINX"} {
+  puts $file_param "`define MAC_XILINX 1"
+}
+if {$REG_TYPE == "ASIC"} {
+  puts $file_param "`define ASIC_REG 1"
+}
+
+puts $file_param "
+`define SRAM_TYPE   \"$SRAM_TYPE\"  
+`define MAC_TYPE    \"$MAC_TYPE\"  
+
+`define UNITS    $UNITS  
+`define GROUPS   $GROUPS 
+`define COPIES   $COPIES 
+`define MEMBERS  $MEMBERS
+`define DW_FACTOR_1 $DW_FACTOR_1
+`define OUTPUT_MODE \"$OUTPUT_MODE\"
+`define KSM_COMBS_EXPR $KSM_COMBS_EXPR
+`define KS_COMBS_EXPR $KS_COMBS_EXPR</code></pre><figcaption>Part of the tcl script that calculates parameters and writes the params.v file</figcaption></figure><p>I then spend a couple of days debugging the TCL script to ensure it can reliably rebuild a project from scratch. These TCL scripts and the source verilog files are tracked by git.</p><figure class="kg-card kg-code-card"><pre><code class="language-tcl">create_bd_design "sys"
+
+# ZYNQ IP
+create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0
+apply_bd_automation -rule xilinx.com:bd_rule:processing_system7 -config {make_external "FIXED_IO, DDR" apply_board_preset "1" Master "Disable" Slave "Disable" }  [get_bd_cells processing_system7_0]
+set_property -dict [list CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ $FREQ_LITE CONFIG.PCW_FPGA1_PERIPHERAL_FREQMHZ $FREQ_LOW CONFIG.PCW_FPGA2_PERIPHERAL_FREQMHZ $FREQ_HIGH CONFIG.PCW_EN_CLK2_PORT $FREQ_LITE CONFIG.PCW_USE_S_AXI_ACP {1} CONFIG.PCW_USE_DEFAULT_ACP_USER_VAL {1} CONFIG.PCW_USE_FABRIC_INTERRUPT {1} CONFIG.PCW_EN_CLK1_PORT {1} CONFIG.PCW_EN_CLK2_PORT {1} CONFIG.PCW_IRQ_F2P_INTR {1} CONFIG.PCW_QSPI_PERIPHERAL_ENABLE {0} CONFIG.PCW_SD0_PERIPHERAL_ENABLE {0} CONFIG.PCW_I2C0_PERIPHERAL_ENABLE {0} CONFIG.PCW_GPIO_MIO_GPIO_ENABLE {0}] [get_bd_cells processing_system7_0]
+
+# Accelerator
+create_bd_cell -type module -reference axis_accelerator axis_accelerator_0
+
+# Weights &amp; out DMA
+set IP_NAME "dma_weights_im_out"
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 $IP_NAME
+set_property -dict [list CONFIG.c_include_sg {0} CONFIG.c_sg_length_width {26} CONFIG.c_m_axi_mm2s_data_width {32} CONFIG.c_m_axis_mm2s_tdata_width {32} CONFIG.c_mm2s_burst_size {8} CONFIG.c_sg_include_stscntrl_strm {0} CONFIG.c_include_mm2s_dre {1} CONFIG.c_m_axi_mm2s_data_width $S_WEIGHTS_WIDTH_LF CONFIG.c_m_axis_mm2s_tdata_width $S_WEIGHTS_WIDTH_LF CONFIG.c_m_axi_s2mm_data_width $M_DATA_WIDTH_LF CONFIG.c_s_axis_s2mm_tdata_width $M_DATA_WIDTH_LF CONFIG.c_include_s2mm_dre {1} CONFIG.c_s2mm_burst_size {16}] [get_bd_cells $IP_NAME]
+
+# Im_in_1
+set IP_NAME "dma_im_in"
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 $IP_NAME
+set_property -dict [list CONFIG.c_include_sg {0} CONFIG.c_sg_length_width {26} CONFIG.c_m_axi_mm2s_data_width [expr $S_PIXELS_WIDTH_LF] CONFIG.c_m_axis_mm2s_tdata_width [expr $S_PIXELS_WIDTH_LF] CONFIG.c_include_mm2s_dre {1} CONFIG.c_mm2s_burst_size {64} CONFIG.c_include_s2mm {0}] [get_bd_cells $IP_NAME]
+
+# # Interrupts
+create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0
+set_property -dict [list CONFIG.NUM_PORTS {4}] [get_bd_cells xlconcat_0]
+connect_bd_net [get_bd_pins dma_im_in/mm2s_introut] [get_bd_pins xlconcat_0/In0]
+connect_bd_net [get_bd_pins dma_weights_im_out/mm2s_introut] [get_bd_pins xlconcat_0/In2]
+connect_bd_net [get_bd_pins dma_weights_im_out/s2mm_introut] [get_bd_pins xlconcat_0/In3]
+connect_bd_net [get_bd_pins xlconcat_0/dout] [get_bd_pins processing_system7_0/IRQ_F2P]
+
+# Engine connections
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK1] [get_bd_pins axis_accelerator_0/aclk]
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK2] [get_bd_pins axis_accelerator_0/hf_aclk]
+connect_bd_intf_net [get_bd_intf_pins dma_im_in/M_AXIS_MM2S] [get_bd_intf_pins axis_accelerator_0/s_axis_pixels]
+connect_bd_intf_net [get_bd_intf_pins dma_weights_im_out/M_AXIS_MM2S] [get_bd_intf_pins axis_accelerator_0/s_axis_weights]
+switch $OUTPUT_MODE {
+  "CONV"    {connect_bd_intf_net [get_bd_intf_pins dma_weights_im_out/S_AXIS_S2MM] [get_bd_intf_pins axis_accelerator_0/conv_dw2_lf_m_axis]}
+  "LRELU"   {connect_bd_intf_net [get_bd_intf_pins dma_weights_im_out/S_AXIS_S2MM] [get_bd_intf_pins axis_accelerator_0/lrelu_dw_lf_m_axis]}
+  "MAXPOOL" {connect_bd_intf_net [get_bd_intf_pins dma_weights_im_out/S_AXIS_S2MM] [get_bd_intf_pins axis_accelerator_0/max_dw2_lf_m_axis ]}
+}
+
+# AXI Lite
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Clk_slave {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Master {/processing_system7_0/M_AXI_GP0} Slave {/dma_im_in/S_AXI_LITE} ddr_seg {Auto} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins dma_im_in/S_AXI_LITE]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Clk_slave {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK0 ($FREQ_LITE MHz)} Master {/processing_system7_0/M_AXI_GP0} Slave {/dma_weights_im_out/S_AXI_LITE} ddr_seg {Auto} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins dma_weights_im_out/S_AXI_LITE]
+endgroup
+
+# AXI4
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_slave {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Master {/dma_weights_im_out/M_AXI_MM2S} Slave {/processing_system7_0/S_AXI_ACP} ddr_seg {Auto} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins processing_system7_0/S_AXI_ACP]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_slave {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Master {/dma_im_in/M_AXI_MM2S} Slave {/processing_system7_0/S_AXI_ACP} ddr_seg {Auto} intc_ip {/axi_mem_intercon} master_apm {0}}  [get_bd_intf_pins dma_im_in/M_AXI_MM2S]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_slave {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK1 ($FREQ_LOW MHz)} Master {/dma_weights_im_out/M_AXI_S2MM} Slave {/processing_system7_0/S_AXI_ACP} ddr_seg {Auto} intc_ip {/axi_mem_intercon} master_apm {0}}  [get_bd_intf_pins dma_weights_im_out/M_AXI_S2MM]
+endgroup
+
+# HF Reset
+set IP_NAME "reset_hf"
+create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 $IP_NAME
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK2] [get_bd_pins $IP_NAME/slowest_sync_clk]
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins $IP_NAME/ext_reset_in]
+connect_bd_net [get_bd_pins $IP_NAME/peripheral_aresetn] [get_bd_pins axis_accelerator_0/hf_aresetn]
+
+# LF Reset
+# NOTE: axi_mem_intercon gets created after axi lite
+connect_bd_net [get_bd_pins axis_accelerator_0/aresetn] [get_bd_pins axi_mem_intercon/ARESETN]
+
+save_bd_design
+validate_bd_design
+
+generate_target all [get_files  $PROJ_FOLDER/$PROJ_NAME.srcs/sources_1/bd/sys/sys.bd]
+make_wrapper -files [get_files $PROJ_FOLDER/$PROJ_NAME.srcs/sources_1/bd/sys/sys.bd] -top
+add_files -norecurse $PROJ_FOLDER/$PROJ_NAME.gen/sources_1/bd/sys/hdl/sys_wrapper.v
+set_property top sys_wrapper [current_fileset]</code></pre><figcaption>TCL file that builds the project.</figcaption></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">13. C++ Firmware</h2></div><p>I then write the C++ code to be run on the ARM processor, which instructs the DMA to pull data from memory and push it back. When multiple DMAs are involved, this is fairly tricky. Right after starting a DMA operation, the parameters for the next DMA iteration must be calculated in advance, to prevent stalling the DMA.</p><h3 id="131-oop-wrappers-for-dma-drivers">13.1. OOP Wrappers for DMA Drivers</h3><p>I find the C code provided by Xilinx a bit counterintuitive. Therefore, I have written an OOP wrapper for the Xilinx DMA, which is open-sourced here:</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://github.com/abarajithan11/zynq-oop-drivers"><div class="kg-bookmark-content"><div class="kg-bookmark-title">GitHub - abarajithan11/zynq-oop-drivers: Object oriented drivers for Xilinx IPs (DMA...) for ZYNQ PSoC</div><div class="kg-bookmark-description">Object oriented drivers for Xilinx IPs (DMA...) for ZYNQ PSoC - GitHub - abarajithan11/zynq-oop-drivers: Object oriented drivers for Xilinx IPs (DMA...) for ZYNQ PSoC</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://github.com/fluidicon.png" alt=""><span class="kg-bookmark-author">GitHub</span><span class="kg-bookmark-publisher">abarajithan11</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://opengraph.githubassets.com/68b1de5a4adce9b41978d0009c3d32b23fa6e0edbafc33a9c62cd23da784f29a/abarajithan11/zynq-oop-drivers" alt=""></div></a></figure><h3 id="132-oop-architecture-for-dnn-models-config-bits-in-c">13.2. OOP Architecture for DNN models &amp; config bits in C++</h3><p>The firmware needs to be flexible, such that I can create any DNN by chaining layer objects. For this, I write the layer class, with necessary features like extracting configuration bits and appending to data. This is basically like another golden model, but for the purposes of running in the ARM processor.</p><pre><code class="language-cpp">class Layer
+{
+public:
+	 int idx, H_IN, W_IN, C_IN, C_OUT, KH_IN, KW_IN;
+	 bool IS_NOT_MAX, IS_MAX, IS_LRELU;
+
+	 Layer * PREV_P = nullptr;
+	 Layer * NEXT_P = nullptr;
+
+	 int BLOCKS, BLOCKS_PER_ARR;
+	 u8 MAX_FACTOR, SUB_CORES, EFF_CORES, ITR, COUT_FPGA, COUT_VALID, COUT_INVALID;
+	 u8 KW_PAD;
+
+	 int OUT_W_IN, OUT_BLOCKS, OUT_MAX_FACTOR, OUT_BLOCKS_PER_ARR, OUT_KH;
+
+	 int DATA_BEATS_PIXELS;
+	 int BEATS_LRELU = 0;
+	 int WORDS_PIXELS_PER_ARR;
+	 int WORDS_WEIGHTS_PER_ITR, WORDS_WEIGHTS;
+
+	 int WORDS_OUT_PER_TRANSFER, TRANSFERS_OUT_PER_ITR;
+	 int WORDS_OUT_PER_TRANSFER_ARR [3];
+
+	 chunk_s * input_chunk_p  = nullptr;
+	 chunk_s * output_chunk_p = nullptr;
+	 bool done_write = false;
+
+	 Layer ( int idx,
+			 int H_IN, int W_IN, int C_IN, int C_OUT,
+			 int KH_IN, int KW_IN,
+			 bool IS_NOT_MAX, bool IS_MAX, bool IS_LRELU):
+					 idx    (idx),
+					 H_IN   (H_IN),
+					 W_IN   (W_IN),
+					 C_IN   (C_IN),
+					 C_OUT  (C_OUT),
+					 KH_IN   (KH_IN),
+					 KW_IN   (KW_IN),
+					 IS_NOT_MAX(IS_NOT_MAX),
+					 IS_MAX    (IS_MAX),
+					 IS_LRELU  (IS_LRELU)
+	 {
+		 BLOCKS     = H_IN / UNITS;
+		 MAX_FACTOR = IS_MAX ? 2 : 1;
+		 BLOCKS_PER_ARR = BLOCKS / MAX_FACTOR;
+
+		 KW_PAD = KW_IN - 2*IS_MAX;
+
+		 SUB_CORES = MEMBERS / KW_IN;
+		 EFF_CORES = COPIES * GROUPS * SUB_CORES / MAX_FACTOR;
+		 ITR       = (int)(std::ceil((float)C_OUT / (float)EFF_CORES));
+		 COUT_FPGA = EFF_CORES * ITR;
+
+		 COUT_VALID = C_OUT % EFF_CORES;
+		 COUT_VALID = (COUT_VALID == 0) ? EFF_CORES : COUT_VALID;
+
+		 COUT_INVALID = EFF_CORES - COUT_VALID;
+
+		 /* LRELU BEATS */
+
+		 BEATS_LRELU += 1; //D
+		 BEATS_LRELU += ceil(2.0/KW_IN); // A
+
+		 for (int clr_i=0;  clr_i &lt; KW_IN/2+1; clr_i ++){
+			 int clr = clr_i*2 +1;
+			 for (int mtb=0;  mtb &lt; clr; mtb ++){
+				 int bram_width = MEMBERS/clr;
+				 int bram_size  = 2*SUB_CORES;
+				 int BEATS_ij = ceil((float)bram_size/bram_width);
+
+				 BEATS_LRELU += BEATS_ij;
+			 }
+		 }
+
+		 DATA_BEATS_PIXELS = BLOCKS_PER_ARR * W_IN * C_IN;
+
+		 WORDS_PIXELS_PER_ARR  =      DATA_BEATS_PIXELS  * UNITS_EDGES;
+		 WORDS_WEIGHTS_PER_ITR = (S_WEIGHTS_WIDTH/8) + (BEATS_LRELU + C_IN*KH_IN) * COPIES * GROUPS * MEMBERS;
+		 WORDS_WEIGHTS         = ITR * WORDS_WEIGHTS_PER_ITR;
+
+		 if (IS_NOT_MAX &amp;&amp; IS_MAX)
+		 {
+			 WORDS_OUT_PER_TRANSFER_ARR[0] = SUB_CORES * COPIES * GROUPS * UNITS_EDGES;
+			 WORDS_OUT_PER_TRANSFER_ARR[1] =             COPIES * GROUPS * UNITS_EDGES;
+			 WORDS_OUT_PER_TRANSFER_ARR[2] =             COPIES * GROUPS * UNITS_EDGES / MAX_FACTOR;
+
+			 TRANSFERS_OUT_PER_ITR = BLOCKS/MAX_FACTOR * W_IN/MAX_FACTOR * (1 + 2 * SUB_CORES);
+		 }
+		 else
+		 {
+			 WORDS_OUT_PER_TRANSFER = SUB_CORES * COPIES * GROUPS * UNITS_EDGES / MAX_FACTOR;
+			 TRANSFERS_OUT_PER_ITR  = BLOCKS/MAX_FACTOR * W_IN/MAX_FACTOR;
+		 }
+	 };
+
+	 void set_config()
+	 {
+		 input_chunk_p-&gt;data_p[0] = (s8)(IS_NOT_MAX);
+		 input_chunk_p-&gt;data_p[1] = (s8)(IS_MAX);
+		 input_chunk_p-&gt;data_p[2] = (s8)(IS_LRELU);
+		 input_chunk_p-&gt;data_p[3] = (s8)(KH_IN/2);
+
+#ifdef DEBUG
+		 for (int i=4; i&lt;UNITS_EDGES; i++) input_chunk_p-&gt;data_p[i] = 0;
+#endif
+		 Xil_DCacheFlushRange((UINTPTR)input_chunk_p-&gt;data_p, UNITS_EDGES);
+	 };
+
+	 void set_out_params()
+	 {
+		 /* Next layer can be null (if this is last) or can have multiple next layers.
+		  * We are interested in how to arrange the output values of this, to match the next
+		  */
+
+		 OUT_W_IN   = W_IN / MAX_FACTOR;
+		 OUT_BLOCKS = (H_IN / MAX_FACTOR) / UNITS;
+
+		 OUT_MAX_FACTOR     = (NEXT_P == nullptr) ? 1 : NEXT_P-&gt;MAX_FACTOR;
+		 OUT_BLOCKS_PER_ARR = OUT_BLOCKS/OUT_MAX_FACTOR;
+
+		 OUT_KH = (NEXT_P == nullptr) ? KH_IN : NEXT_P-&gt;KH_IN;
+	 }
+
+	 inline s8* get_input_pixels_base_p()
+	 {
+		 return (s8*)(input_chunk_p-&gt;data_p) + UNITS_EDGES;
+	 }
+	 inline s8* get_output_pixels_base_p()
+	 {
+		 return (s8*)(output_chunk_p-&gt;data_p) + UNITS_EDGES;
+	 }
+};</code></pre><pre><code class="language-cpp">auto build_yolo_mod()
+{
+	std::array&lt;Layer,21&gt; layers = {
+		Layer(1,	H_RGB   ,W_RGB  ,    3,  32,   3,   3,false, true, true),
+		Layer(2,	H_RGB/2 ,W_RGB/2,   32,  64,   3,   3,false, true, true),
+		Layer(3,	H_RGB/4 ,W_RGB/4,   64, 128,   3,   3,true, false, true),
+		Layer(4,	H_RGB/4 ,W_RGB/4,  128,  64,   1,   1,true, false, true),
+		Layer(5,	H_RGB/4 ,W_RGB/4,   64, 128,   3,   3,false, true, true),
+		Layer(6,	H_RGB/8 ,W_RGB/8,  128, 256,   3,   3,true, false, true),
+		Layer(7,	H_RGB/8 ,W_RGB/8,  256, 128,   1,   1,true, false, true),
+		Layer(8,	H_RGB/8 ,W_RGB/8,  128, 256,   3,   3,false, true, true),
+		Layer(9,	H_RGB/16,W_RGB/16, 256, 512,   3,   3,true, false, true),
+		Layer(10,	H_RGB/16,W_RGB/16, 512, 256,   1,   1,true, false, true),
+		Layer(11,	H_RGB/16,W_RGB/16, 256, 512,   3,   3,true, false, true),
+		Layer(12,	H_RGB/16,W_RGB/16, 512, 256,   1,   1,true, false, true),
+		Layer(13,	H_RGB/16,W_RGB/16, 256, 512,   3,   3,false, true, true),
+		Layer(14,	H_RGB/32,W_RGB/32, 512,1024,   3,   3,true, false, true),
+		Layer(15,	H_RGB/32,W_RGB/32,1024, 512,   1,   1,true, false, true),
+		Layer(16,	H_RGB/32,W_RGB/32, 512,1024,   3,   3,true, false, true),
+		Layer(17,	H_RGB/32,W_RGB/32,  64, 128,1024, 512,true, false, true),
+		Layer(18,	H_RGB/32,W_RGB/32,  64, 128, 512,1024,true, false, true),
+		Layer(19,	H_RGB/32,W_RGB/32,1024,1024,   3,   3,true, false, true),
+		Layer(20,	H_RGB/32,W_RGB/32,1024,1024,   3,   3,true, false, true),
+		Layer(21,	H_RGB/32,W_RGB/32,1024,  45,   1,   1,true, false, false)
+	};
+
+	for (int i=0; i &lt; N_LAYERS; i++)
+	{
+		if (i!=0         ) layers[i].PREV_P = &amp;layers[i-1];
+		if (i!=N_LAYERS-1) layers[i].NEXT_P = &amp;layers[i+1];
+		layers[i].set_out_params();
+	}
+	return layers;
+}</code></pre><h3 id="133-c-code-to-control-multiple-dmas-effectively">13.3. C++ Code to control multiple DMAs effectively</h3><pre><code class="language-cpp">void restart_output()
+{
+	static int i_w=0, i_w_flipped=0, i_blocks=0, i_bpa=0, i_arr=0, i_cout=0, i_itr=0, i_layers=i_layers_start;
+	static volatile s8 * write_p = layers[i_layers].get_output_pixels_base_p();
+	static bool is_new_layer=true;
+
+    static volatile s8 * write_p_old = 0;
+	Xil_DCacheFlushRange((UINTPTR)write_p_old, UNITS_EDGES);
+
+	if ((i_itr == 0 &amp;&amp; i_blocks == 31) || (i_itr == 1 &amp;&amp; i_blocks == 0)){
+		for (int i=0; i&lt;UNITS_EDGES; i++){
+			PRINT(" %d,", write_p_old[i]);
+		}
+		PRINT("] \r\n");
+		PRINT("(%d,%d,%d,%d-%d,:) -- %p [", i_arr, i_bpa, i_w_flipped,i_itr,i_cout, write_p);
+	}
+	write_p_old = write_p;
+
+	// start transfer
+	dma_weights_im_out.s2mm_start(	(UINTPTR)write_p,
+									layers[i_layers].WORDS_OUT_PER_TRANSFER);
+
+	pad_prev(i_w_flipped,i_blocks,i_bpa,i_arr,i_cout,i_layers);
+
+	// set config
+	if (is_new_layer &amp;&amp; i_layers != N_LAYERS-1)
+	{
+		layers[i_layers].NEXT_P-&gt;set_config();
+		layers[i_layers].NEXT_P-&gt;done_write = false;
+		is_new_layer = false;
+	}
+
+	// PREPARE NEXT INDICES
+	// blocks = 31 (a=1,bpa=15), w_f = 191 (w = 190), itr = 0
+	if (i_w &lt; layers[i_layers].OUT_W_IN-1)
+	{
+		i_w += 1;
+		// Flip last KW-1 columns : flipped = 2w-(kw+iw)
+		// For max: kw &lt;- kw-2
+		if (i_w &gt; layers[i_layers].OUT_W_IN - layers[i_layers].KW_PAD)
+			i_w_flipped = 2 * layers[i_layers].OUT_W_IN - (i_w + layers[i_layers].KW_PAD);
+		else
+			i_w_flipped = i_w;
+	}
+	else
+	{
+		i_w = 0;
+		i_w_flipped = 0;
+
+		 PRINT(" i_blocks: %d, write_p: %p \r\n", i_blocks, write_p);
+
+		if (i_blocks &lt; layers[i_layers].OUT_BLOCKS-1)
+		{
+			i_blocks  += 1;
+			i_arr      = i_blocks % layers[i_layers].OUT_MAX_FACTOR;
+			i_bpa      = i_blocks / layers[i_layers].OUT_MAX_FACTOR;
+		}
+		else
+		{
+			i_blocks   = 0;
+			i_arr      = 0;
+			i_bpa      = 0;
+
+			 PRINT(" i_itr: %d \r\n", i_itr);
+
+			if (i_itr &gt;= layers[i_layers].ITR-1)
+			{
+				is_new_layer = true;
+				i_itr = 0;
+				i_cout= 0;
+
+				if (i_layers &lt; N_LAYERS-1)
+					i_layers += 1;
+				else
+				{
+					i_layers = 0;
+					done = true;
+					PRINT("All Layers done \r\n");
+				}
+
+				/* Chaining*/
+				if (i_layers == N_LAYERS-1)
+				{
+					layers[0].input_chunk_p = &amp;temp_in_chunk;
+					layers[i_layers].output_chunk_p = &amp;temp_out_chunk;
+				}
+				else
+				{
+					layers[i_layers].output_chunk_p = get_chunk();
+					layers[i_layers].NEXT_P-&gt;input_chunk_p = layers[i_layers].output_chunk_p;
+				}
+				PRINT("Writing to new layer: chained_chunks (idx:%d -&gt; idx:%d), data_p= %p \r\n",
+						    layers[i_layers].idx, layers[i_layers].NEXT_P-&gt;idx,
+							layers[i_layers].output_chunk_p-&gt;data_p);
+
+				layers[i_layers].print_output_params();
+			}
+			else if (i_itr == 0)
+			{
+				i_itr += 1;
+				i_cout = layers[i_layers].COUT_VALID;
+			}
+			else
+			{
+				i_itr  += 1;
+				i_cout += layers[i_layers].EFF_CORES;
+			}
+		}
+	}
+	// blocks = 31 (a=1,bpa=15), w_f = 191, itr = 0
+	write_p = unravel_image_abwcu(layers[i_layers].get_output_pixels_base_p(),
+								  i_arr,i_bpa,i_w_flipped,i_cout,0, i_layers);
+}</code></pre><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">14. Hardware (FPGA) Verification</h2></div><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2022/01/image-7.png" class="kg-image" alt loading="lazy" width="922" height="674" srcset="../content/images/size/w600/2022/01/image-7.png 600w, ../content/images/2022/01/image-7.png 922w" sizes="(min-width: 720px) 720px"><figcaption>Hardware testing.&nbsp;</figcaption></figure><p></p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" style="" data-kg-background-image=""><h2 class="kg-header-card-header">15. Repeat 11-14</h2></div><p>I spent weeks or months repeating 11-14, to finally get the hardware outputs to match the golden model, and hence the original DNNs.  Once I spent a month figuring out a bug where the system worked perfectly in randomized simulations but had wrong values for just 6 bytes out of 4 million bytes. Finally I found its a bug in Vivado's compiler.</p>
+                <section class="m-tags in-post">
+                  <h3 class="m-submenu-title">Tags</h3>
+                  <ul>
+                      <li>
+                        <a href="../tag/tech-projects/index.html" title="Technical Projects">Technical Projects</a>
+                      </li>
+                  </ul>
+                </section>
+            </div>
+          </div>
+        </div>
+
+          <section class="m-comments">
+            <div class="l-wrapper in-comments">
+              <div class="fb-comments" data-href="https://aba-blog.xyz/dnn-to-chip-4/" data-width="800" data-numposts="10" data-colorscheme="dark" ></div>
+            </div>
+          </section>
+
+
+          <section class="m-recommended">
+            <div class="l-wrapper in-recommended">
+              <h3 class="m-section-title in-recommended">Recommended for you</h3>
+              <div class="m-recommended-articles">
+                <div class="m-recommended-slider glide js-recommended-slider">
+                  <div class="glide__track" data-glide-el="track">
+                    <div class="glide__slides">
+                      
+    <div class="m-recommended-slider__item glide__slide">
+  <article class="m-article-card  post tag-tech-projects">
+    <div class="m-article-card__picture">
+      <a href="../dnn-to-chip-3/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/Data-Flow-of-Inference-Engine-2-1.png" loading="lazy" alt="">
+      <a href="../author/aba/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan G" data-tippy-content="Posted by Abarajithan G ">
+          <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
+      </a>
+    </div>
+      <div class="m-article-card__info">
+        <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
+      <a href="../dnn-to-chip-3/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [3/4: Digital Design]">
+        <div>
+          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [3/4: Digital Design]">
+            DNN → Chip Design [3/4: Digital Design]
+          </h2>
+        </div>
+        <div class="m-article-card__timestamp">
+          <span>an hour ago</span>
+          <span>&bull;</span>
+          <span>11 min read</span>
+        </div>
+      </a>
+    </div>
+  </article>
+    </div>
+    <div class="m-recommended-slider__item glide__slide">
+  <article class="m-article-card  post tag-tech-projects">
+    <div class="m-article-card__picture">
+      <a href="../dnn-to-chip-2/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" loading="lazy" alt="">
+      <a href="../author/aba/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan G" data-tippy-content="Posted by Abarajithan G ">
+          <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
+      </a>
+    </div>
+      <div class="m-article-card__info">
+        <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
+      <a href="../dnn-to-chip-2/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [2/4: Golden Models]">
+        <div>
+          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [2/4: Golden Models]">
+            DNN → Chip Design [2/4: Golden Models]
+          </h2>
+        </div>
+        <div class="m-article-card__timestamp">
+          <span>an hour ago</span>
+          <span>&bull;</span>
+          <span>7 min read</span>
+        </div>
+      </a>
+    </div>
+  </article>
+    </div>
+    <div class="m-recommended-slider__item glide__slide">
+  <article class="m-article-card  post tag-tech-projects">
+    <div class="m-article-card__picture">
+      <a href="../dnn-to-chip-1/index.html" class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+        <img class="m-article-card__picture-background" src="../content/images/size/w600/2022/01/langs-2.png" loading="lazy" alt="">
+      <a href="../author/aba/index.html" class="m-article-card__author js-tooltip" aria-label="Abarajithan G" data-tippy-content="Posted by Abarajithan G ">
+          <div style="background-image: url(../content/images/size/w100/2021/11/im_large_vignette.jpg);"></div>
+      </a>
+    </div>
+      <div class="m-article-card__info">
+        <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
+      <a href="../dnn-to-chip-1/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
+        <div>
+          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
+            DNN → Chip Design [1/4: Intro &amp; Directory Structure]
+          </h2>
+        </div>
+        <div class="m-article-card__timestamp">
+          <span>19 hours ago</span>
+          <span>&bull;</span>
+          <span>2 min read</span>
+        </div>
+      </a>
+    </div>
+  </article>
+    </div>
+                    </div>
+                  </div>
+                  <div data-glide-el="controls" class="glide__arrows js-controls">
+                    <button data-glide-dir="<" class="m-icon-button filled in-recommended-articles glide-prev" aria-label="Previous">
+                      <span class="icon-arrow-left" aria-hidden="true"></span>
+                    </button>
+                    <button data-glide-dir=">" class="m-icon-button filled in-recommended-articles glide-next" aria-label="Next">
+                      <span class="icon-arrow-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    </div>
+  </article>
+</main>
+
+
+
+    
+<div class="m-search js-search" role="dialog" aria-modal="true" aria-label="Search">
+  <button class="m-icon-button outlined as-close-search js-close-search" aria-label="Close search">
+    <span class="icon-close" aria-hidden="true"></span>
+  </button>
+  <div class="m-search__content">
+    <form class="m-search__form">
+      <div class="pos-relative">
+        <span class="icon-search m-search-icon" aria-hidden="true"></span>
+        <label for="search-input" class="sr-only">
+          Type to search
+        </label>
+        <input id="search-input" type="text" class="m-input in-search js-input-search" placeholder="Type to search">
+      </div>
+    </form>
+    <div class="js-search-results hide"></div>
+    <p class="m-not-found align-center hide js-no-results">
+      No results for your search, please try with something else.
+    </p>
+  </div>
+</div>
+
+    
+<footer class="m-footer">
+  <div class="m-footer__content">
+    <nav class="m-footer-social">
+        <a href="https://www.facebook.com/abarajithan11" target="_blank" rel="noopener" aria-label="Facebook">
+          <span class="icon-facebook" aria-hidden="true"></span>
+        </a>
+      <a href="https://www.linkedin.com/in/abarajithan11" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <span class="icon-linkedin" aria-hidden="true"></span>
+      </a>
+      <a href="https://github.com/abarajithan11" target="_blank" rel="noopener" aria-label="Github">
+        <span class="icon-github" aria-hidden="true"></span>
+      </a>
+      <a href="https://aba-blog.xyz/rss" aria-label="RSS">
+        <span class="icon-rss" aria-hidden="true"></span>
+      </a>
+    </nav>
+    <p class="m-footer-copyright">
+      <span>Aba&#x27;s Blog &copy; 2022</span>
+      <span>&nbsp; &bull; &nbsp;</span>
+      <span>Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a></span>
+    </p>
+    <p class="m-footer-copyright jslicense">
+      <a href="../assets/html/javascript.html%3Fv=6e0704866d.html" rel="jslicense">JavaScript license information</a>
+    </p>
+  </div>
+</footer>
+
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CPromise%2CArray.prototype.includes%2CString.prototype.endsWith%2CString.prototype.startsWith%2CObject.assign%2CNodeList.prototype.forEach"></script>
+    <script defer src="../assets/js/manifest.js%3Fv=6e0704866d"></script>
+    <script defer src="../assets/js/vendor/content-api.min.js%3Fv=6e0704866d"></script>
+    <script defer src="../assets/js/vendor.js%3Fv=6e0704866d"></script>
+    <script defer src="../assets/js/app.js%3Fv=6e0704866d"></script>
+
+      <script defer src="../assets/js/post.js%3Fv=6e0704866d"></script>
+
+
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0" nonce="C5ma3g6v"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre[class*=language-]').forEach(function (node) {
+            node.classList.add('line-numbers');
+        });
+        Prism.highlightAll();
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-matlab.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-tcl.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-verilog.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-latex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-verilog.min.js"></script>
+  </body>
+</html>
