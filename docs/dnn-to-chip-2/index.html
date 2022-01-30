@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>DNN → Chip Design [2/4: Golden Models]</title>
+    <title>Neural Chip Design [2/4: Golden Model]</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -77,6 +77,7 @@
 
     
 
+    <meta name="description" content="I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc." />
     <link rel="icon" href="../favicon.png" type="image/png" />
     <link rel="canonical" href="index.html" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
@@ -84,19 +85,19 @@
     
     <meta property="og:site_name" content="Aba&#x27;s Blog" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="DNN → Chip Design [2/4: Golden Models]" />
-    <meta property="og:description" content="This is a series of articles [intro] outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken [arXiv paper].Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level" />
+    <meta property="og:title" content="Neural Chip Design [2/4: Golden Model]" />
+    <meta property="og:description" content="I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc." />
     <meta property="og:url" content="https://aba-blog.xyz/dnn-to-chip-2/" />
     <meta property="og:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" />
     <meta property="article:published_time" content="2022-01-29T10:30:50.000Z" />
-    <meta property="article:modified_time" content="2022-01-29T18:43:05.000Z" />
+    <meta property="article:modified_time" content="2022-01-30T06:59:56.000Z" />
     <meta property="article:tag" content="Technical Projects" />
     
     <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
     <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DNN → Chip Design [2/4: Golden Models]" />
-    <meta name="twitter:description" content="This is a series of articles [intro] outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken [arXiv paper].Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level" />
+    <meta name="twitter:title" content="Neural Chip Design [2/4: Golden Model]" />
+    <meta name="twitter:description" content="I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc." />
     <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-2/" />
     <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -136,10 +137,10 @@
             "https://www.facebook.com/abarajithan11"
         ]
     },
-    "headline": "DNN → Chip Design [2/4: Golden Models]",
+    "headline": "Neural Chip Design [2/4: Golden Model]",
     "url": "https://aba-blog.xyz/dnn-to-chip-2/",
     "datePublished": "2022-01-29T10:30:50.000Z",
-    "dateModified": "2022-01-29T18:43:05.000Z",
+    "dateModified": "2022-01-30T06:59:56.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://aba-blog.xyz/content/images/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg",
@@ -147,7 +148,7 @@
         "height": 1366
     },
     "keywords": "Technical Projects",
-    "description": "\n\n&gt; This is a series of articles [intro]\n[https://aba-blog.xyz/dnn-to-chip-1/index.html] outlining my workflow of 15\nsteps, which I developed over the past few years through building my own DNN\naccelerator: Kraken [arXiv paper] [https://arxiv.org/abs/2112.02793].\nGolden Models are essential to hardware (FPGA/ASIC) development. They model the\nexpected behavior of a chip using a high-level language, such that they can be\nbuilt relatively fast, with almost zero chance of error. The input and expect",
+    "description": "I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc.",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://aba-blog.xyz/"
@@ -238,10 +239,9 @@
 </script>
 
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coldark-dark.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.css" />
 <style>
     pre[class*=language-] {
         margin: 0.5em 0;
@@ -335,10 +335,10 @@
                                     <div class="m-recent-article__picture ">
                                         <img src="../content/images/size/w300/2022/01/sys-4.jpg" loading="lazy" alt="">
                                     </div>
-                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [4/4: System-on-Chip]">
-                                      DNN → Chip Design [4/4: System-on-Chip]
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [4/4: SoC Integration &amp; Firmware]">
+                                      Neural Chip Design [4/4: SoC Integration &amp; Firmware]
                                     </h3>
-                                    <span class="m-recent-article__date">8 hours ago</span>
+                                    <span class="m-recent-article__date">21 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
@@ -346,10 +346,10 @@
                                     <div class="m-recent-article__picture ">
                                         <img src="../content/images/size/w300/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" loading="lazy" alt="">
                                     </div>
-                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [3/4: Digital Design]">
-                                      DNN → Chip Design [3/4: Digital Design]
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [3/4: Digital Design &amp; Verification]">
+                                      Neural Chip Design [3/4: Digital Design &amp; Verification]
                                     </h3>
-                                    <span class="m-recent-article__date">8 hours ago</span>
+                                    <span class="m-recent-article__date">21 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
@@ -357,10 +357,10 @@
                                     <div class="m-recent-article__picture ">
                                         <img src="../content/images/size/w300/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" loading="lazy" alt="">
                                     </div>
-                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [2/4: Golden Models]">
-                                      DNN → Chip Design [2/4: Golden Models]
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [2/4: Golden Model]">
+                                      Neural Chip Design [2/4: Golden Model]
                                     </h3>
-                                    <span class="m-recent-article__date">8 hours ago</span>
+                                    <span class="m-recent-article__date">21 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
@@ -368,10 +368,10 @@
                                     <div class="m-recent-article__picture ">
                                         <img src="../content/images/size/w300/2022/01/cov-14.jpg" loading="lazy" alt="">
                                     </div>
-                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
-                                      DNN → Chip Design [1/4: Intro &amp; Directory Structure]
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [1/4: Overview]">
+                                      Neural Chip Design [1/4: Overview]
                                     </h3>
-                                    <span class="m-recent-article__date">a day ago</span>
+                                    <span class="m-recent-article__date">2 days ago</span>
                                   </a>
                                 </div>
                               </div>
@@ -455,7 +455,7 @@
           <div
             class="l-post-content js-progress-content">
             <header class="m-heading">
-              <h1 class="m-heading__title in-post">DNN → Chip Design [2/4: Golden Models]</h1>
+              <h1 class="m-heading__title in-post">Neural Chip Design [2/4: Golden Model]</h1>
               <div class="m-heading__meta">
                   <a href="../tag/tech-projects/index.html" class="m-heading__meta__tag">Technical Projects</a>
                   <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
@@ -469,7 +469,7 @@
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Facebook">
                     <span class="icon-facebook" aria-hidden="true"></span>
                   </a>
-                  <a href="https://twitter.com/intent/tweet?text=DNN%20%E2%86%92%20Chip%20Design%20%5B2%2F4%3A%20Golden%20Models%5D&url=https://aba-blog.xyz/dnn-to-chip-2/"
+                  <a href="https://twitter.com/intent/tweet?text=Neural%20Chip%20Design%20%5B2%2F4%3A%20Golden%20Model%5D&url=https://aba-blog.xyz/dnn-to-chip-2/"
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">
                     <span class="icon-twitter" aria-hidden="true"></span>
                   </a>
@@ -477,7 +477,7 @@
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="LinkedIn">
                     <span class="icon-linkedin" aria-hidden="true"></span>
                   </a>
-                  <a href="https://reddit.com/submit?url=https://aba-blog.xyz/dnn-to-chip-2/&title=DNN%20%E2%86%92%20Chip%20Design%20%5B2%2F4%3A%20Golden%20Models%5D"
+                  <a href="https://reddit.com/submit?url=https://aba-blog.xyz/dnn-to-chip-2/&title=Neural%20Chip%20Design%20%5B2%2F4%3A%20Golden%20Model%5D"
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Reddit">
                     <span class="icon-reddit" aria-hidden="true"></span>
                   </a>
@@ -489,7 +489,7 @@
                   </button>
                 </div>
               </div>
-              <p></p><blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[intro]</a> outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level language, such that they can be built relatively fast, with almost zero chance of error. The input and expected output test vectors for every RTL module are generated using them, and the simulation output from the testbench is compared against their 'gold standard.'</p><p>I first obtain pretrained DNNs from PyTorch / Tensorflow model zoo, analyze them, then load them into the custom DNN inference framework I have built with NumPy stack to ensure I fully understand each operation. I then generate test vectors from those golden models.</p><h2 id="steps">Steps:</h2><!--kg-card-begin: markdown--><ol>
+              <p></p><blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[overview]</a> outlining the  workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level language, such that they can be built relatively fast, with almost zero chance of error. The input and expected output test vectors for every RTL module are generated using them, and the simulation output from the testbench is compared against their 'gold standard.'</p><p>I first obtain pretrained DNNs from PyTorch / Tensorflow model zoo, analyze them, then load them into the custom DNN inference framework I have built with NumPy stack to ensure I fully understand each operation. I then generate test vectors from those golden models.</p><h2 id="steps">Steps:</h2><!--kg-card-begin: markdown--><ol>
 <li><strong>PyTorch/TensorFlow</strong>: Explore DNN models, quantize &amp; extract weights</li>
 <li><strong>Golden Model in Python (NumPy stack)</strong>: Custom OOP framework, process the weights, convert to custom datatypes</li>
 </ol>
@@ -802,14 +802,14 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
     </div>
       <div class="m-article-card__info">
         <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
-      <a href="../dnn-to-chip-4/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [4/4: System-on-Chip]">
+      <a href="../dnn-to-chip-4/index.html" class="m-article-card__info-link" aria-label="Neural Chip Design [4/4: SoC Integration &amp; Firmware]">
         <div>
-          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [4/4: System-on-Chip]">
-            DNN → Chip Design [4/4: System-on-Chip]
+          <h2 class="m-article-card__title js-article-card-title " title="Neural Chip Design [4/4: SoC Integration &amp; Firmware]">
+            Neural Chip Design [4/4: SoC Integration &amp; Firmware]
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>8 hours ago</span>
+          <span>21 hours ago</span>
           <span>&bull;</span>
           <span>10 min read</span>
         </div>
@@ -828,14 +828,14 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
     </div>
       <div class="m-article-card__info">
         <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
-      <a href="../dnn-to-chip-3/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [3/4: Digital Design]">
+      <a href="../dnn-to-chip-3/index.html" class="m-article-card__info-link" aria-label="Neural Chip Design [3/4: Digital Design &amp; Verification]">
         <div>
-          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [3/4: Digital Design]">
-            DNN → Chip Design [3/4: Digital Design]
+          <h2 class="m-article-card__title js-article-card-title " title="Neural Chip Design [3/4: Digital Design &amp; Verification]">
+            Neural Chip Design [3/4: Digital Design &amp; Verification]
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>8 hours ago</span>
+          <span>21 hours ago</span>
           <span>&bull;</span>
           <span>12 min read</span>
         </div>
@@ -857,14 +857,14 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
     </div>
       <div class="m-article-card__info">
         <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
-      <a href="../dnn-to-chip-1/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
+      <a href="../dnn-to-chip-1/index.html" class="m-article-card__info-link" aria-label="Neural Chip Design [1/4: Overview]">
         <div>
-          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
-            DNN → Chip Design [1/4: Intro &amp; Directory Structure]
+          <h2 class="m-article-card__title js-article-card-title " title="Neural Chip Design [1/4: Overview]">
+            Neural Chip Design [1/4: Overview]
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>a day ago</span>
+          <span>2 days ago</span>
           <span>&bull;</span>
           <span>5 min read</span>
         </div>

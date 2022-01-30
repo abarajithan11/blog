@@ -4,27 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <title>DNN → Chip Design [2/4: Golden Models]</title>
+    <title>Neural Chip Design [2/4: Golden Model]</title>
 
+    <meta name="description" content="I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc." />
     <link rel="icon" href="../../favicon.png" type="image/png" />
     <link rel="canonical" href="../index.html" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     
     <meta property="og:site_name" content="Aba&#x27;s Blog" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="DNN → Chip Design [2/4: Golden Models]" />
-    <meta property="og:description" content="This is a series of articles [intro] outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken [arXiv paper].Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level" />
+    <meta property="og:title" content="Neural Chip Design [2/4: Golden Model]" />
+    <meta property="og:description" content="I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc." />
     <meta property="og:url" content="https://aba-blog.xyz/dnn-to-chip-2/" />
     <meta property="og:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" />
     <meta property="article:published_time" content="2022-01-29T10:30:50.000Z" />
-    <meta property="article:modified_time" content="2022-01-29T18:43:05.000Z" />
+    <meta property="article:modified_time" content="2022-01-30T06:59:56.000Z" />
     <meta property="article:tag" content="Technical Projects" />
     
     <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
     <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DNN → Chip Design [2/4: Golden Models]" />
-    <meta name="twitter:description" content="This is a series of articles [intro] outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken [arXiv paper].Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level" />
+    <meta name="twitter:title" content="Neural Chip Design [2/4: Golden Model]" />
+    <meta name="twitter:description" content="I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc." />
     <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-2/" />
     <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -64,10 +65,10 @@
             "https://www.facebook.com/abarajithan11"
         ]
     },
-    "headline": "DNN → Chip Design [2/4: Golden Models]",
+    "headline": "Neural Chip Design [2/4: Golden Model]",
     "url": "https://aba-blog.xyz/dnn-to-chip-2/",
     "datePublished": "2022-01-29T10:30:50.000Z",
-    "dateModified": "2022-01-29T18:43:05.000Z",
+    "dateModified": "2022-01-30T06:59:56.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://aba-blog.xyz/content/images/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg",
@@ -75,7 +76,7 @@
         "height": 1366
     },
     "keywords": "Technical Projects",
-    "description": "\n\n&gt; This is a series of articles [intro]\n[https://aba-blog.xyz/dnn-to-chip-1/index.html] outlining my workflow of 15\nsteps, which I developed over the past few years through building my own DNN\naccelerator: Kraken [arXiv paper] [https://arxiv.org/abs/2112.02793].\nGolden Models are essential to hardware (FPGA/ASIC) development. They model the\nexpected behavior of a chip using a high-level language, such that they can be\nbuilt relatively fast, with almost zero chance of error. The input and expect",
+    "description": "I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc.",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://aba-blog.xyz/"
@@ -1070,7 +1071,7 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">DNN → Chip Design [2/4: Golden Models]</h1>
+                <h1 class="post-title">Neural Chip Design [2/4: Golden Model]</h1>
                 <section class="post-meta">
                     Abarajithan G -
                     <time class="post-date" datetime="2022-01-29">29 Jan 2022</time>
@@ -1081,7 +1082,7 @@
             </figure>
             <section class="post-content">
 
-                <p></p><blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[intro]</a> outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level language, such that they can be built relatively fast, with almost zero chance of error. The input and expected output test vectors for every RTL module are generated using them, and the simulation output from the testbench is compared against their 'gold standard.'</p><p>I first obtain pretrained DNNs from PyTorch / Tensorflow model zoo, analyze them, then load them into the custom DNN inference framework I have built with NumPy stack to ensure I fully understand each operation. I then generate test vectors from those golden models.</p><h2 id="steps">Steps:</h2><ol>
+                <p></p><blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[overview]</a> outlining the  workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level language, such that they can be built relatively fast, with almost zero chance of error. The input and expected output test vectors for every RTL module are generated using them, and the simulation output from the testbench is compared against their 'gold standard.'</p><p>I first obtain pretrained DNNs from PyTorch / Tensorflow model zoo, analyze them, then load them into the custom DNN inference framework I have built with NumPy stack to ensure I fully understand each operation. I then generate test vectors from those golden models.</p><h2 id="steps">Steps:</h2><ol>
 <li><strong>PyTorch/TensorFlow</strong>: Explore DNN models, quantize &amp; extract weights</li>
 <li><strong>Golden Model in Python (NumPy stack)</strong>: Custom OOP framework, process the weights, convert to custom datatypes</li>
 </ol>

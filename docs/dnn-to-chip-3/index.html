@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>DNN → Chip Design [3/4: Digital Design]</title>
+    <title>Neural Chip Design [3/4: Digital Design &amp; Verification]</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -77,6 +77,7 @@
 
     
 
+    <meta name="description" content="How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them." />
     <link rel="icon" href="../favicon.png" type="image/png" />
     <link rel="canonical" href="index.html" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
@@ -84,19 +85,19 @@
     
     <meta property="og:site_name" content="Aba&#x27;s Blog" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="DNN → Chip Design [3/4: Digital Design]" />
-    <meta property="og:description" content="This is a series of articles [intro] outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken [arXiv paper].After building golden models and understanding the operations, its time to design and implement digital circuits that can accelerate those" />
+    <meta property="og:title" content="Neural Chip Design [3/4: Digital Design &amp; Verification]" />
+    <meta property="og:description" content="How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them." />
     <meta property="og:url" content="https://aba-blog.xyz/dnn-to-chip-3/" />
     <meta property="og:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" />
     <meta property="article:published_time" content="2022-01-29T10:36:04.000Z" />
-    <meta property="article:modified_time" content="2022-01-29T18:33:28.000Z" />
+    <meta property="article:modified_time" content="2022-01-30T07:01:02.000Z" />
     <meta property="article:tag" content="Technical Projects" />
     
     <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
     <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DNN → Chip Design [3/4: Digital Design]" />
-    <meta name="twitter:description" content="This is a series of articles [intro] outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken [arXiv paper].After building golden models and understanding the operations, its time to design and implement digital circuits that can accelerate those" />
+    <meta name="twitter:title" content="Neural Chip Design [3/4: Digital Design &amp; Verification]" />
+    <meta name="twitter:description" content="How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them." />
     <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-3/" />
     <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -136,10 +137,10 @@
             "https://www.facebook.com/abarajithan11"
         ]
     },
-    "headline": "DNN → Chip Design [3/4: Digital Design]",
+    "headline": "Neural Chip Design [3/4: Digital Design &amp; Verification]",
     "url": "https://aba-blog.xyz/dnn-to-chip-3/",
     "datePublished": "2022-01-29T10:36:04.000Z",
-    "dateModified": "2022-01-29T18:33:28.000Z",
+    "dateModified": "2022-01-30T07:01:02.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://aba-blog.xyz/content/images/2022/01/vlcsnap-2022-01-30-00h01m19s402.png",
@@ -147,7 +148,7 @@
         "height": 724
     },
     "keywords": "Technical Projects",
-    "description": "&gt; This is a series of articles [intro]\n[https://aba-blog.xyz/dnn-to-chip-1/index.html] outlining my workflow of 15\nsteps, which I developed over the past few years through building my own DNN\naccelerator: Kraken [arXiv paper] [https://arxiv.org/abs/2112.02793].\nAfter building golden models and understanding the operations, its time to\ndesign and implement digital circuits that can accelerate those operations with: \n\n * low on-chip area\n * high fmax (hence short critical paths)\n * minimal multipl",
+    "description": "How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them.",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://aba-blog.xyz/"
@@ -238,10 +239,9 @@
 </script>
 
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coldark-dark.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.css" />
 <style>
     pre[class*=language-] {
         margin: 0.5em 0;
@@ -335,10 +335,10 @@
                                     <div class="m-recent-article__picture ">
                                         <img src="../content/images/size/w300/2022/01/sys-4.jpg" loading="lazy" alt="">
                                     </div>
-                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [4/4: System-on-Chip]">
-                                      DNN → Chip Design [4/4: System-on-Chip]
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [4/4: SoC Integration &amp; Firmware]">
+                                      Neural Chip Design [4/4: SoC Integration &amp; Firmware]
                                     </h3>
-                                    <span class="m-recent-article__date">8 hours ago</span>
+                                    <span class="m-recent-article__date">21 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
@@ -346,10 +346,10 @@
                                     <div class="m-recent-article__picture ">
                                         <img src="../content/images/size/w300/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" loading="lazy" alt="">
                                     </div>
-                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [3/4: Digital Design]">
-                                      DNN → Chip Design [3/4: Digital Design]
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [3/4: Digital Design &amp; Verification]">
+                                      Neural Chip Design [3/4: Digital Design &amp; Verification]
                                     </h3>
-                                    <span class="m-recent-article__date">8 hours ago</span>
+                                    <span class="m-recent-article__date">21 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
@@ -357,10 +357,10 @@
                                     <div class="m-recent-article__picture ">
                                         <img src="../content/images/size/w300/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" loading="lazy" alt="">
                                     </div>
-                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [2/4: Golden Models]">
-                                      DNN → Chip Design [2/4: Golden Models]
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [2/4: Golden Model]">
+                                      Neural Chip Design [2/4: Golden Model]
                                     </h3>
-                                    <span class="m-recent-article__date">8 hours ago</span>
+                                    <span class="m-recent-article__date">21 hours ago</span>
                                   </a>
                                 </div>
                                 <div class="glide__slide">
@@ -368,10 +368,10 @@
                                     <div class="m-recent-article__picture ">
                                         <img src="../content/images/size/w300/2022/01/cov-14.jpg" loading="lazy" alt="">
                                     </div>
-                                    <h3 class="m-recent-article__title js-recent-article-title" title="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
-                                      DNN → Chip Design [1/4: Intro &amp; Directory Structure]
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [1/4: Overview]">
+                                      Neural Chip Design [1/4: Overview]
                                     </h3>
-                                    <span class="m-recent-article__date">a day ago</span>
+                                    <span class="m-recent-article__date">2 days ago</span>
                                   </a>
                                 </div>
                               </div>
@@ -455,7 +455,7 @@
           <div
             class="l-post-content js-progress-content">
             <header class="m-heading">
-              <h1 class="m-heading__title in-post">DNN → Chip Design [3/4: Digital Design]</h1>
+              <h1 class="m-heading__title in-post">Neural Chip Design [3/4: Digital Design &amp; Verification]</h1>
               <div class="m-heading__meta">
                   <a href="../tag/tech-projects/index.html" class="m-heading__meta__tag">Technical Projects</a>
                   <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
@@ -469,7 +469,7 @@
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Facebook">
                     <span class="icon-facebook" aria-hidden="true"></span>
                   </a>
-                  <a href="https://twitter.com/intent/tweet?text=DNN%20%E2%86%92%20Chip%20Design%20%5B3%2F4%3A%20Digital%20Design%5D&url=https://aba-blog.xyz/dnn-to-chip-3/"
+                  <a href="https://twitter.com/intent/tweet?text=Neural%20Chip%20Design%20%5B3%2F4%3A%20Digital%20Design%20%26%20Verification%5D&url=https://aba-blog.xyz/dnn-to-chip-3/"
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">
                     <span class="icon-twitter" aria-hidden="true"></span>
                   </a>
@@ -477,7 +477,7 @@
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="LinkedIn">
                     <span class="icon-linkedin" aria-hidden="true"></span>
                   </a>
-                  <a href="https://reddit.com/submit?url=https://aba-blog.xyz/dnn-to-chip-3/&title=DNN%20%E2%86%92%20Chip%20Design%20%5B3%2F4%3A%20Digital%20Design%5D"
+                  <a href="https://reddit.com/submit?url=https://aba-blog.xyz/dnn-to-chip-3/&title=Neural%20Chip%20Design%20%5B3%2F4%3A%20Digital%20Design%20%26%20Verification%5D"
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Reddit">
                     <span class="icon-reddit" aria-hidden="true"></span>
                   </a>
@@ -489,7 +489,7 @@
                   </button>
                 </div>
               </div>
-              <blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[intro]</a> outlining my workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>After building golden models and understanding the operations, its time to design and implement digital circuits that can accelerate those operations with: </p><ul><li>low on-chip area</li><li>high fmax (hence short critical paths)</li><li>minimal multiplexers, registers, and SRAM usage</li></ul><p>For this, I first design my modules in detail, on a whiteboard. I spend days or weeks doing this: optimizing designs and mapping out state machines for each module. Once I'm satisfied. I sit with VSCode and start writing synthesizable RTL. Once I'm done, I generate test vectors from the golden model, write testbenches to read and compare them and start debugging.</p><h2 id="steps">Steps:</h2><!--kg-card-begin: markdown--><ol start="3">
+              <blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[overview]</a> outlining the  workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>After building golden models and understanding the operations, its time to design and implement digital circuits that can accelerate those operations with: </p><ul><li>low on-chip area</li><li>high fmax (hence short critical paths)</li><li>minimal multiplexers, registers, and SRAM usage</li></ul><p>For this, I first design my modules in detail, on a whiteboard. I spend days or weeks doing this: optimizing designs and mapping out state machines for each module. Once I'm satisfied. I sit with VSCode and start writing synthesizable RTL. Once I'm done, I generate test vectors from the golden model, write testbenches to read and compare them and start debugging.</p><h2 id="steps">Steps:</h2><!--kg-card-begin: markdown--><ol start="3">
 <li><strong>Whiteboard</strong>: Design hardware</li>
 <li><strong>RTL Design</strong>: SystemVerilog/Verilog for the whiteboard designs</li>
 <li><strong>Generate Test Vectors</strong>: using Python Notebooks</li>
@@ -984,14 +984,14 @@ report_power &gt; ${REPORT_DIR}/power.log</code></pre><h2 id="next">Next:</h2><f
     </div>
       <div class="m-article-card__info">
         <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
-      <a href="../dnn-to-chip-4/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [4/4: System-on-Chip]">
+      <a href="../dnn-to-chip-4/index.html" class="m-article-card__info-link" aria-label="Neural Chip Design [4/4: SoC Integration &amp; Firmware]">
         <div>
-          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [4/4: System-on-Chip]">
-            DNN → Chip Design [4/4: System-on-Chip]
+          <h2 class="m-article-card__title js-article-card-title " title="Neural Chip Design [4/4: SoC Integration &amp; Firmware]">
+            Neural Chip Design [4/4: SoC Integration &amp; Firmware]
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>8 hours ago</span>
+          <span>21 hours ago</span>
           <span>&bull;</span>
           <span>10 min read</span>
         </div>
@@ -1010,14 +1010,14 @@ report_power &gt; ${REPORT_DIR}/power.log</code></pre><h2 id="next">Next:</h2><f
     </div>
       <div class="m-article-card__info">
         <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
-      <a href="../dnn-to-chip-2/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [2/4: Golden Models]">
+      <a href="../dnn-to-chip-2/index.html" class="m-article-card__info-link" aria-label="Neural Chip Design [2/4: Golden Model]">
         <div>
-          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [2/4: Golden Models]">
-            DNN → Chip Design [2/4: Golden Models]
+          <h2 class="m-article-card__title js-article-card-title " title="Neural Chip Design [2/4: Golden Model]">
+            Neural Chip Design [2/4: Golden Model]
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>8 hours ago</span>
+          <span>21 hours ago</span>
           <span>&bull;</span>
           <span>8 min read</span>
         </div>
@@ -1039,14 +1039,14 @@ report_power &gt; ${REPORT_DIR}/power.log</code></pre><h2 id="next">Next:</h2><f
     </div>
       <div class="m-article-card__info">
         <a href="../tag/tech-projects/index.html" class="m-article-card__tag">Technical Projects</a>
-      <a href="../dnn-to-chip-1/index.html" class="m-article-card__info-link" aria-label="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
+      <a href="../dnn-to-chip-1/index.html" class="m-article-card__info-link" aria-label="Neural Chip Design [1/4: Overview]">
         <div>
-          <h2 class="m-article-card__title js-article-card-title " title="DNN → Chip Design [1/4: Intro &amp; Directory Structure]">
-            DNN → Chip Design [1/4: Intro &amp; Directory Structure]
+          <h2 class="m-article-card__title js-article-card-title " title="Neural Chip Design [1/4: Overview]">
+            Neural Chip Design [1/4: Overview]
           </h2>
         </div>
         <div class="m-article-card__timestamp">
-          <span>a day ago</span>
+          <span>2 days ago</span>
           <span>&bull;</span>
           <span>5 min read</span>
         </div>
