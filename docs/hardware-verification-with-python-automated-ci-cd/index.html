@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>CoCoTB: FPGA/ASIC Testbenches in Python + Automated Testing in GitHub​</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preload" href="../assets/css/app.css%3Fv=18c182a334.css" as="style" />
+    <link rel="preload" href="../assets/js/manifest.js%3Fv=18c182a334" as="script" />
+    <link rel="preload" href="../assets/js/vendor/content-api.min.js%3Fv=18c182a334" as="script" />
+    <link rel="preload" href="../assets/js/vendor.js%3Fv=18c182a334" as="script" />
+    <link rel="preload" href="../assets/js/app.js%3Fv=18c182a334" as="script" />
+    <link rel="preconnect" href="https://polyfill.io">
+    <link rel="dns-prefetch" href="https://polyfill.io">
+
+      <link rel="preload" href="../assets/css/post.css%3Fv=18c182a334.css" as="style" />
+  <link rel="preload" href="../assets/js/post.js%3Fv=18c182a334" as="script" />
+
+
+    <style>
+      /* These font-faces are here to make fonts work if the Ghost instance is installed in a subdirectory */
+
+      /* source-sans-pro-regular */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('SourceSansPro-Regular'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-regular.woff2%3Fv=18c182a334") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-regular.woff%3Fv=18c182a334") format('woff');
+      }
+
+      /* source-sans-pro-600 */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: local('SourceSansPro-SemiBold'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-600.woff2%3Fv=18c182a334") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-600.woff%3Fv=18c182a334") format('woff');
+      }
+
+      /* source-sans-pro-700 */
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: local('SourceSansPro-Bold'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-700.woff2%3Fv=18c182a334") format('woff2'),
+            url("../assets/fonts/source-sans-pro/latin/source-sans-pro-700.woff%3Fv=18c182a334") format('woff');
+      }
+
+      /* iconmoon */
+      @font-face {
+        font-family: 'icomoon';
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+        src: url("../assets/fonts/icomoon/icomoon.eot%3F101fc3%3Fv=18c182a334");
+        src: url("../assets/fonts/icomoon/icomoon.eot%3F101fc3") format('embedded-opentype'),
+        url("../assets/fonts/icomoon/icomoon.ttf%3F101fc3%3Fv=18c182a334") format('truetype'),
+        url("../assets/fonts/icomoon/icomoon.woff%3F101fc3%3Fv=18c182a334") format('woff'),
+        url("../assets/fonts/icomoon/icomoon.svg%3F101fc3") format('svg');
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/app.css%3Fv=18c182a334.css" media="screen" />
+
+      <link rel="stylesheet" type="text/css" href="../assets/css/post.css%3Fv=18c182a334.css" media="screen" />
+
+
+    
+
+    <link rel="icon" href="../favicon.png" type="image/png" />
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="Aba&#x27;s Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="CoCoTB: FPGA/ASIC Testbenches in Python + Automated Testing in GitHub​" />
+    <meta property="og:description" content="Verilog and VHDL are quite good for designing digital circuits. But it is often painful to write Verilog testbenches to simulate them. If you disagree, try writing a neural network or a multi-dimensional Fourier Transform in SystemVerilog.​ I recently came across cocotb, a popular python-based alternative to SystemVerilog testbenches. It" />
+    <meta property="og:url" content="https://aba-blog.xyz/hardware-verification-with-python-automated-ci-cd/" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;fit&#x3D;max&amp;fm&#x3D;jpg&amp;ixid&#x3D;MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&amp;ixlib&#x3D;rb-1.2.1&amp;q&#x3D;80&amp;w&#x3D;2000" />
+    <meta property="article:published_time" content="2022-04-04T15:52:02.000Z" />
+    <meta property="article:modified_time" content="2022-04-04T17:06:36.000Z" />
+    <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
+    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CoCoTB: FPGA/ASIC Testbenches in Python + Automated Testing in GitHub​" />
+    <meta name="twitter:description" content="Verilog and VHDL are quite good for designing digital circuits. But it is often painful to write Verilog testbenches to simulate them. If you disagree, try writing a neural network or a multi-dimensional Fourier Transform in SystemVerilog.​ I recently came across cocotb, a popular python-based alternative to SystemVerilog testbenches. It" />
+    <meta name="twitter:url" content="https://aba-blog.xyz/hardware-verification-with-python-automated-ci-cd/" />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;fit&#x3D;max&amp;fm&#x3D;jpg&amp;ixid&#x3D;MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&amp;ixlib&#x3D;rb-1.2.1&amp;q&#x3D;80&amp;w&#x3D;2000" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Abarajithan G" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="1346" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aba&#x27;s Blog",
+        "url": "https://aba-blog.xyz/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://aba-blog.xyz/favicon.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Abarajithan G",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://aba-blog.xyz/content/images/2021/11/im_large_vignette.jpg",
+            "width": 1600,
+            "height": 1600
+        },
+        "url": "https://aba-blog.xyz/author/aba/",
+        "sameAs": [
+            "https://www.linkedin.com/in/abarajithan11",
+            "https://www.facebook.com/abarajithan11"
+        ]
+    },
+    "headline": "CoCoTB: FPGA/ASIC Testbenches in Python + Automated Testing in GitHub​",
+    "url": "https://aba-blog.xyz/hardware-verification-with-python-automated-ci-cd/",
+    "datePublished": "2022-04-04T15:52:02.000Z",
+    "dateModified": "2022-04-04T17:06:36.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&ixlib=rb-1.2.1&q=80&w=2000",
+        "width": 2000,
+        "height": 1346
+    },
+    "description": "Verilog and VHDL are quite good for designing digital circuits. But it is often\npainful to write Verilog testbenches to simulate them. If you disagree, try\nwriting a neural network or a multi-dimensional Fourier Transform in\nSystemVerilog.​\n\nI recently came across cocotb, a popular python-based alternative to\nSystemVerilog testbenches. It doesn’t do the simulation itself (a good thing),\nbut interfaces with widely used simulators such as iVerilog, Verilator, Synopsys\nVCS, Cadence Incisive, and mo",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aba-blog.xyz/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.32" />
+    <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../rss/index.html" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.13.0/umd/portal.min.js" data-ghost="https://aba-blog.xyz/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style>
+    <script defer src="../public/cards.min.js%3Fv=18c182a334"></script>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=18c182a334.css">
+    <meta property="fb:admins" content="abarajithan11"/>
+<style>
+.post-template {
+    text-align: justify;
+}
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script>
+  const ghostSearchApiKey = 'f615b479aa70555d4c87186458'
+</script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coldark-dark.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css" />
+<style>
+    pre[class*=language-] {
+        margin: 0.5em 0;
+        font-size: 0.8rem;
+        background: #111;
+    }
+</style><style>:root {--ghost-accent-color: #2861bd;}</style>
+
+    <style>
+      :root {
+        --primary-subtle-color: var(--ghost-accent-color) !important;
+      }
+    </style>
+
+    <script>
+      // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt Expat
+      const ghostHost = "https://aba-blog.xyz"
+      // @license-end
+    </script>
+
+  </head>
+  <body class="post-template">
+    
+
+
+
+  
+<header class="m-header with-picture js-header">
+  <div class="m-mobile-topbar" data-aos="fade-down">
+    <button class="m-icon-button in-mobile-topbar js-open-menu" aria-label="Open menu">
+      <span class="icon-menu" aria-hidden="true"></span>
+    </button>
+      <a href="../index.html" class="m-site-name in-mobile-topbar">
+        Aba&#x27;s Blog
+      </a>
+    <button class="m-icon-button in-mobile-topbar js-open-search" aria-label="Open search">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="m-menu js-menu">
+    <button class="m-icon-button outlined as-close-menu js-close-menu" aria-label="Close menu">
+      <span class="icon-close"></span>
+    </button>
+    <div class="m-menu__main" data-aos="fade-down">
+      <div class="l-wrapper">
+        <div class="m-nav js-main-nav">
+          <nav class="m-nav__left js-main-nav-left" role="navigation" aria-label="Main menu">
+            <ul>
+                <li class="only-desktop">
+                  <a href="../index.html" class="m-site-name in-desktop-menu">
+                    Aba&#x27;s Blog
+                  </a>
+                </li>
+                
+    <li class="nav-cv">
+      <a href="https://aba-blog.xyz/cv.pdf">CV</a>
+    </li>
+    <li class="nav-tech-projects">
+      <a href="../tag/tech-projects/index.html">Tech Projects</a>
+    </li>
+    <li class="nav-travels">
+      <a href="../tag/travels/index.html">Travels</a>
+    </li>
+    <li class="nav-thoughts">
+      <a href="../tag/thoughts/index.html">Thoughts</a>
+    </li>
+    <li class="nav-stories">
+      <a href="../tag/stories/index.html">Stories</a>
+    </li>
+    <li class="nav-reviews">
+      <a href="../tag/reviews/index.html">Reviews</a>
+    </li>
+    <li class="nav-teaching">
+      <a href="../tag/teaching/index.html">Teaching</a>
+    </li>
+    <li class="nav-community-work">
+      <a href="../tag/community-work/index.html">Community Work</a>
+    </li>
+
+              <li class="submenu-option js-submenu-option">
+                <button class="m-icon-button in-menu-main more js-toggle-submenu" aria-label="Open submenu">
+                  <span class="icon-more" aria-hidden="true"></span>
+                </button>
+                <div class="m-submenu js-submenu">
+                  <div class="l-wrapper in-submenu">
+                    <section class="m-recent-articles">
+                      <h3 class="m-submenu-title in-recent-articles">Recent articles</h3>
+                          <div class="glide js-recent-slider">
+                            <div class="glide__track" data-glide-el="track">
+                              <div class="glide__slides">
+                                <div class="glide__slide">
+                                  <a href="index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;fit&#x3D;max&amp;fm&#x3D;jpg&amp;ixid&#x3D;MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&amp;ixlib&#x3D;rb-1.2.1&amp;q&#x3D;80&amp;w&#x3D;2000" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="CoCoTB: FPGA/ASIC Testbenches in Python + Automated Testing in GitHub​">
+                                      CoCoTB: FPGA/ASIC Testbenches in Python + Automated Testing in GitHub​
+                                    </h3>
+                                    <span class="m-recent-article__date">an hour ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../upper-gartmore/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2022/03/PXL_20220226_125117243-2.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Upper Gartmore Camping [2022]">
+                                      Upper Gartmore Camping [2022]
+                                    </h3>
+                                    <span class="m-recent-article__date">a month ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../dnn-to-chip-4/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2022/01/sys-4.jpg" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [4/4: SoC Integration &amp; Firmware]">
+                                      Neural Chip Design [4/4: SoC Integration &amp; Firmware]
+                                    </h3>
+                                    <span class="m-recent-article__date">2 months ago</span>
+                                  </a>
+                                </div>
+                                <div class="glide__slide">
+                                  <a href="../dnn-to-chip-3/index.html" class="m-recent-article">
+                                    <div class="m-recent-article__picture ">
+                                        <img src="../content/images/size/w300/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" loading="lazy" alt="">
+                                    </div>
+                                    <h3 class="m-recent-article__title js-recent-article-title" title="Neural Chip Design [3/4: RTL Design &amp; Verification]">
+                                      Neural Chip Design [3/4: RTL Design &amp; Verification]
+                                    </h3>
+                                    <span class="m-recent-article__date">2 months ago</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </section>
+                    <section class="m-tags">
+                      <h3 class="m-submenu-title">Tags</h3>
+                        <ul>
+                            <li>
+                              <a href="../tag/australia/index.html">Australia</a>
+                            </li>
+                            <li>
+                              <a href="../tag/community-work/index.html">Community Work</a>
+                            </li>
+                            <li>
+                              <a href="../tag/india/index.html">India</a>
+                            </li>
+                            <li>
+                              <a href="../tag/nature/index.html">Nature</a>
+                            </li>
+                            <li>
+                              <a href="../tag/reviews/index.html">Reviews</a>
+                            </li>
+                            <li>
+                              <a href="../tag/stories/index.html">Stories</a>
+                            </li>
+                            <li>
+                              <a href="../tag/teaching/index.html">Teaching</a>
+                            </li>
+                            <li>
+                              <a href="../tag/tech-projects/index.html">Technical Projects</a>
+                            </li>
+                            <li>
+                              <a href="../tag/thoughts/index.html">Thoughts</a>
+                            </li>
+                            <li>
+                              <a href="../tag/travels/index.html">Travels</a>
+                            </li>
+                        </ul>
+                    </section>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <div class="m-nav__right">
+            <button class="m-icon-button in-menu-main js-open-search" aria-label="Open search">
+              <span class="icon-search" aria-hidden="true"></span>
+            </button>
+            <div class="m-toggle-darkmode js-tooltip" data-tippy-content="Toggle light/dark mode" tabindex="0">
+              <label for="toggle-darkmode" class="sr-only">
+                Toggle light/dark mode
+              </label>
+              <input id="toggle-darkmode" type="checkbox" class="js-toggle-darkmode">
+              <div>
+                <span class="icon-moon moon" aria-hidden="true"></span>
+                <span class="icon-sunny sun" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<main class="main-wrap">
+    
+  <section class="m-hero with-picture" data-aos="fade">
+    <div class="m-hero__picture in-post">
+      <img srcset="https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;fit&#x3D;max&amp;fm&#x3D;jpg&amp;ixid&#x3D;MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&amp;ixlib&#x3D;rb-1.2.1&amp;q&#x3D;80&amp;w&#x3D;2000 300w, https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;fit&#x3D;max&amp;fm&#x3D;jpg&amp;ixid&#x3D;MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&amp;ixlib&#x3D;rb-1.2.1&amp;q&#x3D;80&amp;w&#x3D;2000 600w, https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;fit&#x3D;max&amp;fm&#x3D;jpg&amp;ixid&#x3D;MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&amp;ixlib&#x3D;rb-1.2.1&amp;q&#x3D;80&amp;w&#x3D;2000 1000w, https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;fit&#x3D;max&amp;fm&#x3D;jpg&amp;ixid&#x3D;MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&amp;ixlib&#x3D;rb-1.2.1&amp;q&#x3D;80&amp;w&#x3D;2000 2000w" sizes="(max-width: 600px) 600px, (max-width: 1000px) 1000px, 2000px" src="https://images.unsplash.com/photo-1513563568283-f43b7e3d8de5?crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;fit&#x3D;max&amp;fm&#x3D;jpg&amp;ixid&#x3D;MnwxMTc3M3wwfDF8c2VhcmNofDYyfHxweXRob258ZW58MHx8fHwxNjQ5MDkxOTg0&amp;ixlib&#x3D;rb-1.2.1&amp;q&#x3D;80&amp;w&#x3D;2000" alt="" />
+    </div>
+    </section>
+        <div class="l-wrapper in-caption">
+          <p class="m-small-text align-center">
+            Photo by <a href="https://unsplash.com/@davidclode?utm_source=ghost&utm_medium=referral&utm_campaign=api-credit">David Clode</a> / <a href="https://unsplash.com/?utm_source=ghost&utm_medium=referral&utm_campaign=api-credit">Unsplash</a>
+          </p>
+        </div>
+  
+  <article>
+    <div class="l-content in-post">
+        <div class="l-wrapper in-post  js-aos-wrapper" data-aos="fade-up"
+          data-aos-delay="300">
+          <div
+            class="l-post-content js-progress-content">
+            <header class="m-heading">
+              <h1 class="m-heading__title in-post">CoCoTB: FPGA/ASIC Testbenches in Python + Automated Testing in GitHub​</h1>
+              <div class="m-heading__meta">
+                <span class="m-heading__meta__time">Apr 4, 2022</span>
+              </div>
+            </header>
+            <div class="pos-relative js-post-content">
+              <div class="m-share">
+                <div class="m-share__content js-sticky">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://aba-blog.xyz/hardware-verification-with-python-automated-ci-cd/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Facebook">
+                    <span class="icon-facebook" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://twitter.com/intent/tweet?text=CoCoTB%3A%20FPGA%2FASIC%20Testbenches%20in%20Python%20%2B%20Automated%20Testing%20in%20GitHub%E2%80%8B&url=https://aba-blog.xyz/hardware-verification-with-python-automated-ci-cd/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">
+                    <span class="icon-twitter" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aba-blog.xyz/hardware-verification-with-python-automated-ci-cd/"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <span class="icon-linkedin" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://reddit.com/submit?url=https://aba-blog.xyz/hardware-verification-with-python-automated-ci-cd/&title=CoCoTB%3A%20FPGA%2FASIC%20Testbenches%20in%20Python%20%2B%20Automated%20Testing%20in%20GitHub%E2%80%8B"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Reddit">
+                    <span class="icon-reddit" aria-hidden="true"></span>
+                  </a>
+                  <button class="m-icon-button filled in-share progress js-scrolltop" aria-label="Scroll to top">
+                    <span class="icon-arrow-top" aria-hidden="true"></span>
+                    <svg aria-hidden="true">
+                      <circle class="progress-ring__circle js-progress" fill="transparent" r="0" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <p>Verilog and VHDL are quite good for designing digital circuits. But it is often painful to write Verilog testbenches to simulate them. If you disagree, try writing a neural network or a multi-dimensional Fourier Transform in SystemVerilog.​</p><p>I recently came across cocotb, a popular python-based alternative to SystemVerilog testbenches. It doesn’t do the simulation itself (a good thing), but interfaces with widely used simulators such as iVerilog, Verilator, Synopsys VCS, Cadence Incisive, and more. You just write your clock-cycle accurate testbenches in python, specify a simulator and run. You can dump and view the waveforms in GTK Wave.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2022/04/1gtk.png" class="kg-image" alt loading="lazy" width="1253" height="665" srcset="../content/images/size/w600/2022/04/1gtk.png 600w, ../content/images/size/w1000/2022/04/1gtk.png 1000w, ../content/images/2022/04/1gtk.png 1253w" sizes="(min-width: 720px) 720px"><figcaption>GTK Wave, showing the output from Icarus Verilog Simulator</figcaption></figure><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2022/04/2sv.png" width="369" height="587" loading="lazy" alt></div><div class="kg-gallery-image"><img src="../content/images/2022/04/3py.png" width="959" height="438" loading="lazy" alt srcset="../content/images/size/w600/2022/04/3py.png 600w, ../content/images/2022/04/3py.png 959w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2022/04/4pytest.png" width="687" height="503" loading="lazy" alt srcset="../content/images/size/w600/2022/04/4pytest.png 600w, ../content/images/2022/04/4pytest.png 687w"></div></div></div><figcaption>A simple register in SystemVerilog, python testbench, pytest setup for multiple parameters</figcaption></figure><p>This means you can use NumPy, SciPy, TensorFlow, PyTorch… the entire python arsenal to build your golden models, generate test vectors and compare with outputs. PDB, a powerful python debugger is also available at your disposal.​</p><p>Wait, it gets better. Cocotb-test, another library uses PyTest to test your designs across several sets of parameters automatically. This whole thing can then be automated into regression tests in a CI/CD pipeline. Whenever a commit is pushed into the GitHub repository or a branch is merged into master, a set of integration testbenches run over several parameters to ensure your design stays clean.​</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="../content/images/2022/04/action.png" width="782" height="752" loading="lazy" alt srcset="../content/images/size/w600/2022/04/action.png 600w, ../content/images/2022/04/action.png 782w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2022/04/1hactions.png" width="1920" height="884" loading="lazy" alt srcset="../content/images/size/w600/2022/04/1hactions.png 600w, ../content/images/size/w1000/2022/04/1hactions.png 1000w, ../content/images/size/w1600/2022/04/1hactions.png 1600w, ../content/images/2022/04/1hactions.png 1920w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="../content/images/2022/04/6action-fail.png" width="1131" height="660" loading="lazy" alt srcset="../content/images/size/w600/2022/04/6action-fail.png 600w, ../content/images/size/w1000/2022/04/6action-fail.png 1000w, ../content/images/2022/04/6action-fail.png 1131w" sizes="(min-width: 720px) 720px"></div></div></div><figcaption>GitHub actions setup, Automated test results, Failed test example</figcaption></figure><p>For more details, check out this talk at CERN &amp; UPenn. They use cocotb to verify the chips that go into the Large Hadron Collider.​</p><div class="kg-card kg-button-card kg-align-center"><a href="https://indico.cern.ch/event/776422/attachments/1769690/2874927/cocotb_talk.pdf​" class="kg-btn kg-btn-accent">CERN + UPenn Talk</a></div><p>​<br>In the following repository, I have built two designs: a simple register and an AXI-Stream FIFO built testbenches over a set of parameters and set up the GitHub Actions. Feel free to check them out.​</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://github.com/abarajithan11/cocotb-example"><div class="kg-bookmark-content"><div class="kg-bookmark-title">GitHub - abarajithan11/cocotb-example</div><div class="kg-bookmark-description">Contribute to abarajithan11/cocotb-example development by creating an account on GitHub.</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://github.com/fluidicon.png" alt=""><span class="kg-bookmark-author">GitHub</span><span class="kg-bookmark-publisher">abarajithan11</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://opengraph.githubassets.com/61692e8b3530397290eebf3c637986925c003b1df0d2d5490ba98f3f224ac980/abarajithan11/cocotb-example" alt=""></div></a></figure><h3 id="first-posted-on-facebook">First posted on Facebook:</h3><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://web.facebook.com/abarajithan11/posts/10224563512866785?__cft__[0]&#x3D;AZWWug-0nOo6WdTzQVFgFD5dDxan3jhIC4owD02FanZz7wzbi-VCA55ZrJqWoPLB8UepjesSZUs83DSB1tPr-qgMejdMCXwzHU3P0DdX39Xr_GK17pWuTbml7xURqwnT2C8&amp;__tn__&#x3D;%2CO%2CP-R"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Abarajithan Gn</div><div class="kg-bookmark-description">FPGA/ASIC Testbenches in Python + Automated Testing in GitHub​​Verilog and VHDL are quite good for designing digital circuits. But it is often painful to write Verilog testbenches to simulate them....</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://static.xx.fbcdn.net/rsrc.php/yv/r/B8BxsscfVBr.ico" alt=""><span class="kg-bookmark-author">Facebook</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://scontent.fcmb7-1.fna.fbcdn.net/v/t39.30808-6/277676095_10224563504306571_8189010906956668816_n.jpg?_nc_cat&#x3D;110&amp;ccb&#x3D;1-5&amp;_nc_sid&#x3D;8024bb&amp;_nc_ohc&#x3D;9qqQUkomokEAX_v8lCM&amp;_nc_ht&#x3D;scontent.fcmb7-1.fna&amp;oh&#x3D;00_AT-lqQFWbneWcgUfme2hIDCkhZesJA4H_U7EHpZJPzd6xg&amp;oe&#x3D;624FC67C" alt=""></div></a></figure>
+            </div>
+          </div>
+        </div>
+
+          <section class="m-comments">
+            <div class="l-wrapper in-comments">
+              <div class="fb-comments" data-href="https://aba-blog.xyz/hardware-verification-with-python-automated-ci-cd/" data-width="100%" data-numposts="10" data-colorscheme="light" style="background-color: white"></div>
+            </div>
+          </section>
+
+
+        <section class="m-recommended">
+          <div class="l-wrapper in-recommended">
+            <h3 class="m-section-title in-recommended">Recommended for you</h3>
+            <div class="m-recommended-articles">
+              <div class="m-recommended-slider glide js-recommended-slider">
+                <div class="glide__track" data-glide-el="track">
+                  <div class="glide__slides">
+                    <div class="m-recommended-slider__item glide__slide">
+                      <div class="m-heading no-margin">
+                        <h3>No posts found</h3>
+                        <p>
+                          Apparently there are no posts at the moment, check again later.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div>
+  </article>
+</main>
+
+
+
+    
+<div class="m-search js-search" role="dialog" aria-modal="true" aria-label="Search">
+  <button class="m-icon-button outlined as-close-search js-close-search" aria-label="Close search">
+    <span class="icon-close" aria-hidden="true"></span>
+  </button>
+  <div class="m-search__content">
+    <form class="m-search__form">
+      <div class="pos-relative">
+        <span class="icon-search m-search-icon" aria-hidden="true"></span>
+        <label for="search-input" class="sr-only">
+          Type to search
+        </label>
+        <input id="search-input" type="text" class="m-input in-search js-input-search" placeholder="Type to search">
+      </div>
+    </form>
+    <div class="js-search-results hide"></div>
+    <p class="m-not-found align-center hide js-no-results">
+      No results for your search, please try with something else.
+    </p>
+  </div>
+</div>
+
+    
+<footer class="m-footer">
+  <div class="m-footer__content">
+    <nav class="m-footer-social">
+        <a href="https://www.facebook.com/abarajithan11" target="_blank" rel="noopener" aria-label="Facebook">
+          <span class="icon-facebook" aria-hidden="true"></span>
+        </a>
+      <a href="https://www.linkedin.com/in/abarajithan11" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <span class="icon-linkedin" aria-hidden="true"></span>
+      </a>
+      <a href="https://github.com/abarajithan11" target="_blank" rel="noopener" aria-label="Github">
+        <span class="icon-github" aria-hidden="true"></span>
+      </a>
+      <a href="https://aba-blog.xyz/rss" aria-label="RSS">
+        <span class="icon-rss" aria-hidden="true"></span>
+      </a>
+    </nav>
+    <p class="m-footer-copyright">
+      <span>Aba&#x27;s Blog &copy; 2022</span>
+      <span>&nbsp; &bull; &nbsp;</span>
+      <span>Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a></span>
+    </p>
+    <p class="m-footer-copyright jslicense">
+      <a href="../assets/html/javascript.html%3Fv=18c182a334.html" rel="jslicense">JavaScript license information</a>
+    </p>
+  </div>
+</footer>
+
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CPromise%2CArray.prototype.includes%2CString.prototype.endsWith%2CString.prototype.startsWith%2CObject.assign%2CNodeList.prototype.forEach"></script>
+    <script defer src="../assets/js/manifest.js%3Fv=18c182a334"></script>
+    <script defer src="../assets/js/vendor/content-api.min.js%3Fv=18c182a334"></script>
+    <script defer src="../assets/js/vendor.js%3Fv=18c182a334"></script>
+    <script defer src="../assets/js/app.js%3Fv=18c182a334"></script>
+
+      <script defer src="../assets/js/post.js%3Fv=18c182a334"></script>
+
+
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0" nonce="C5ma3g6v"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre[class*=language-]').forEach(function (node) {
+            node.classList.add('line-numbers');
+        });
+        Prism.highlightAll();
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-matlab.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-tcl.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-verilog.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-latex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-verilog.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js"></script>
+  </body>
+</html>
