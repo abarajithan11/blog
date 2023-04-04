@@ -22,14 +22,13 @@
     <meta property="article:tag" content="Technical Projects" />
     
     <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
-    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Neural Chip Design [2/4: Golden Model]" />
     <meta name="twitter:description" content="I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc." />
     <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-2/" />
     <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" />
     <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Abarajithan G" />
+    <meta name="twitter:data1" content="Abarajithan Gnaneswaran" />
     <meta name="twitter:label2" content="Filed under" />
     <meta name="twitter:data2" content="Technical Projects" />
     <meta property="og:image:width" content="2000" />
@@ -45,25 +44,20 @@
         "url": "https://aba-blog.xyz/",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://aba-blog.xyz/favicon.png",
-            "width": 60,
-            "height": 60
+            "url": "https://aba-blog.xyz/content/images/size/w256h256/2021/11/-Pngtree-electronic-chip-free-download_4712240.png"
         }
     },
     "author": {
         "@type": "Person",
-        "name": "Abarajithan G",
+        "name": "Abarajithan Gnaneswaran",
         "image": {
             "@type": "ImageObject",
-            "url": "https://aba-blog.xyz/content/images/2021/11/im_large_vignette.jpg",
+            "url": "https://aba-blog.xyz/content/images/2023/04/im_large_vignette.jpg",
             "width": 1600,
             "height": 1600
         },
-        "url": "https://aba-blog.xyz/author/aba/",
-        "sameAs": [
-            "https://www.linkedin.com/in/abarajithan11",
-            "https://www.facebook.com/abarajithan11"
-        ]
+        "url": "https://aba-blog.xyz/author/abarajithan/",
+        "sameAs": []
     },
     "headline": "Neural Chip Design [2/4: Golden Model]",
     "url": "https://aba-blog.xyz/dnn-to-chip-2/",
@@ -77,14 +71,11 @@
     },
     "keywords": "Technical Projects",
     "description": "I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc.",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://aba-blog.xyz/"
-    }
+    "mainEntityOfPage": "https://aba-blog.xyz/dnn-to-chip-2/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 4.32" />
+    <meta name="generator" content="Ghost 5.41" />
     <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../../rss/index.html" />
 
     <style amp-custom>
@@ -260,6 +251,16 @@
 
     amp-img img {
         object-fit: cover;
+    }
+    
+    amp-youtube {
+        height: calc(100vw / 1.78);
+        width: 100vw;
+        position: relative;
+    }
+
+    amp-youtube img {
+        position: absolute;
     }
 
     .page-header {
@@ -1063,7 +1064,7 @@
 <body class="amp-template">
     <header class="page-header">
         <a href="../../index.html">
-                <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+                <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed" alt="Aba&#x27;s Blog"></amp-img>
         </a>
     </header>
 
@@ -1073,20 +1074,22 @@
             <header class="post-header">
                 <h1 class="post-title">Neural Chip Design [2/4: Golden Model]</h1>
                 <section class="post-meta">
-                    Abarajithan G -
+                    Abarajithan Gnaneswaran -
                     <time class="post-date" datetime="2022-01-29">29 Jan 2022</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="https://aba-blog.xyz/content/images/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" width="600" height="340" layout="responsive"></amp-img>
+                <amp-img src="https://aba-blog.xyz/content/images/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" width="600" height="340" layout="responsive" 
+                alt="Neural Chip Design [2/4: Golden Model]"
+                ></amp-img>
             </figure>
             <section class="post-content">
 
-                <p></p><blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[overview]</a> outlining the  workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level language, such that they can be built relatively fast, with almost zero chance of error. The input and expected output test vectors for every RTL module are generated using them, and the simulation output from the testbench is compared against their 'gold standard.'</p><p>I first obtain pretrained DNNs from PyTorch / Tensorflow model zoo, analyze them, then load them into the custom DNN inference framework I have built with NumPy stack to ensure I fully understand each operation. I then generate test vectors from those golden models.</p><h2 id="steps">Steps:</h2><ol>
+                <p></p><blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html?ref=localhost">[overview]</a> outlining the  workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793?ref=localhost"> [arXiv paper]</a>.</blockquote><p>Golden Models are essential to hardware (FPGA/ASIC) development. They model the expected behavior of a chip using a high-level language, such that they can be built relatively fast, with almost zero chance of error. The input and expected output test vectors for every RTL module are generated using them, and the simulation output from the testbench is compared against their 'gold standard.'</p><p>I first obtain pretrained DNNs from PyTorch / Tensorflow model zoo, analyze them, then load them into the custom DNN inference framework I have built with NumPy stack to ensure I fully understand each operation. I then generate test vectors from those golden models.</p><h2 id="steps">Steps:</h2><ol>
 <li><strong>PyTorch/TensorFlow</strong>: Explore DNN models, quantize &amp; extract weights</li>
 <li><strong>Golden Model in Python (NumPy stack)</strong>: Custom OOP framework, process the weights, convert to custom datatypes</li>
 </ol>
-<div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">1. Tensorflow / PyTorch</h2></div><p>Tensorflow (Google) and PyTorch (Facebook) are the two competing open source libraries used to build, train, quantize and deploy modern deep neural networks. </p><p>Both frameworks provide high-level, user-friendly classes and functions such as Conv2D, model.fit() to build &amp; train networks. Each such high-level API is implemented using their own low-level tensor operations (matmul, einsum), which also can be used by the users. Those operations are implemented using their C++ backend, accelerated by high performant libraries like eigen and CUDA. Once we define the models using Python, the C++ code underneath pulls the load, making them fast as well as user-friendly.</p><h3 id="11-download-explore-pretrained-dnn-models">1.1. Download &amp; Explore Pretrained DNN Models</h3><p>As the first step, I obtained the pretrained models from either <a href="https://keras.io/api/applications/">Keras.Applications</a> or <a href="https://pytorch.org/serve/model_zoo.html">PyTorch Model Zoo</a>.</p><figure class="kg-card kg-code-card"><pre><code class="language-python">import tensorflow as tf
+<div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="1-tensorflow-pytorch">1. Tensorflow / PyTorch</h2></div><p>Tensorflow (Google) and PyTorch (Facebook) are the two competing open source libraries used to build, train, quantize and deploy modern deep neural networks. </p><p>Both frameworks provide high-level, user-friendly classes and functions such as Conv2D, model.fit() to build &amp; train networks. Each such high-level API is implemented using their own low-level tensor operations (matmul, einsum), which also can be used by the users. Those operations are implemented using their C++ backend, accelerated by high performant libraries like eigen and CUDA. Once we define the models using Python, the C++ code underneath pulls the load, making them fast as well as user-friendly.</p><h3 id="11-download-explore-pretrained-dnn-models">1.1. Download &amp; Explore Pretrained DNN Models</h3><p>As the first step, I obtained the pretrained models from either <a href="https://keras.io/api/applications/?ref=localhost">Keras.Applications</a> or <a href="https://pytorch.org/serve/model_zoo.html?ref=localhost">PyTorch Model Zoo</a>.</p><figure class="kg-card kg-code-card"><pre><code class="language-python">import tensorflow as tf
 from tensorflow.keras.applications import VGG16
 
 vgg16 = VGG16(
@@ -1260,7 +1263,7 @@ for i, image in enumerate(images):
     output = interpreter.get_tensor(output_details["index"])[0]
     predictions[i] = output.argmax()
 
-print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explore Model Architecture</h3><p><a href="https://netron.app/">Netron </a>is a great tool for opening tensorflow's 32-bit models (savedmodel), tflite's int8 models (tflite), pytorch models (pt), ONNX models, and more, to observe the architecture and tensor names.</p><figure class="kg-card kg-image-card"></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">2. Golden Model</h2><h3 class="kg-header-card-subheader">Python (NumPy stack)</h3></div><p>After obtaining the pretrained model, I need to 100% understand what operations are involved and how they are applied as data flows through the network. The best way to do this is to re-do it myself from scratch and obtain exactly the same results. </p><h3 id="21-custom-quantization-scheme">2.1. Custom Quantization Scheme</h3><figure class="kg-card kg-image-card"></figure><h3 id="22-custom-inference-framework-oop-python">2.2. Custom Inference Framework (OOP, Python)</h3><p>For this, I built a custom framework in Python. It is structured like Keras with the following classes, inheriting as follows:</p><ul>
+print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explore Model Architecture</h3><p><a href="https://netron.app/?ref=localhost">Netron </a>is a great tool for opening tensorflow's 32-bit models (savedmodel), tflite's int8 models (tflite), pytorch models (pt), ONNX models, and more, to observe the architecture and tensor names.</p><figure class="kg-card kg-image-card"></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="2-golden-model">2. Golden Model</h2><h3 class="kg-header-card-subheader" id="python-numpy-stack">Python (NumPy stack)</h3></div><p>After obtaining the pretrained model, I need to 100% understand what operations are involved and how they are applied as data flows through the network. The best way to do this is to re-do it myself from scratch and obtain exactly the same results. </p><h3 id="21-custom-quantization-scheme">2.1. Custom Quantization Scheme</h3><figure class="kg-card kg-image-card"></figure><h3 id="22-custom-inference-framework-oop-python">2.2. Custom Inference Framework (OOP, Python)</h3><p>For this, I built a custom framework in Python. It is structured like Keras with the following classes, inheriting as follows:</p><ul>
 <li>MyModel</li>
 <li>MyLayer
 <ul>
@@ -1356,14 +1359,14 @@ print(predictions)</code></pre><h3 id="15-explore-model-architecture">1.5 Explor
             submatrices = strd(img_pad,shape,img_pad.strides*2,writeable=False)
 
             out_batch += [np.einsum('ijkl,ijkmno-&gt;mnl', kernel, submatrices)]
-        return np.array(out_batch)</code></pre><figcaption>stripped-down version of the MyConv implementation</figcaption></figure><h3 id="23-rebuilding-the-model-debugging">2.3. Rebuilding the model &amp; Debugging</h3><p>I then rebuild the model using the above framework, pass data and tweak things until I get the exact same output. That tells me I have understood all the operations going on inside the model.</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div></figure><p>Once I've understood the model inside-out, I start designing the hardware on the whiteboard.</p><h2 id="next">Next:</h2><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-3/index.html"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [3/4: Digital Design &amp; Verification]</div><div class="kg-bookmark-description">How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" alt width="1448" height="724" layout="responsive"></amp-img></div></a></figure>
+        return np.array(out_batch)</code></pre><figcaption>stripped-down version of the MyConv implementation</figcaption></figure><h3 id="23-rebuilding-the-model-debugging">2.3. Rebuilding the model &amp; Debugging</h3><p>I then rebuild the model using the above framework, pass data and tweak things until I get the exact same output. That tells me I have understood all the operations going on inside the model.</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div></figure><p>Once I've understood the model inside-out, I start designing the hardware on the whiteboard.</p><h2 id="next">Next:</h2><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-3/index.html?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [3/4: Digital Design &amp; Verification]</div><div class="kg-bookmark-description">How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" alt width="1448" height="724" layout="responsive"></amp-img></div></a></figure>
 
             </section>
 
         </article>
     </main>
     <footer class="page-footer">
-            <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+            <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed" alt="Aba&#x27;s Blog"></amp-img>
         <h3>Aba&#x27;s Blog</h3>
             <p>Tech - Travels - Thoughts</p>
         <p><a href="../../index.html">Read more posts →</a></p>

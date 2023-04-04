@@ -22,14 +22,13 @@
     <meta property="article:tag" content="Technical Projects" />
     
     <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
-    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Neural Chip Design [3/4: RTL Design &amp; Verification]" />
     <meta name="twitter:description" content="How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them." />
     <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-3/" />
     <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" />
     <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Abarajithan G" />
+    <meta name="twitter:data1" content="Abarajithan Gnaneswaran" />
     <meta name="twitter:label2" content="Filed under" />
     <meta name="twitter:data2" content="Technical Projects" />
     <meta property="og:image:width" content="1448" />
@@ -45,25 +44,20 @@
         "url": "https://aba-blog.xyz/",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://aba-blog.xyz/favicon.png",
-            "width": 60,
-            "height": 60
+            "url": "https://aba-blog.xyz/content/images/size/w256h256/2021/11/-Pngtree-electronic-chip-free-download_4712240.png"
         }
     },
     "author": {
         "@type": "Person",
-        "name": "Abarajithan G",
+        "name": "Abarajithan Gnaneswaran",
         "image": {
             "@type": "ImageObject",
-            "url": "https://aba-blog.xyz/content/images/2021/11/im_large_vignette.jpg",
+            "url": "https://aba-blog.xyz/content/images/2023/04/im_large_vignette.jpg",
             "width": 1600,
             "height": 1600
         },
-        "url": "https://aba-blog.xyz/author/aba/",
-        "sameAs": [
-            "https://www.linkedin.com/in/abarajithan11",
-            "https://www.facebook.com/abarajithan11"
-        ]
+        "url": "https://aba-blog.xyz/author/abarajithan/",
+        "sameAs": []
     },
     "headline": "Neural Chip Design [3/4: RTL Design &amp; Verification]",
     "url": "https://aba-blog.xyz/dnn-to-chip-3/",
@@ -77,14 +71,11 @@
     },
     "keywords": "Technical Projects",
     "description": "How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them.",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://aba-blog.xyz/"
-    }
+    "mainEntityOfPage": "https://aba-blog.xyz/dnn-to-chip-3/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 4.32" />
+    <meta name="generator" content="Ghost 5.41" />
     <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../../rss/index.html" />
 
     <style amp-custom>
@@ -260,6 +251,16 @@
 
     amp-img img {
         object-fit: cover;
+    }
+    
+    amp-youtube {
+        height: calc(100vw / 1.78);
+        width: 100vw;
+        position: relative;
+    }
+
+    amp-youtube img {
+        position: absolute;
     }
 
     .page-header {
@@ -1063,7 +1064,7 @@
 <body class="amp-template">
     <header class="page-header">
         <a href="../../index.html">
-                <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+                <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed" alt="Aba&#x27;s Blog"></amp-img>
         </a>
     </header>
 
@@ -1073,16 +1074,18 @@
             <header class="post-header">
                 <h1 class="post-title">Neural Chip Design [3/4: RTL Design &amp; Verification]</h1>
                 <section class="post-meta">
-                    Abarajithan G -
+                    Abarajithan Gnaneswaran -
                     <time class="post-date" datetime="2022-01-29">29 Jan 2022</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="https://aba-blog.xyz/content/images/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" width="600" height="340" layout="responsive"></amp-img>
+                <amp-img src="https://aba-blog.xyz/content/images/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" width="600" height="340" layout="responsive" 
+                alt="Neural Chip Design [3/4: RTL Design &amp; Verification]"
+                ></amp-img>
             </figure>
             <section class="post-content">
 
-                <blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html">[overview]</a> outlining the  workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793"> [arXiv paper]</a>.</blockquote><p>After building golden models and understanding the operations, its time to design and implement digital circuits that can accelerate those operations with: </p><ul><li>low on-chip area</li><li>high fmax (hence short critical paths)</li><li>minimal multiplexers, registers, and SRAM usage</li></ul><p>For this, I first design my modules in detail, on a whiteboard. I spend days or weeks doing this: optimizing designs and mapping out state machines for each module. Once I'm satisfied. I sit with VSCode and start writing synthesizable RTL. Once I'm done, I generate test vectors from the golden model, write testbenches to read and compare them and start debugging.</p><h2 id="steps">Steps:</h2><ol start="3">
+                <blockquote>This is a series of articles <a href="https://aba-blog.xyz/dnn-to-chip-1/index.html?ref=localhost">[overview]</a> outlining the  workflow of 15 steps, which I developed over the past few years through building my own DNN accelerator: Kraken<a href="https://arxiv.org/abs/2112.02793?ref=localhost"> [arXiv paper]</a>.</blockquote><p>After building golden models and understanding the operations, its time to design and implement digital circuits that can accelerate those operations with: </p><ul><li>low on-chip area</li><li>high fmax (hence short critical paths)</li><li>minimal multiplexers, registers, and SRAM usage</li></ul><p>For this, I first design my modules in detail, on a whiteboard. I spend days or weeks doing this: optimizing designs and mapping out state machines for each module. Once I'm satisfied. I sit with VSCode and start writing synthesizable RTL. Once I'm done, I generate test vectors from the golden model, write testbenches to read and compare them and start debugging.</p><h2 id="steps">Steps:</h2><ol start="3">
 <li><strong>Whiteboard</strong>: Design hardware</li>
 <li><strong>RTL Design</strong>: SystemVerilog/Verilog for the whiteboard designs</li>
 <li><strong>Generate Test Vectors</strong>: using Python Notebooks</li>
@@ -1092,7 +1095,7 @@
 <li>Repeat 3-8: For every module &amp; every level of integration</li>
 <li><strong>ASIC Synthesis</strong></li>
 </ol>
-<div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">3. Whiteboard</h2></div><p>I almost always design my modules fully on a whiteboard before sitting down to write RTL. This helps to map out almost every register and multiplexer, get an idea of the critical paths, and also to reduce bugs.</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">4. RTL Design</h2><h3 class="kg-header-card-subheader">SystemVerilog / Verilog</h3></div><p>I then start writing modules, state-machines...etc. using synthesizable SystemVerilog, converting my whiteboard drawings into code. This is fairly straightforward. I've given a stripped-down example code of my conv engine. The key things to note are:</p><ul><li><strong>SystemVerilog </strong>- Verilog lacks a lot of features and has the potential to cause serious bugs. SystemVerilog is beautiful and a breeze to write and read.</li><li><strong>Multidimensional wires and ports</strong> - I use them a lot, to group ports meaningfully and connect with each other. I prefer packed over unpacked, so multidimensional SystemVerilog ports can be seamlessly connected to Verilog wrappers with flat ports, without having to manually flatten them.</li><li> <strong>Readability </strong>- I take this seriously. Order does not matter in HDL, but I write in a way that the code top to bottom corresponds to left to right in my whiteboard diagram (the way signal flows).</li><li><strong>Macro Parameters</strong> - I put all the parameters, derived parameters in a common file and include it in all modules. That file itself is written through a tcl script. This way, the parameters of all files are guaranteed to be the same, avoiding bugs and also making the code readable.</li><li><strong>No always@clk</strong>: This might be a surprise. In my entire synthesizable codebase of 9000 lines, I have only one sequential always block: in a parametrized module named <em>register.v.</em>  The register module has optional clken, different types of reset...etc. All other modules instantiate this whenever needed. This helps me to avoid bugs, and to visualize the signal flow, as it directly translates from my whiteboard to code.</li><li><strong>FPGA &amp; ASIC</strong> - Using preprocessor directives (`ifdef), I write code to suit both FPGA and ASIC. Registers have async reset in ASIC mode and sync reset in FPGA mode.</li></ul><pre><code class="language-verilog">`timescale 1ns/1ps
+<div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="3-whiteboard">3. Whiteboard</h2></div><p>I almost always design my modules fully on a whiteboard before sitting down to write RTL. This helps to map out almost every register and multiplexer, get an idea of the critical paths, and also to reduce bugs.</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="4-rtl-design">4. RTL Design</h2><h3 class="kg-header-card-subheader" id="systemverilog-verilog">SystemVerilog / Verilog</h3></div><p>I then start writing modules, state-machines...etc. using synthesizable SystemVerilog, converting my whiteboard drawings into code. This is fairly straightforward. I've given a stripped-down example code of my conv engine. The key things to note are:</p><ul><li><strong>SystemVerilog </strong>- Verilog lacks a lot of features and has the potential to cause serious bugs. SystemVerilog is beautiful and a breeze to write and read.</li><li><strong>Multidimensional wires and ports</strong> - I use them a lot, to group ports meaningfully and connect with each other. I prefer packed over unpacked, so multidimensional SystemVerilog ports can be seamlessly connected to Verilog wrappers with flat ports, without having to manually flatten them.</li><li> <strong>Readability </strong>- I take this seriously. Order does not matter in HDL, but I write in a way that the code top to bottom corresponds to left to right in my whiteboard diagram (the way signal flows).</li><li><strong>Macro Parameters</strong> - I put all the parameters, derived parameters in a common file and include it in all modules. That file itself is written through a tcl script. This way, the parameters of all files are guaranteed to be the same, avoiding bugs and also making the code readable.</li><li><strong>No always@clk</strong>: This might be a surprise. In my entire synthesizable codebase of 9000 lines, I have only one sequential always block: in a parametrized module named <em>register.v.</em>  The register module has optional clken, different types of reset...etc. All other modules instantiate this whenever needed. This helps me to avoid bugs, and to visualize the signal flow, as it directly translates from my whiteboard to code.</li><li><strong>FPGA &amp; ASIC</strong> - Using preprocessor directives (`ifdef), I write code to suit both FPGA and ASIC. Registers have async reset in ASIC mode and sync reset in FPGA mode.</li></ul><pre><code class="language-verilog">`timescale 1ns/1ps
 `include "../include/params.v"
 
 module conv_engine #(ZERO=0) (
@@ -1236,7 +1239,7 @@ endmodule</code></pre><pre><code class="language-verilog">module processing_elem
     .B      (acc_s_data ),  
     .Q      (m_data     )  
   );
-endmodule</code></pre><p></p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">5. Test Vector Generation</h2><h3 class="kg-header-card-subheader">Python</h3></div><p>Next, I write python functions to extracts weights and inputs of each layer from my custom framework model (2.2), and convert them into input test vectors. Their dimensions need to be split, reshaped, transposed and flattened to get the final input \(\hat{X}\), and weights \(\hat{K}\) packets which can be understood by the hardware I designed. Output \(\hat{Y}\) is also transformed to match the hardware's outputs. Also, configuration bits need to be calculated and appended to the packet to make it complete.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>The python functions perform these reshapes to generate input and output vectors (multidimensional tensors)</figcaption></figure><pre><code class="language-python">def get_weights(i_layers, i_itr, c):
+endmodule</code></pre><p></p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="5-test-vector-generation">5. Test Vector Generation</h2><h3 class="kg-header-card-subheader" id="python">Python</h3></div><p>Next, I write python functions to extracts weights and inputs of each layer from my custom framework model (2.2), and convert them into input test vectors. Their dimensions need to be split, reshaped, transposed and flattened to get the final input \(\hat{X}\), and weights \(\hat{K}\) packets which can be understood by the hardware I designed. Output \(\hat{Y}\) is also transformed to match the hardware's outputs. Also, configuration bits need to be calculated and appended to the packet to make it complete.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>The python functions perform these reshapes to generate input and output vectors (multidimensional tensors)</figcaption></figure><pre><code class="language-python">def get_weights(i_layers, i_itr, c):
     weights = c.LAYERS[f'{c.PREFIX_CONV}{i_layers}'].weights
     KH, KW, CIN, COUT = weights.shape
     max_factor = 2 if f'{c.PREFIX_MAX}{i_layers}' in c.LAYERS.keys() else 1
@@ -1307,7 +1310,7 @@ endmodule</code></pre><p></p><div class="kg-card kg-header-card kg-width-full kg
     print(f"get_weights - weights_dma_beats.shape: (ITR, 4 + (LRELU_BEATS + CIN*KH)*COPIES*GROUPS*MEMBERS) = {weights_dma_beats.shape}")
 
     np.savetxt(f"{c.DATA_DIR}{i_layers}_weights.txt", weights_dma_beats[i_itr].flatten(), fmt='%d')
-    return weights_dma_beats</code></pre><p></p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">6. Testbench &amp; Simulation</h2><h3 class="kg-header-card-subheader">SystemVerilog</h3></div><p>Next, I write testbenches for the modules. They are built around two custom SystemVerilog classes: AXIS_Slave, which reads a text file and loads data into an AXI stream port while conforming to the protocol, and AXIS_Master which reads data from a port and writes into a text file. </p><figure class="kg-card kg-embed-card"><amp-youtube width="200" height="113" data-videoid="jZIaMTLCzjc" layout="fixed"></amp-youtube></figure><p>The control signals: valid and ready are randomized. They get toggled according to a given probability, to simulate the effects of memory bus freezing up and clearing.</p><figure class="kg-card kg-code-card"><pre><code class="language-verilog">`timescale 1ns/1ps
+    return weights_dma_beats</code></pre><p></p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="6-testbench-amp-simulation">6. Testbench &amp; Simulation</h2><h3 class="kg-header-card-subheader" id="systemverilog">SystemVerilog</h3></div><p>Next, I write testbenches for the modules. They are built around two custom SystemVerilog classes: AXIS_Slave, which reads a text file and loads data into an AXI stream port while conforming to the protocol, and AXIS_Master which reads data from a port and writes into a text file. </p><figure class="kg-card kg-embed-card"><amp-youtube width="600" height="350" data-videoid="jZIaMTLCzjc" layout="responsive"></amp-youtube></figure><p>The control signals: valid and ready are randomized. They get toggled according to a given probability, to simulate the effects of memory bus freezing up and clearing.</p><figure class="kg-card kg-code-card"><pre><code class="language-verilog">`timescale 1ns/1ps
 class AXIS_Slave #(WORD_WIDTH=8, WORDS_PER_BEAT=1, VALID_PROB=100);
 
   string file_path;
@@ -1468,7 +1471,7 @@ endclass</code></pre><figcaption>Stripped down version of AXIS_Slave class</figc
       m_packets = master_obj.i_packets;
       m_packets_per_file = master_obj.packets_per_file;
     end
-endmodule</code></pre><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">7. Debugging</h2><h3 class="kg-header-card-subheader">Python Notebooks &amp; SystemVerilog Simulations</h3></div><p>I then run simulations, collect output vectors and compare them with expected vectors using python notebooks. Notebooks allow one to play around with data, quickly print and observe different dimensions...etc. </p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Integration testing the whole system</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Observing outputs</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>The dimension indices of the locations where output doesn't match expected output. Very helpful in debugging.</figcaption></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">8. Debugging with Microsoft Excel</h2><h3 class="kg-header-card-subheader">Yep :-)</h3></div><p>In some cases, the output from a module is garbage and does not match the expected output at all. Since it is a convolution over several values, it is near impossible to guess the bug by looking at such garbage numbers. In that case, I resort to Excel, where I manually transform a set of small input vectors through the logic, step by step to see what I should expect in every clock cycle. I then compare it to the waveforms I see in the simulator to figure out where the bug is.</p><figure class="kg-card kg-image-card"></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">9. Repeat</h2></div><p>I move back and forth between the whiteboard, RTL code, python code, and simulation to fix bugs one by one. Some take weeks and make me want to pull my hair out. I also do this for each module, then put them together hierarchically, write integration testbenches, and test that too. </p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">10. ASIC Synthesis</h2></div><p>Once the design is verified in randomized simulations, I write the scripts for ASIC synthesis. Our university uses Cadence tools, so the following script is for Cadence Genus, using 65nm CMOS PDK from TSMC.</p><pre><code class="language-tcl">set TOP axis_accelerator_asic
+endmodule</code></pre><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="7-debugging">7. Debugging</h2><h3 class="kg-header-card-subheader" id="python-notebooks-amp-systemverilog-simulations">Python Notebooks &amp; SystemVerilog Simulations</h3></div><p>I then run simulations, collect output vectors and compare them with expected vectors using python notebooks. Notebooks allow one to play around with data, quickly print and observe different dimensions...etc. </p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Integration testing the whole system</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Observing outputs</figcaption></figure><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>The dimension indices of the locations where output doesn't match expected output. Very helpful in debugging.</figcaption></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="8-debugging-with-microsoft-excel">8. Debugging with Microsoft Excel</h2><h3 class="kg-header-card-subheader" id="yep">Yep :-)</h3></div><p>In some cases, the output from a module is garbage and does not match the expected output at all. Since it is a convolution over several values, it is near impossible to guess the bug by looking at such garbage numbers. In that case, I resort to Excel, where I manually transform a set of small input vectors through the logic, step by step to see what I should expect in every clock cycle. I then compare it to the waveforms I see in the simulator to figure out where the bug is.</p><figure class="kg-card kg-image-card"></figure><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="9-repeat">9. Repeat</h2></div><p>I move back and forth between the whiteboard, RTL code, python code, and simulation to fix bugs one by one. Some take weeks and make me want to pull my hair out. I also do this for each module, then put them together hierarchically, write integration testbenches, and test that too. </p><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="10-asic-synthesis">10. ASIC Synthesis</h2></div><p>Once the design is verified in randomized simulations, I write the scripts for ASIC synthesis. Our university uses Cadence tools, so the following script is for Cadence Genus, using 65nm CMOS PDK from TSMC.</p><pre><code class="language-tcl">set TOP axis_accelerator_asic
 # set TOP axis_conv_engine
 
 #--------- CONFIG
@@ -1538,14 +1541,14 @@ report_hierarchy &gt; ${REPORT_DIR}/hierarchy.log
 report_clock_gating &gt; ${REPORT_DIR}/clock_gating.log
 
 build_rtl_power_models -clean_up_netlist
-report_power &gt; ${REPORT_DIR}/power.log</code></pre><h2 id="next">Next:</h2><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-4/index.html"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [4/4: SoC Integration &amp; Firmware]</div><div class="kg-bookmark-description">SoC design involves integrating other IPs, automating projects with TCL, writing C++ firmware, and testing on PSoC hardware.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/sys-4.jpg" alt width="2000" height="1125" layout="responsive"></amp-img></div></a></figure>
+report_power &gt; ${REPORT_DIR}/power.log</code></pre><h2 id="next">Next:</h2><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-4/index.html?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [4/4: SoC Integration &amp; Firmware]</div><div class="kg-bookmark-description">SoC design involves integrating other IPs, automating projects with TCL, writing C++ firmware, and testing on PSoC hardware.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/sys-4.jpg" alt width="2000" height="1125" layout="responsive"></amp-img></div></a></figure>
 
             </section>
 
         </article>
     </main>
     <footer class="page-footer">
-            <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+            <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed" alt="Aba&#x27;s Blog"></amp-img>
         <h3>Aba&#x27;s Blog</h3>
             <p>Tech - Travels - Thoughts</p>
         <p><a href="../../index.html">Read more posts →</a></p>

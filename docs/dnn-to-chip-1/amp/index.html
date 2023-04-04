@@ -22,14 +22,13 @@
     <meta property="article:tag" content="Technical Projects" />
     
     <meta property="article:publisher" content="https://www.facebook.com/abarajithan11" />
-    <meta property="article:author" content="https://www.facebook.com/abarajithan11" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Neural Chip Design [1/4: Overview]" />
     <meta name="twitter:description" content="I built Kraken, an ASIC/FPGA engine for DNN inference that beats SOTA. This series outlines my workflow: how I integrated my SystemVerilog, Python (PyTorch, TF, Numpy), C++, TCL codes, and multiple different software tools." />
     <meta name="twitter:url" content="https://aba-blog.xyz/dnn-to-chip-1/" />
     <meta name="twitter:image" content="https://aba-blog.xyz/content/images/size/w2000/2022/01/cov-14.jpg" />
     <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Abarajithan G" />
+    <meta name="twitter:data1" content="Abarajithan Gnaneswaran" />
     <meta name="twitter:label2" content="Filed under" />
     <meta name="twitter:data2" content="Technical Projects" />
     <meta property="og:image:width" content="2000" />
@@ -45,25 +44,20 @@
         "url": "https://aba-blog.xyz/",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://aba-blog.xyz/favicon.png",
-            "width": 60,
-            "height": 60
+            "url": "https://aba-blog.xyz/content/images/size/w256h256/2021/11/-Pngtree-electronic-chip-free-download_4712240.png"
         }
     },
     "author": {
         "@type": "Person",
-        "name": "Abarajithan G",
+        "name": "Abarajithan Gnaneswaran",
         "image": {
             "@type": "ImageObject",
-            "url": "https://aba-blog.xyz/content/images/2021/11/im_large_vignette.jpg",
+            "url": "https://aba-blog.xyz/content/images/2023/04/im_large_vignette.jpg",
             "width": 1600,
             "height": 1600
         },
-        "url": "https://aba-blog.xyz/author/aba/",
-        "sameAs": [
-            "https://www.linkedin.com/in/abarajithan11",
-            "https://www.facebook.com/abarajithan11"
-        ]
+        "url": "https://aba-blog.xyz/author/abarajithan/",
+        "sameAs": []
     },
     "headline": "Neural Chip Design [1/4: Overview]",
     "url": "https://aba-blog.xyz/dnn-to-chip-1/",
@@ -77,14 +71,11 @@
     },
     "keywords": "Technical Projects",
     "description": "I built Kraken, an ASIC/FPGA engine for DNN inference that beats SOTA. This series outlines my workflow: how I integrated my SystemVerilog, Python (PyTorch, TF, Numpy), C++, TCL codes, and multiple different software tools.",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://aba-blog.xyz/"
-    }
+    "mainEntityOfPage": "https://aba-blog.xyz/dnn-to-chip-1/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 4.32" />
+    <meta name="generator" content="Ghost 5.41" />
     <link rel="alternate" type="application/rss+xml" title="Aba&#x27;s Blog" href="../../rss/index.html" />
 
     <style amp-custom>
@@ -260,6 +251,16 @@
 
     amp-img img {
         object-fit: cover;
+    }
+    
+    amp-youtube {
+        height: calc(100vw / 1.78);
+        width: 100vw;
+        position: relative;
+    }
+
+    amp-youtube img {
+        position: absolute;
     }
 
     .page-header {
@@ -1063,7 +1064,7 @@
 <body class="amp-template">
     <header class="page-header">
         <a href="../../index.html">
-                <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+                <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed" alt="Aba&#x27;s Blog"></amp-img>
         </a>
     </header>
 
@@ -1073,20 +1074,22 @@
             <header class="post-header">
                 <h1 class="post-title">Neural Chip Design [1/4: Overview]</h1>
                 <section class="post-meta">
-                    Abarajithan G -
+                    Abarajithan Gnaneswaran -
                     <time class="post-date" datetime="2022-01-28">28 Jan 2022</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="https://aba-blog.xyz/content/images/2022/01/cov-14.jpg" width="600" height="340" layout="responsive"></amp-img>
+                <amp-img src="https://aba-blog.xyz/content/images/2022/01/cov-14.jpg" width="600" height="340" layout="responsive" 
+                alt="Neural Chip Design [1/4: Overview]"
+                ></amp-img>
             </figure>
             <section class="post-content">
 
-                <h2 id="kraken-engine">Kraken Engine</h2><p>In March 2020, I started building Kraken as a personal, passion project, an engine capable of accelerating any kind of Deep Neural Network (DNN) with convolutional layers, fully-connected layers, and matrix products using a single uniform dataflow pattern while consuming remarkably low on-chip area. I synthesized it in 65-nm CMOS technology at 400 MHz, packing 672 MACs in 7.3 mm2, with a peak performance of 537.6 Gops.</p><p>When benchmarked on AlexNet [336.6 fps], VGG16 [17.5 fps], and ResNet-50 [64.2 fps] (yeah, those are old, but those are the widely used benchmarks), it outperforms the state-of-the-art ASIC architectures in terms of overall performance efficiency, DRAM accesses, arithmetic intensity, and throughput, with 5.8x more Gops/mm2 and 1.6x more Gops/W.</p><p>I submitted the design as a  journal paper to IEEE TCAS-1, the #3 journal in the field, and it is currently under review. You can find the paper at the following link.</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://arxiv.org/abs/2112.02793"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Kraken: An Efficient Engine with a Uniform Dataflow for Deep Neural Networks</div><div class="kg-bookmark-description">Deep neural networks (DNNs) have been successfully employed in a multitude ofapplications with remarkable performance. As such performance is achieved at asignificant computational cost, several embedded applications demand fast andefficient hardware accelerators for DNNs. Previously proposed app…</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://static.arxiv.org/static/browse/0.3.2.8/images/icons/favicon.ico" alt width="32" height="32" layout="fixed"></amp-img><span class="kg-bookmark-author">arXiv.org</span><span class="kg-bookmark-publisher">G Abarajithan</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png" alt width="1000" height="1000" layout="responsive"></amp-img></div></a></figure><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>An overview of the series</figcaption></figure><h2 id="technologies-used">Technologies Used</h2><p>Throughout the project, I wrote code, moved back and forth, and interfaced between several technologies, from different domains such as hardware (RTL), software, and machine vision.</p><ul><li>Python - Numpy, Tensorflow, PyTorch</li><li>SystemVerilog - RTL, Testbenches</li><li>TCL - Scripting the Vivado project, ASIC synthesis</li><li>C++ - Firmware to control the system-on-chip</li><li>Tools: Xilinx (Vivado, SDK), Cadence (Genus, Innovus)...</li></ul><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">My Workflow</h2></div><p>Through the Kraken project, I developed a workflow of 15 steps, which helps me to move between golden models in python, RTL designs &amp; simulations in SystemVerilog, and firmware in C++.  I have written them in detail as three more blog posts with code examples. </p><h3 id="24-golden-model">2/4: Golden Model</h3><ol>
+                <h2 id="kraken-engine">Kraken Engine</h2><p>In March 2020, I started building Kraken as a personal, passion project, an engine capable of accelerating any kind of Deep Neural Network (DNN) with convolutional layers, fully-connected layers, and matrix products using a single uniform dataflow pattern while consuming remarkably low on-chip area. I synthesized it in 65-nm CMOS technology at 400 MHz, packing 672 MACs in 7.3 mm2, with a peak performance of 537.6 Gops.</p><p>When benchmarked on AlexNet [336.6 fps], VGG16 [17.5 fps], and ResNet-50 [64.2 fps] (yeah, those are old, but those are the widely used benchmarks), it outperforms the state-of-the-art ASIC architectures in terms of overall performance efficiency, DRAM accesses, arithmetic intensity, and throughput, with 5.8x more Gops/mm2 and 1.6x more Gops/W.</p><p>I submitted the design as a  journal paper to IEEE TCAS-1, the #3 journal in the field, and it is currently under review. You can find the paper at the following link.</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://arxiv.org/abs/2112.02793?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Kraken: An Efficient Engine with a Uniform Dataflow for Deep Neural Networks</div><div class="kg-bookmark-description">Deep neural networks (DNNs) have been successfully employed in a multitude ofapplications with remarkable performance. As such performance is achieved at asignificant computational cost, several embedded applications demand fast andefficient hardware accelerators for DNNs. Previously proposed app…</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://static.arxiv.org/static/browse/0.3.2.8/images/icons/favicon.ico" alt width="32" height="32" layout="fixed"></amp-img><span class="kg-bookmark-author">arXiv.org</span><span class="kg-bookmark-publisher">G Abarajithan</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png" alt width="1000" height="1000" layout="responsive"></amp-img></div></a></figure><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>An overview of the series</figcaption></figure><h2 id="technologies-used">Technologies Used</h2><p>Throughout the project, I wrote code, moved back and forth, and interfaced between several technologies, from different domains such as hardware (RTL), software, and machine vision.</p><ul><li>Python - Numpy, Tensorflow, PyTorch</li><li>SystemVerilog - RTL, Testbenches</li><li>TCL - Scripting the Vivado project, ASIC synthesis</li><li>C++ - Firmware to control the system-on-chip</li><li>Tools: Xilinx (Vivado, SDK), Cadence (Genus, Innovus)...</li></ul><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="my-workflow">My Workflow</h2></div><p>Through the Kraken project, I developed a workflow of 15 steps, which helps me to move between golden models in python, RTL designs &amp; simulations in SystemVerilog, and firmware in C++.  I have written them in detail as three more blog posts with code examples. </p><h3 id="24-golden-model">2/4: Golden Model</h3><ol>
 <li><strong>PyTorch/TensorFlow</strong>: Explore DNN models, quantize &amp; extract weights</li>
 <li><strong>Golden Model in Python (NumPy stack)</strong>: Custom OOP framework, process the weights, convert to custom datatypes</li>
 </ol>
-<figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-2/index.html"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [2/4: Golden Model]</div><div class="kg-bookmark-description">I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" alt width="2000" height="1366" layout="responsive"></amp-img></div></a></figure><h3 id="34-rtl-design-verification">3/4: RTL Design &amp; Verification</h3><ol start="3">
+<figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-2/index.html?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [2/4: Golden Model]</div><div class="kg-bookmark-description">I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" alt width="2000" height="1366" layout="responsive"></amp-img></div></a></figure><h3 id="34-rtl-design-verification">3/4: RTL Design &amp; Verification</h3><ol start="3">
 <li><strong>Whiteboard</strong>: Design hardware modules, state machines</li>
 <li><strong>RTL Design</strong>: SystemVerilog/Verilog for the whiteboard designs</li>
 <li><strong>Generate Test Vectors</strong>: using Python Notebooks</li>
@@ -1096,14 +1099,14 @@
 <li>Repeat 3-8: For every module &amp; every level of integration</li>
 <li><strong>ASIC Synthesis</strong></li>
 </ol>
-<figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-3/index.html"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [3/4: Digital Design &amp; Verification]</div><div class="kg-bookmark-description">How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" alt width="1448" height="724" layout="responsive"></amp-img></div></a></figure><h3 id="44-system-on-chip-integration-firmware-development">4/4: System-on-Chip Integration &amp; Firmware Development</h3><ol start="11">
+<figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-3/index.html?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [3/4: Digital Design &amp; Verification]</div><div class="kg-bookmark-description">How I designed modules in the whiteboard, then wrote SystemVerilog RTL, built testbenches, prepared test vectors, and debugged them.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/vlcsnap-2022-01-30-00h01m19s402.png" alt width="1448" height="724" layout="responsive"></amp-img></div></a></figure><h3 id="44-system-on-chip-integration-firmware-development">4/4: System-on-Chip Integration &amp; Firmware Development</h3><ol start="11">
 <li><strong>SoC Block Design</strong>: Build FPGA projects with Vivado manually and synthesize</li>
 <li><strong>Automation</strong>: TCL scripts to automate the project building and configuration</li>
 <li><strong>C++ Firmware</strong>: To control the custom modules</li>
 <li><strong>Hardware Verification</strong>: Test on FPGA, compare output to golden model</li>
 <li>Repeat 11-14</li>
 </ol>
-<figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-4/index.html"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [4/4: SoC Integration &amp; Firmware]</div><div class="kg-bookmark-description">SoC design involves integrating other IPs, automating projects with TCL, writing C++ firmware, and testing on PSoC hardware.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/sys-4.jpg" alt width="2000" height="1125" layout="responsive"></amp-img></div></a></figure><hr></hr><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header">Directory Structure</h2></div><p>Simpler FPGA/ASIC projects can be done within a single folder. However, as the scope and complexity of the project grow, the need to work with multiple languages (Python, SystemVerilog, C, TCL...)  and tools (Jupyter, Vivado, SDK, Genus, Innovus...) can grow out of control. </p><p>The project needs to be version-controlled (git) as well, to prevent data loss and to move between different stages of development like a time machine. However, FPGA and ASIC tools create a lot of internal files, which do not generalize between machines. Therefore, the building of such projects is automated via TCL scripts, and only such scripts and the source files are git-tracked.</p><p>The following is the structure I developed through my Kraken project.</p><pre><code>kraken
+<figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-4/index.html?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [4/4: SoC Integration &amp; Firmware]</div><div class="kg-bookmark-description">SoC design involves integrating other IPs, automating projects with TCL, writing C++ firmware, and testing on PSoC hardware.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/sys-4.jpg" alt width="2000" height="1125" layout="responsive"></amp-img></div></a></figure><hr></hr><div class="kg-card kg-header-card kg-width-full kg-size-small kg-style-dark" data-kg-background-image><h2 class="kg-header-card-header" id="directory-structure">Directory Structure</h2></div><p>Simpler FPGA/ASIC projects can be done within a single folder. However, as the scope and complexity of the project grow, the need to work with multiple languages (Python, SystemVerilog, C, TCL...)  and tools (Jupyter, Vivado, SDK, Genus, Innovus...) can grow out of control. </p><p>The project needs to be version-controlled (git) as well, to prevent data loss and to move between different stages of development like a time machine. However, FPGA and ASIC tools create a lot of internal files, which do not generalize between machines. Therefore, the building of such projects is automated via TCL scripts, and only such scripts and the source files are git-tracked.</p><p>The following is the structure I developed through my Kraken project.</p><pre><code>kraken
 │
 ├── hdl
 │   ├── src        : rtl designs (SystemVerilog/Verilog)
@@ -1139,14 +1142,14 @@
 │   ├── include    : header files
 │   └── external   : external libraries
 │
-└── doc            : documentation: excel files, drawings...</code></pre><h2 id="next">Next:</h2><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-2/index.html"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [2/4: Golden Model]</div><div class="kg-bookmark-description">I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" alt width="2000" height="1366" layout="responsive"></amp-img></div></a></figure><h2></h2>
+└── doc            : documentation: excel files, drawings...</code></pre><h2 id="next">Next:</h2><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://aba-blog.xyz/dnn-to-chip-2/index.html?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Neural Chip Design [2/4: Golden Model]</div><div class="kg-bookmark-description">I wrote golden models in python to model the intended behavior of the chip. This outlines how I got pretrained models, extracted weights, applied my own quantization...etc.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://aba-blog.xyz/favicon.png" alt width="70" height="70" layout="fixed"></amp-img><span class="kg-bookmark-author">Aba's Blog</span><span class="kg-bookmark-publisher">Abarajithan G</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://aba-blog.xyz/content/images/size/w2000/2022/01/b6f87d_cec29645262b492f95a30c10edec1090_mv2.jpg" alt width="2000" height="1366" layout="responsive"></amp-img></div></a></figure><h2></h2>
 
             </section>
 
         </article>
     </main>
     <footer class="page-footer">
-            <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed"></amp-img>
+            <amp-img class="site-icon" src="https://aba-blog.xyz/content/images/2021/11/-Pngtree-electronic-chip-free-download_4712240.png" width="50" height="50" layout="fixed" alt="Aba&#x27;s Blog"></amp-img>
         <h3>Aba&#x27;s Blog</h3>
             <p>Tech - Travels - Thoughts</p>
         <p><a href="../../index.html">Read more posts →</a></p>

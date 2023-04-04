@@ -1,5 +1,5 @@
 User-agent: *
-Sitemap: http://aba-blog.xyz/sitemap.xml
+Sitemap: https://aba-blog.xyz/sitemap.xml
 Disallow: /ghost/
 Disallow: /p/
 Disallow: /email/
